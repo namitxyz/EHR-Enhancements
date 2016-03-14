@@ -19,7 +19,13 @@ public class UserInfo {
 	
 	public boolean CreateUser(String authString)
 	{
-		// Add this string to a table in the database containing encoded IDs and Passwords
+		String Decodedauth = GetDecodedAuth(authString);
+		
+		String[] parts = Decodedauth.split(":");
+		
+		String UserID = parts[0];
+		
+		// Add authString and UserID to a table in the database containing encoded IDs and Passwords. Make sure both are unique. If not, return false
 		return true; // if success (else false)
 	}
 	
@@ -34,7 +40,7 @@ public class UserInfo {
 		// Add a mapping from patient to possible providers who can view their records
 		return true; //if success (else false)
 	}
-
+	
 	private String GetDecodedAuth(final String authString)
 	{
 		String decodedAuth = "";
