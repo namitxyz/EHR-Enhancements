@@ -9,7 +9,7 @@ public class EHRClnt {
 
 	public static void main(String a[]){
 
-		String url = "http://localhost:8080/HealthEnhancements/webresources/UserAuthentication/1016";
+		String url = "http://localhost:8080/HealthEnhancements/webresources/UserAuthentication";
 		String name = "namit";
 		String password = "gupta";
 		String authString = name + ":" + password;
@@ -18,7 +18,7 @@ public class EHRClnt {
 		Client restClient = Client.create();
 		WebResource webResource = restClient.resource(url);
 		ClientResponse resp = webResource.accept("application/json")
-				.header("Authorization", "Basic " + authStringEnc)
+				.header("authentication", "Basic " + authStringEnc)
 				.get(ClientResponse.class);
 		if(resp.getStatus() != 200){
 			System.err.println("Unable to connect to the server");
