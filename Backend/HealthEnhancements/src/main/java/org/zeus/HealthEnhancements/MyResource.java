@@ -2,53 +2,55 @@
 package org.zeus.HealthEnhancements;
 
 import javax.ws.rs.GET;
+
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import javax.print.attribute.standard.Media;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import java.io.IOException;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.PathParam;
+import sun.misc.BASE64Decoder;
 
 @Path("/")
 public class MyResource {
-	@POST
-	@Path("/crunchifyService")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response crunchifyREST(InputStream incomingData) {
-		StringBuilder crunchifyBuilder = new StringBuilder();
-		try {
-			BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
-			String line = null;
-			while ((line = in.readLine()) != null) {
-				crunchifyBuilder.append(line);
-			}
-		} catch (Exception e) {
-			System.out.println("Error Parsing: - ");
-		}
-		System.out.println("Data Received: " + crunchifyBuilder.toString());
+	@GET
+	@Path("UserAuthentication/{userId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object getUserById(@PathParam("userId") Integer userId,
+			@HeaderParam("authorization") String authString){
 
-		// return HTTP response 200 in case of success
-		return Response.status(200).entity(crunchifyBuilder.toString()).build();
+		System.out.println(authString);
+		String decodedAuth = "";
+
+		if(!isUserAuthenticated(authString, decodedAuth)){
+			return "{\"error\":\"User not authenticated\"}";
+		}
+
+		return decodedAuth;
 	}
 
-	@GET
-	@Path("/myresource")
-	@Produces(MediaType.TEXT_PLAIN)
-	public Response verifyRESTService(InputStream incomingData) {
-		String result = "CrunchifyRESTService Successfully started..";
+	private boolean isUserAuthenticated(String authString, String decodedAuth){
 
-		// return HTTP response 200 in case of success
-		return Response.status(200).entity(result).build();
+		//String decodedAuth = "";
+		// Header is in the format "Basic 5tyc0uiDat4"
+		// We need to extract data before decoding it back to original string
+		String[] authParts = authString.split("\\s+");
+		String authInfo = authParts[1];
+		// Decode the data back to original string
+		byte[] bytes = null;
+		try {
+			bytes = new BASE64Decoder().decodeBuffer(authInfo);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		decodedAuth = new String(bytes);
+
+		// your validation code goes here....
+
+		return true;
 	}
 
 }
