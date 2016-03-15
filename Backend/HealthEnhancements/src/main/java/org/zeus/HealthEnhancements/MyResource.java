@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 
 import javax.ws.rs.Path;
@@ -76,7 +77,7 @@ public class MyResource {
 	}
 
 	@GET
-	@Path("UserPrivilege")
+	@Path("GetPatientToProviderMapping")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object CheckPrivilege(@HeaderParam("PatientID") String szPatientID, 
 			@HeaderParam("ProviderID") String szProviderID)
@@ -163,5 +164,132 @@ public class MyResource {
 			return "{\"error\":\"Provider profile not updated\"}";
 		else
 			return "{\"success\":\"Provider profile updated\"}";	
+	}
+	
+	@GET
+	@Path("GetAllPatientsForProvider")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object GetAllPatientsForProvider(@HeaderParam("ProviderID") String szProviderID)
+	{
+		return "";
+		
+	}
+	
+	@GET
+	@Path("GetAllProvidersForPatient")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object GetAllProvidersForPatient(@HeaderParam("PatientID") String szPatientID)
+	{
+		return "";
+		
+	}
+	
+	@POST
+	@Path("AddFeedbackForProvider")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object AddFeedbackForProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("feedback") String szfeedback)
+	{
+		return "";
+		
+	}
+	
+	@GET
+	@Path("ViewAllFeedbackForProvider")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object ViewAllFeedbackForProvider(@HeaderParam("ProviderID") String szProviderID)
+	{
+		return "";
+		
+	}
+	
+	@GET
+	@Path("ViewAllFeedbackGivenByPatient")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object ViewAllFeedbackGivenByPatient(@HeaderParam("PatientID") String szPatientID)
+	{
+		return "";
+		
+	}
+	
+	@GET
+	@Path("ViewAllFeedbackGivenByPatientForProvider")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object ViewAllFeedbackGivenByPatientForProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID)
+	{
+		return "";
+		
+	}
+	
+	@POST
+	@Path("AddMedicalRecord")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object AddMedicalRecord(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("MedicalRecordJSON") String szMedicalRecord)
+	{
+		//also store the timestamp
+		return "";
+		
+	}
+	
+	@GET
+	@Path("ViewEntireMedicalHistory")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object ViewEntireMedicalHistory(@HeaderParam("PatientID") String szPatientID)
+	{
+		return "";
+		
+	}
+	
+	@GET
+	@Path("ViewLatestMedicalHistory")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object ViewLatestMedicalHistory(@HeaderParam("PatientID") String szPatientID)
+	{
+		return "";
+		
+	}
+	
+	@POST
+	@Path("AddAppointment")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object AddAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("DateTime") String szDateTime)
+	{
+		return "";
+		
+	}
+	
+	@GET
+	@Path("GetAppointment")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object DeleteAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID)
+	{
+		return "";
+		
+	}
+	
+	@PUT
+	@Path("UpdateAppointment")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object UpdateAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("DateTime") String szDateTime)
+	{
+		return "";
+		
+	}
+	
+	@DELETE
+	@Path("DeleteAppointment")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object DeleteAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("DateTime") String szDateTime)
+	{
+		return "";
+		
+	}
+	
+	@POST
+	@Path("SendEmailToAnotherProvider")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object SendEmailToAnotherProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("OrigProviderID") String szOrigProviderID, @HeaderParam("NewProviderID") String szNewProviderID, @HeaderParam("EmailContent") String szEmailContent)
+	{
+		return "";
+		
 	}
 }
