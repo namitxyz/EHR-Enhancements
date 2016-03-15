@@ -5,11 +5,12 @@ import sun.misc.BASE64Encoder;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+@SuppressWarnings("restriction")
 public class EHRClnt {
 
 	public static void main(String a[]){
 
-		String url = "http://localhost:8080/HealthEnhancements/webresources/UserAuthentication";
+		String url = "http://localhost:8080/HealthEnhancements/webresources/GetProviderProfile";
 		String name = "namit";
 		String password = "gupta";
 		String authString = name + ":" + password;
@@ -18,8 +19,9 @@ public class EHRClnt {
 		Client restClient = Client.create();
 		WebResource webResource = restClient.resource(url);
 		ClientResponse resp = webResource.accept("application/json")
-				.header("authentication", "Basic " + authStringEnc)
+				.header("authentication", authStringEnc)
 				.get(ClientResponse.class);
+		
 		if(resp.getStatus() != 200){
 			System.err.println("Unable to connect to the server");
 		}
