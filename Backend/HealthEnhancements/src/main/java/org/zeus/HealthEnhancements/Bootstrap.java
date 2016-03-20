@@ -2,17 +2,10 @@ package org.zeus.HealthEnhancements;
 
 import com.mongodb.*;
 
-import static spark.Spark.setIpAddress;
-import static spark.Spark.setPort;
-import static spark.SparkBase.staticFileLocation;
-
 public class Bootstrap {
 	private static Bootstrap instance = null;
 	private static DB dbHandle = null;
-	
-	private static final String IP_ADDRESS = System.getenv("OPENSHIFT_DIY_IP") != null ? System.getenv("OPENSHIFT_DIY_IP") : "localhost";
-	private static final int PORT = System.getenv("OPENSHIFT_DIY_PORT") != null ? Integer.parseInt(System.getenv("OPENSHIFT_DIY_PORT")) : 8080;
-	
+
 	public static Bootstrap getInstance()
 	{
 		if (instance == null)
@@ -27,11 +20,7 @@ public class Bootstrap {
 	}
 
 	private Bootstrap()
-	{
-		setIpAddress(IP_ADDRESS);
-		setPort(PORT);
-		staticFileLocation("/public");
-		
+	{		
 		try 
 		{
 			dbHandle = mongo();

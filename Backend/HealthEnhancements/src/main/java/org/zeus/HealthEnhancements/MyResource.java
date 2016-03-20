@@ -25,13 +25,13 @@ import sun.misc.BASE64Decoder;
 @SuppressWarnings({ "unused", "restriction" })
 @Path("/")
 public class MyResource {
-	
+
 	public static UserInfo StringToObject_UserInfo(String p_json) 
 	{
 		Gson gson = new GsonBuilder().create();
 		return gson.fromJson(p_json, UserInfo.class);
 	}
-	
+
 	public static ProviderInfo StringToObject_ProviderInfo(String p_json) 
 	{
 		Gson gson = new GsonBuilder().create();
@@ -51,7 +51,7 @@ public class MyResource {
 		UserInfo user = new UserInfo();
 
 		if(!user.CreateUser(authString))
-			return "{\"error\":\"User already exists in the system. Please try again with a different username\"}";
+			return "{\"error\":\"User already exists in the system. Please try again with a different username and password\"}";
 		else
 			return "{\"success\":\"User added to the system\"}";	
 	}
@@ -78,10 +78,17 @@ public class MyResource {
 
 		UserInfo user = StringToObject_UserInfo(szUser);
 
-		if(!user.UpdatePatientProfile())
-			return "{\"error\":\"Patient profile not created\"}";
-		else
-			return "{\"success\":\"Patient profile created\"}";	
+		try
+		{
+			if(user.UpdatePatientProfile())
+				return "{\"success\":\"Patient profile created\"}";	
+		}
+		catch(Exception e)
+		{
+			return e.getMessage();
+		}
+
+		return "{\"error\":\"Patient profile not created\"}";
 	}
 
 	@GET
@@ -91,7 +98,15 @@ public class MyResource {
 	{
 		UserInfo user = new UserInfo();
 
-		user.LoadPatientProfile(authString);
+		try
+		{
+			user.LoadPatientProfile(authString);
+		}
+		catch(Exception e)
+		{
+			return e.getMessage();
+
+		}
 		return ObjectToString(user);
 	}
 
@@ -102,12 +117,19 @@ public class MyResource {
 	{
 		UserInfo user = StringToObject_UserInfo(szUser);
 
-		if(!user.UpdatePatientProfile())
-			return "{\"error\":\"Patient profile not updated\"}";
-		else
-			return "{\"success\":\"Patient profile updated\"}";	
+		try
+		{
+			if(user.UpdatePatientProfile())
+				return "{\"success\":\"Patient profile updated\"}";	
+		}
+		catch(Exception e)
+		{
+			return e.getMessage();
+		}
+
+		return "{\"error\":\"Patient profile not updated\"}";
 	}
-	
+
 	@POST
 	@Path ("AddPatientToProviderMapping")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -173,61 +195,61 @@ public class MyResource {
 		else
 			return "{\"success\":\"Provider profile updated\"}";	
 	}
-	
+
 	@GET
 	@Path("GetAllPatientsForProvider")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object GetAllPatientsForProvider(@HeaderParam("ProviderID") String szProviderID)
 	{
 		return "";
-		
+
 	}
-	
+
 	@GET
 	@Path("GetAllProvidersForPatient")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object GetAllProvidersForPatient(@HeaderParam("PatientID") String szPatientID)
 	{
 		return "";
-		
+
 	}
-	
+
 	@POST
 	@Path("AddFeedbackForProvider")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object AddFeedbackForProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("feedback") String szfeedback)
 	{
 		return "";
-		
+
 	}
-	
+
 	@GET
 	@Path("ViewAllFeedbackForProvider")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object ViewAllFeedbackForProvider(@HeaderParam("ProviderID") String szProviderID)
 	{
 		return "";
-		
+
 	}
-	
+
 	@GET
 	@Path("ViewAllFeedbackGivenByPatient")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object ViewAllFeedbackGivenByPatient(@HeaderParam("PatientID") String szPatientID)
 	{
 		return "";
-		
+
 	}
-	
+
 	@GET
 	@Path("ViewAllFeedbackGivenByPatientForProvider")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object ViewAllFeedbackGivenByPatientForProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID)
 	{
 		return "";
-		
+
 	}
-	
+
 	@POST
 	@Path("AddMedicalRecord")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -235,69 +257,69 @@ public class MyResource {
 	{
 		//also store the timestamp
 		return "";
-		
+
 	}
-	
+
 	@GET
 	@Path("ViewEntireMedicalHistory")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object ViewEntireMedicalHistory(@HeaderParam("PatientID") String szPatientID)
 	{
 		return "";
-		
+
 	}
-	
+
 	@GET
 	@Path("ViewLatestMedicalHistory")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object ViewLatestMedicalHistory(@HeaderParam("PatientID") String szPatientID)
 	{
 		return "";
-		
+
 	}
-	
+
 	@POST
 	@Path("AddAppointment")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object AddAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("DateTime") String szDateTime)
 	{
 		return "";
-		
+
 	}
-	
+
 	@GET
 	@Path("GetAppointment")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object DeleteAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID)
 	{
 		return "";
-		
+
 	}
-	
+
 	@PUT
 	@Path("UpdateAppointment")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object UpdateAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("DateTime") String szDateTime)
 	{
 		return "";
-		
+
 	}
-	
+
 	@DELETE
 	@Path("DeleteAppointment")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object DeleteAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("DateTime") String szDateTime)
 	{
 		return "";
-		
+
 	}
-	
+
 	@POST
 	@Path("SendEmailToAnotherProvider")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object SendEmailToAnotherProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("OrigProviderID") String szOrigProviderID, @HeaderParam("NewProviderID") String szNewProviderID, @HeaderParam("EmailContent") String szEmailContent)
 	{
 		return "";
-		
+
 	}
 }

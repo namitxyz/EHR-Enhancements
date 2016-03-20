@@ -7,11 +7,11 @@ public class EHRClnt {
 
 	public static void main(String a[]){
 
-		String url = "http://localhost:8080/HealthEnhancements/webresources/GetPatientProfile";
+		String url = "http://localhost:8080/HealthEnhancements/webresources/CreateUser";
 		String name = "namit";
 		String password = "gupta";
 		String authString = name + ":" + password;
-		/*String authString = "{\"m_id\":\"56ef107096eac02cbca7f19d\",\"m_szUserName\":\"namit\",\"m_szHashUserPassword\":\"gupta"
+		/*String authString = "{\"m_id\":\"56ef2edbe4b05d8826b8a25c\",\"m_szUserName\":\"namit\",\"m_szHashUserPassword\":\"gupta"
 				+ "\",\"m_szFirstName\":\"barack\",\"m_szLastName\":\"obama\",\"m_szMiddleInitial\":\"\",\"m_szAddress\":\"\",\"m_szPhoneNumber"
 				+ "\":\"\",\"m_szEmail\":\"\",\"m_szDateOfBirth\":\"\",\"m_szGender\":\"\",\"m_szRace\":\"\","
 				+ "\"m_szEthnicity\":\"\",\"m_szPrimaryLanguage\":\"\",\"m_szMartialStatus\":\"\",\"m_szSocialSecurity\":\"\","
@@ -24,7 +24,7 @@ public class EHRClnt {
 		WebResource webResource = restClient.resource(url);
 		ClientResponse resp = webResource.accept("application/json")
 				.header("authentication", authString)
-				.get(ClientResponse.class);
+				.post(ClientResponse.class);
 		
 		if(resp.getStatus() != 200){
 			System.err.println("Unable to connect to the server");

@@ -152,19 +152,22 @@ public class UserInfo {
 		return true;
 	}
 
-	public boolean UpdatePatientProfile() 
+	public boolean UpdatePatientProfile() throws RuntimeException
 	{
 		HashMap<String, UserInfo> mpPatients = GetAllPatients();
 
 		if(!mpPatients.containsKey(m_szUserName))
-			return false; // user does not exist in the system
+			throw new RuntimeException("{\"error\":\"Username does not exist in the system\"}");
 		
 		if(mpPatients.containsKey(m_szUserName)) 
 		{
 			UserInfo user = mpPatients.get(m_szUserName);
 
 			if(!user.m_szHashUserPassword.equals(m_szHashUserPassword))
-				return false; //trying to change password not allowed
+				throw new RuntimeException("{\"error\":\"Invalid Password\"}");
+			
+			if(!user.m_id.equals(m_id))
+				throw new RuntimeException("{\"error\":\"Invalid identifier in field m_id\"}");
 		}
 		
 		DBCollection collection = Bootstrap.getEHRdbHandle().getCollection("UserInfo");
@@ -232,14 +235,14 @@ public class UserInfo {
 		HashMap<String, UserInfo> mpPatients = GetAllPatients();
 
 		if(!mpPatients.containsKey(m_szUserName))
-			return; // user does not exist in the system
+			throw new RuntimeException("{\"error\":\"Username does not exist in the system\"}");
 		
 		if(mpPatients.containsKey(m_szUserName)) 
 		{
 			UserInfo user = mpPatients.get(m_szUserName);
 
 			if(!user.m_szHashUserPassword.equals(m_szHashUserPassword))
-				return; //invalid password
+				throw new RuntimeException("{\"error\":\"Invalid Password\"}");
 			
 			this.m_id = user.m_id;
 			this.m_szFirstName = user.m_szFirstName == null ? "" : user.m_szFirstName;
