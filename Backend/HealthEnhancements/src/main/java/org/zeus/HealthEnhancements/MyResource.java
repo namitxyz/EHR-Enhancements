@@ -25,10 +25,17 @@ import sun.misc.BASE64Decoder;
 @SuppressWarnings({ "unused", "restriction" })
 @Path("/")
 public class MyResource {
-	public static Object StringToObject(String p_json) 
+	
+	public static UserInfo StringToObject_UserInfo(String p_json) 
 	{
 		Gson gson = new GsonBuilder().create();
-		return gson.fromJson(p_json, Object.class);
+		return gson.fromJson(p_json, UserInfo.class);
+	}
+	
+	public static ProviderInfo StringToObject_ProviderInfo(String p_json) 
+	{
+		Gson gson = new GsonBuilder().create();
+		return gson.fromJson(p_json, ProviderInfo.class);
 	}
 
 	public static String ObjectToString(Object p_obj) 
@@ -44,13 +51,13 @@ public class MyResource {
 		UserInfo user = new UserInfo();
 
 		if(!user.CreateUser(authString))
-			return "{\"error\":\"User not added to the system\"}";
+			return "{\"error\":\"User already exists in the system. Please try again with a different username\"}";
 		else
 			return "{\"success\":\"User added to the system\"}";	
 	}
 
 	@GET
-	@Path("UserAuthentication")
+	@Path("login")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object CheckUserIdAndPassword(@HeaderParam("authentication") String authString)
 	{	
@@ -63,42 +70,15 @@ public class MyResource {
 	}
 
 	@POST
-	@Path ("AddPatientToProviderMapping")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Object AddPatientToProviderMapping(@HeaderParam("PatientID") String szPatientID, 
-			@HeaderParam("ProviderID") String szProviderID)
-	{
-		UserInfo user = new UserInfo();
-
-		if(!user.AddPatientToProviderMapping(szPatientID, szProviderID))
-			return "{\"error\":\"Patient-Provider mapping not added to the system\"}";
-		else
-			return "{\"success\":\"Patient-Provider mapping added to the system\"}";	
-	}
-
-	@GET
-	@Path("GetPatientToProviderMapping")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Object CheckPrivilege(@HeaderParam("PatientID") String szPatientID, 
-			@HeaderParam("ProviderID") String szProviderID)
-	{
-		UserInfo user = new UserInfo();
-
-		if(!user.IsProviderPrivilegedToViewPatientData(szProviderID, szPatientID))
-			return "{\"error\":\"Provider cannot view patient data\"}";
-		else
-			return "{\"success\":\"Provider can view patient data\"}";		
-	}
-
-	@POST
 	@Path("CreatePatientProfile")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object CreatePatientProfile(@HeaderParam("userInfo") final String szUser)
 	{
+		System.out.println(szUser);
 
-		UserInfo user = (UserInfo) StringToObject(szUser);
+		UserInfo user = StringToObject_UserInfo(szUser);
 
-		if(!user.CreatePatientProfile())
+		if(!user.UpdatePatientProfile())
 			return "{\"error\":\"Patient profile not created\"}";
 		else
 			return "{\"success\":\"Patient profile created\"}";	
@@ -120,12 +100,40 @@ public class MyResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object UpdatePatientProfile(@HeaderParam("userInfo") String szUser)
 	{
-		UserInfo user = (UserInfo) StringToObject(szUser);
+		UserInfo user = StringToObject_UserInfo(szUser);
 
 		if(!user.UpdatePatientProfile())
 			return "{\"error\":\"Patient profile not updated\"}";
 		else
 			return "{\"success\":\"Patient profile updated\"}";	
+	}
+	
+	@POST
+	@Path ("AddPatientToProviderMapping")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object AddPatientToProviderMapping(@HeaderParam("PatientID") String szPatientID, 
+			@HeaderParam("ProviderID") String szProviderID)
+	{
+		PatientToProvider p2p = new PatientToProvider();
+
+		if(!p2p.AddPatientToProviderMapping(szPatientID, szProviderID))
+			return "{\"error\":\"Patient-Provider mapping not added to the system\"}";
+		else
+			return "{\"success\":\"Patient-Provider mapping added to the system\"}";	
+	}
+
+	@GET
+	@Path("GetPatientToProviderMapping")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object CheckPrivilege(@HeaderParam("PatientID") String szPatientID, 
+			@HeaderParam("ProviderID") String szProviderID)
+	{
+		PatientToProvider p2p = new PatientToProvider();
+
+		if(!p2p.IsProviderPrivilegedToViewPatientData(szProviderID, szPatientID))
+			return "{\"error\":\"Provider cannot view patient data\"}";
+		else
+			return "{\"success\":\"Provider can view patient data\"}";		
 	}
 
 	@POST
@@ -134,7 +142,7 @@ public class MyResource {
 	public Object CreateProviderProfile(@HeaderParam("providerInfo") final String szProvider)
 	{
 
-		ProviderInfo provider = (ProviderInfo) StringToObject(szProvider);
+		ProviderInfo provider = StringToObject_ProviderInfo(szProvider);
 
 		if(!provider.CreateProviderProfile())
 			return "{\"error\":\"Provider profile not created\"}";
@@ -158,7 +166,7 @@ public class MyResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object UpdateProviderProfile(@HeaderParam("providerInfo") String szProvider)
 	{
-		ProviderInfo provider = (ProviderInfo) StringToObject(szProvider);
+		ProviderInfo provider = StringToObject_ProviderInfo(szProvider);
 
 		if(!provider.UpdateProviderProfile())
 			return "{\"error\":\"Provider profile not updated\"}";

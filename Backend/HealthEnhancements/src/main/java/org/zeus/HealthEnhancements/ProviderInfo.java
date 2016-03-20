@@ -30,8 +30,9 @@ public class ProviderInfo {
 
 	public void LoadProviderProfile(String authString) 
 	{
-		//m_szUserName = GetDecodedAuth(authString);
-		m_szHashUserPassword = authString;
+		String [] parts = authString.split(":");
+		m_szUserName = parts[0];
+		m_szHashUserPassword = parts[1];
 
 		// query the database for the user data and load the member variables
 	}

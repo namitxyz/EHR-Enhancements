@@ -1,12 +1,17 @@
 package org.zeus.HealthEnhancements;
 
-import java.io.IOException;
+import java.util.HashMap;
+import org.bson.BasicBSONObject;
+import org.bson.types.ObjectId;
 
-import sun.misc.BASE64Decoder;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 
-@SuppressWarnings("restriction")
 public class UserInfo {
 
+	String m_id = "";
 	String m_szUserName = "";
 	String m_szHashUserPassword = "";
 	String m_szFirstName = "";
@@ -36,84 +41,231 @@ public class UserInfo {
 
 	public UserInfo()
 	{
+		Bootstrap.getInstance();
+	}
+
+	private UserInfo(BasicDBObject dbObject)
+	{
+		m_id = ((ObjectId) dbObject.get("_id")).toString();
+		m_szUserName = dbObject.getString("m_szUserName");
+		m_szHashUserPassword = dbObject.getString("m_szHashUserPassword");
+		m_szFirstName = dbObject.getString("m_szFirstName");
+		m_szLastName = dbObject.getString("m_szLastName");
+		m_szMiddleInitial = dbObject.getString("m_szMiddleInitial");
+		m_szAddress = dbObject.getString("m_szAddress");
+		m_szPhoneNumber = dbObject.getString("m_szPhoneNumber");
+		m_szEmail = dbObject.getString("m_szEmail");
+		m_szDateOfBirth = dbObject.getString("m_szDateOfBirth");
+		m_szGender = dbObject.getString("m_szGender");
+		m_szRace = dbObject.getString("m_szRace");
+		m_szEthnicity = dbObject.getString("m_szEthnicity");
+		m_szPrimaryLanguage = dbObject.getString("m_szPrimaryLanguage");
+		m_szMartialStatus = dbObject.getString("m_szMartialStatus");
+		m_szSocialSecurity = dbObject.getString("m_szSocialSecurity");
+		m_szEmployer = dbObject.getString("m_szEmployer");
+		m_szEmploymentStatus = dbObject.getString("m_szEmploymentStatus");
+		m_szEmergencyFirstName = dbObject.getString("m_szEmergencyFirstName");
+		m_szEmergencyLastName = dbObject.getString("m_szEmergencyLastName");
+		m_szEmergencyPhoneNumber = dbObject.getString("m_szEmergencyPhoneNumber");
+		m_szEmergencyRelationship = dbObject.getString("m_szEmergencyRelationship");
+		m_szEmergencyAddress = dbObject.getString("m_szEmergencyAddress");
+		m_szInsuraceCompanyName = dbObject.getString("m_szInsuraceCompanyName");
+		m_szInsurancePhoneNumber = dbObject.getString("m_szInsurancePhoneNumber");
+		m_szInsuranceSubsriberID = dbObject.getString("m_szInsuranceSubsriberID");
+		m_szInsuranceGroupID = dbObject.getString("m_szInsuranceGroupID");
+	}
+
+	private HashMap<String, UserInfo> GetAllPatients()
+	{
+		HashMap<String, UserInfo> mpPatients = new HashMap<String, UserInfo>();
+
+		DBCursor dbObjects =  Bootstrap.getEHRdbHandle().getCollection("UserInfo").find();
+
+		while (dbObjects.hasNext()) 
+		{
+			DBObject dbObject = dbObjects.next();
+			mpPatients.put(((BasicBSONObject) dbObject).getString("m_szUserName"), new UserInfo((BasicDBObject) dbObject));
+		}
+
+		return mpPatients;
 	}
 
 	public boolean IsValidUser(String authString)
 	{
-		m_szUserName = GetDecodedAuth(authString);
-		m_szHashUserPassword = authString;
+		String [] parts = authString.split(":");
+		m_szUserName = parts[0];
+		m_szHashUserPassword = parts[1];
 
-		//query the database to check if this string exists in the database or not.
-		return true;
+		HashMap<String, UserInfo> mpPatients = GetAllPatients();
+
+		if(mpPatients.containsKey(m_szUserName)) 
+		{
+			UserInfo user = mpPatients.get(m_szUserName);
+
+			if(user.m_szHashUserPassword.equals(m_szHashUserPassword))
+				return true;
+		}
+
+		return false;
 	}
 
 	public boolean CreateUser(String authString)
 	{
-		m_szUserName = GetDecodedAuth(authString);
-		m_szHashUserPassword = authString;
+		String [] parts = authString.split(":");
+		m_szUserName = parts[0];
+		m_szHashUserPassword = parts[1];
 
-		// Add authString and UserID to a table in the database containing encoded IDs and Passwords. Make sure both are unique. If not, return false
-		return true; // if success (else false)
-	}
+		HashMap<String, UserInfo> mpPatients = GetAllPatients();
 
-	public boolean IsProviderPrivilegedToViewPatientData(String szProviderID, String szPatientID)
-	{
-		// query the database to check if the provider can view patient data or not
+		if(mpPatients.containsKey(m_szUserName))
+			return false; // user already exists in the system
+
+		DBCollection collection = Bootstrap.getEHRdbHandle().getCollection("UserInfo");
+
+		collection.insert(new BasicDBObject("m_szUserName", m_szUserName).append
+				("m_szHashUserPassword", m_szHashUserPassword).append
+				("m_szFirstName", m_szFirstName).append
+				("m_szLastName", m_szLastName).append
+				("m_szMiddleInitial", m_szMiddleInitial).append
+				("m_szAddress", m_szAddress).append
+				("m_szPhoneNumber", m_szPhoneNumber).append
+				("m_szEmail", m_szEmail).append
+				("m_szDateOfBirth", m_szDateOfBirth).append
+				("m_szGender", m_szGender).append
+				("m_szRace", m_szRace).append
+				("m_szEthnicity", m_szEthnicity).append
+				("m_szPrimaryLanguage", m_szPrimaryLanguage).append
+				("m_szMartialStatus", m_szMartialStatus).append
+				("m_szSocialSecurity", m_szSocialSecurity).append
+				("m_szEmployer", m_szEmployer).append
+				("m_szEmploymentStatus", m_szEmploymentStatus).append
+				("m_szEmergencyFirstName", m_szEmergencyFirstName).append
+				("m_szEmergencyLastName", m_szEmergencyLastName).append
+				("m_szEmergencyPhoneNumber", m_szEmergencyPhoneNumber).append
+				("m_szEmergencyRelationship", m_szEmergencyRelationship).append
+				("m_szEmergencyAddress", m_szEmergencyAddress).append
+				("m_szInsuraceCompanyName", m_szInsuraceCompanyName).append
+				("m_szInsurancePhoneNumber", m_szInsurancePhoneNumber).append
+				("m_szInsuranceSubsriberID", m_szInsuranceSubsriberID).append
+				("m_szInsuranceGroupID", m_szInsuranceGroupID));
+
 		return true;
-	}
-
-	public boolean AddPatientToProviderMapping(String szPatientID, String szProviderID) 
-	{
-		// Add a mapping from patient to possible providers who can view their records
-		return true; //if success (else false)
-	}
-
-	public boolean CreatePatientProfile() 
-	{
-		//add a record in the patient table with all the data
-		return true;  //successfully created patient profile (else false)
-	}
-
-	public void LoadPatientProfile(String authString) 
-	{
-		m_szUserName = GetDecodedAuth(authString);
-		m_szHashUserPassword = authString;
-
-		// query the database for the user data and load the member variables
 	}
 
 	public boolean UpdatePatientProfile() 
 	{
-		//update a record in the patient table with all the data
-		return true; //successfully updated patient profile (else false)
-	}
+		HashMap<String, UserInfo> mpPatients = GetAllPatients();
 
-	private String GetDecodedAuth(final String authString)
-	{
-		String decodedAuth = "";
-		try{
-			// Header is in the format "Basic 5tyc0uiDat4"
-			// We need to extract data before decoding it back to original string
-			String[] authParts = authString.split("\\s+");
-			String authInfo = authParts[1];
-			// Decode the data back to original string
-			byte[] bytes = null;
-			try {
-				bytes = new BASE64Decoder().decodeBuffer(authInfo);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			decodedAuth = new String(bytes);
-
-			String[] parts = decodedAuth.split(":");
-			return parts[0];
-		}
-		catch(Exception e)
+		if(!mpPatients.containsKey(m_szUserName))
+			return false; // user does not exist in the system
+		
+		if(mpPatients.containsKey(m_szUserName)) 
 		{
-			return decodedAuth;
-		}	
+			UserInfo user = mpPatients.get(m_szUserName);
+
+			if(!user.m_szHashUserPassword.equals(m_szHashUserPassword))
+				return false; //trying to change password not allowed
+		}
+		
+		DBCollection collection = Bootstrap.getEHRdbHandle().getCollection("UserInfo");
+		
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szFirstName", m_szFirstName)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szLastName", m_szLastName)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szMiddleInitial", m_szMiddleInitial)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szAddress", m_szAddress)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szPhoneNumber", m_szPhoneNumber)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szEmail", m_szEmail)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szDateOfBirth", m_szDateOfBirth)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szGender", m_szGender)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szRace", m_szRace)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szEthnicity", m_szEthnicity)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szPrimaryLanguage", m_szPrimaryLanguage)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szMartialStatus", m_szMartialStatus)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szSocialSecurity", m_szSocialSecurity)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szEmployer", m_szEmployer)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szEmploymentStatus", m_szEmploymentStatus)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szEmploymentStatus", m_szEmploymentStatus)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szEmergencyFirstName", m_szEmergencyFirstName)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szEmergencyLastName", m_szEmergencyLastName)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szEmergencyPhoneNumber", m_szEmergencyPhoneNumber)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szEmergencyRelationship", m_szEmergencyRelationship)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szEmergencyAddress", m_szEmergencyAddress)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szInsuraceCompanyName", m_szInsuraceCompanyName)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szInsurancePhoneNumber", m_szInsurancePhoneNumber)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szInsuranceSubsriberID", m_szInsuranceSubsriberID)));
+		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
+				new BasicDBObject("$set", new BasicDBObject("m_szInsuranceGroupID", m_szInsuranceGroupID)));		
+		
+		return true; 
 	}
 
+	public void LoadPatientProfile(String authString) 
+	{
+		String [] parts = authString.split(":");
+		m_szUserName = parts[0];
+		m_szHashUserPassword = parts[1];
+		
+		HashMap<String, UserInfo> mpPatients = GetAllPatients();
+
+		if(!mpPatients.containsKey(m_szUserName))
+			return; // user does not exist in the system
+		
+		if(mpPatients.containsKey(m_szUserName)) 
+		{
+			UserInfo user = mpPatients.get(m_szUserName);
+
+			if(!user.m_szHashUserPassword.equals(m_szHashUserPassword))
+				return; //invalid password
+			
+			this.m_id = user.m_id;
+			this.m_szFirstName = user.m_szFirstName == null ? "" : user.m_szFirstName;
+			this.m_szLastName = user.m_szLastName == null ? "" : user.m_szLastName;
+			this.m_szMiddleInitial = user.m_szMiddleInitial == null ? "" : user.m_szMiddleInitial;
+			this.m_szAddress = user.m_szAddress == null ? "" : user.m_szAddress;
+			this.m_szPhoneNumber = user.m_szPhoneNumber == null ? "" : user.m_szPhoneNumber;
+			this.m_szEmail = user.m_szEmail == null ? "" : user.m_szEmail;
+			this.m_szDateOfBirth = user.m_szDateOfBirth == null ? "" : user.m_szDateOfBirth;
+			this.m_szGender = user.m_szGender == null ? "" : user.m_szGender;
+			this.m_szRace = user.m_szRace == null ? "" : user.m_szRace;
+			this.m_szEthnicity = user.m_szEthnicity == null ? "" : user.m_szEthnicity;
+			this.m_szPrimaryLanguage = user.m_szPrimaryLanguage == null ? "" : user.m_szPrimaryLanguage;
+			this.m_szMartialStatus = user.m_szMartialStatus == null ? "" : user.m_szMartialStatus;
+			this.m_szSocialSecurity = user.m_szSocialSecurity == null ? "" : user.m_szSocialSecurity;
+			this.m_szEmployer = user.m_szEmployer == null ? "" : user.m_szEmployer;
+			this.m_szEmploymentStatus = user.m_szEmploymentStatus == null ? "" : user.m_szEmploymentStatus;
+			this.m_szEmergencyFirstName = user.m_szEmergencyFirstName == null ? "" : user.m_szEmergencyFirstName;
+			this.m_szEmergencyLastName = user.m_szEmergencyLastName == null ? "" : user.m_szEmergencyLastName;
+			this.m_szEmergencyPhoneNumber = user.m_szEmergencyPhoneNumber == null ? "" : user.m_szEmergencyPhoneNumber;
+			this.m_szEmergencyRelationship = user.m_szEmergencyRelationship == null ? "" : user.m_szEmergencyRelationship;
+			this.m_szEmergencyAddress = user.m_szEmergencyAddress == null ? "" : user.m_szEmergencyAddress;
+			this.m_szInsuraceCompanyName = user.m_szInsuraceCompanyName == null ? "" : user.m_szInsuraceCompanyName;
+			this.m_szInsurancePhoneNumber = user.m_szInsurancePhoneNumber == null ? "" : user.m_szInsurancePhoneNumber;
+			this.m_szInsuranceSubsriberID = user.m_szInsuranceSubsriberID == null ? "" : user.m_szInsuranceSubsriberID;
+			this.m_szInsuranceGroupID = user.m_szInsuranceGroupID == null ? "" : user.m_szInsuranceGroupID;	
+		}
+	}
 }

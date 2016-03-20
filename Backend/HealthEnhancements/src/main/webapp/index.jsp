@@ -3,7 +3,7 @@
 <h2>Team Zeus EHR Enhancements</h2>
 <h2>List of APIS:</h2>
 <h2>http://ehr-namitgupta.rhcloud.com/webresources/CreateUser</h2>
-<h2>http://ehr-namitgupta.rhcloud.com/webresources/UserAuthentication</h2>
+<h2>http://ehr-namitgupta.rhcloud.com/webresources/login</h2>
 <h2>http://ehr-namitgupta.rhcloud.com/webresources/AddPatientToProviderMapping</h2>
 <h2>http://ehr-namitgupta.rhcloud.com/webresources/GetPatientToProviderMapping</h2>
 <h2>http://ehr-namitgupta.rhcloud.com/webresources/CreatePatientProfile</h2>
