@@ -46,61 +46,39 @@ public class MyResource {
 	@POST
 	@Path ("CreateUser")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Object CreateUser(@HeaderParam("authentication") String authString)
+	public Object CreateUser(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
 	{
 		UserInfo user = new UserInfo();
 
-		if(!user.CreateUser(authString))
+		if(!user.CreateUser(szUserName, szPassword))
 			return "{\"error\":\"User already exists in the system. Please try again with a different username and password\"}";
 		else
-			return "{\"success\":\"User added to the system\"}";	
+			return ObjectToString(user);	
 	}
 
 	@GET
-	@Path("login")
+	@Path("UserLogin")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Object CheckUserIdAndPassword(@HeaderParam("authentication") String authString)
+	public Object CheckUserIdAndPassword(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
 	{	
 		UserInfo user = new UserInfo();
 
-		if(!user.IsValidUser(authString))
+		if(!user.IsValidUser(szUserName, szPassword))
 			return "{\"error\":\"User not authenticated\"}";
 		else
 			return "{\"Success\":\"User authenticated\"}";
 	}
 
-	@POST
-	@Path("CreatePatientProfile")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Object CreatePatientProfile(@HeaderParam("userInfo") final String szUser)
-	{
-		System.out.println(szUser);
-
-		UserInfo user = StringToObject_UserInfo(szUser);
-
-		try
-		{
-			if(user.UpdatePatientProfile())
-				return "{\"success\":\"Patient profile created\"}";	
-		}
-		catch(Exception e)
-		{
-			return e.getMessage();
-		}
-
-		return "{\"error\":\"Patient profile not created\"}";
-	}
-
 	@GET
 	@Path("GetPatientProfile")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Object GetPatientProfile(@HeaderParam("authentication") String authString)
+	public Object GetPatientProfile(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
 	{
 		UserInfo user = new UserInfo();
 
 		try
 		{
-			user.LoadPatientProfile(authString);
+			user.LoadPatientProfile(szUserName, szPassword);
 		}
 		catch(Exception e)
 		{
@@ -129,7 +107,57 @@ public class MyResource {
 
 		return "{\"error\":\"Patient profile not updated\"}";
 	}
+	
+	@POST
+	@Path ("CreateProvider")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object CreateProvider(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
+	{
+		ProviderInfo provider = new ProviderInfo();
 
+		if(!provider.CreateProvider(szUserName, szPassword))
+			return "{\"error\":\"Provider already exists in the system. Please try again with a different username and password\"}";
+		else
+			return ObjectToString(provider);
+	}
+
+	@GET
+	@Path("ProviderLogin")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object CheckProviderIdAndPassword(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
+	{	
+		ProviderInfo provider = new ProviderInfo();
+
+		if(!provider.IsValidUser(szUserName, szPassword))
+			return "{\"error\":\"Provider not authenticated\"}";
+		else
+			return "{\"Success\":\"Provider authenticated\"}";
+	}
+
+	@GET
+	@Path("GetProviderProfile")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object GetProviderProfile(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
+	{
+		ProviderInfo provider = new ProviderInfo();
+
+		provider.LoadProviderProfile(szUserName, szPassword);
+		return ObjectToString(provider);
+	}
+
+	@PUT
+	@Path("UpdateProviderProfile")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object UpdateProviderProfile(@HeaderParam("providerInfo") String szProvider)
+	{
+		ProviderInfo provider = StringToObject_ProviderInfo(szProvider);
+
+		if(!provider.UpdateProviderProfile())
+			return "{\"error\":\"Provider profile not updated\"}";
+		else
+			return "{\"success\":\"Provider profile updated\"}";	
+	}
+	
 	@POST
 	@Path ("AddPatientToProviderMapping")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -156,44 +184,6 @@ public class MyResource {
 			return "{\"error\":\"Provider cannot view patient data\"}";
 		else
 			return "{\"success\":\"Provider can view patient data\"}";		
-	}
-
-	@POST
-	@Path("CreateProviderProfile")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Object CreateProviderProfile(@HeaderParam("providerInfo") final String szProvider)
-	{
-
-		ProviderInfo provider = StringToObject_ProviderInfo(szProvider);
-
-		if(!provider.CreateProviderProfile())
-			return "{\"error\":\"Provider profile not created\"}";
-		else
-			return "{\"success\":\"Provider profile created\"}";	
-	}
-
-	@GET
-	@Path("GetProviderProfile")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Object GetProviderProfile(@HeaderParam("authentication") String authString)
-	{
-		ProviderInfo provider = new ProviderInfo();
-
-		provider.LoadProviderProfile(authString);
-		return ObjectToString(provider);
-	}
-
-	@PUT
-	@Path("UpdateProviderProfile")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Object UpdateProviderProfile(@HeaderParam("providerInfo") String szProvider)
-	{
-		ProviderInfo provider = StringToObject_ProviderInfo(szProvider);
-
-		if(!provider.UpdateProviderProfile())
-			return "{\"error\":\"Provider profile not updated\"}";
-		else
-			return "{\"success\":\"Provider profile updated\"}";	
 	}
 
 	@GET

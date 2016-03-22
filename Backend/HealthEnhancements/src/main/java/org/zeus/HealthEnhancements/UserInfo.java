@@ -90,11 +90,10 @@ public class UserInfo {
 		return mpPatients;
 	}
 
-	public boolean IsValidUser(String authString)
+	public boolean IsValidUser(String szUserName, String szPassword)
 	{
-		String [] parts = authString.split(":");
-		m_szUserName = parts[0];
-		m_szHashUserPassword = parts[1];
+		m_szUserName = szUserName;
+		m_szHashUserPassword = szPassword;
 
 		HashMap<String, UserInfo> mpPatients = GetAllPatients();
 
@@ -109,11 +108,10 @@ public class UserInfo {
 		return false;
 	}
 
-	public boolean CreateUser(String authString)
+	public boolean CreateUser(String szUserName, String szPassword)
 	{
-		String [] parts = authString.split(":");
-		m_szUserName = parts[0];
-		m_szHashUserPassword = parts[1];
+		m_szUserName = szUserName;
+		m_szHashUserPassword = szPassword;
 
 		HashMap<String, UserInfo> mpPatients = GetAllPatients();
 
@@ -149,6 +147,8 @@ public class UserInfo {
 				("m_szInsuranceSubsriberID", m_szInsuranceSubsriberID).append
 				("m_szInsuranceGroupID", m_szInsuranceGroupID));
 
+		LoadPatientProfile(szUserName, szPassword);
+
 		return true;
 	}
 
@@ -158,20 +158,20 @@ public class UserInfo {
 
 		if(!mpPatients.containsKey(m_szUserName))
 			throw new RuntimeException("{\"error\":\"Username does not exist in the system\"}");
-		
+
 		if(mpPatients.containsKey(m_szUserName)) 
 		{
 			UserInfo user = mpPatients.get(m_szUserName);
 
 			if(!user.m_szHashUserPassword.equals(m_szHashUserPassword))
 				throw new RuntimeException("{\"error\":\"Invalid Password\"}");
-			
+
 			if(!user.m_id.equals(m_id))
 				throw new RuntimeException("{\"error\":\"Invalid identifier in field m_id\"}");
 		}
-		
+
 		DBCollection collection = Bootstrap.getEHRdbHandle().getCollection("UserInfo");
-		
+
 		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
 				new BasicDBObject("$set", new BasicDBObject("m_szFirstName", m_szFirstName)));
 		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
@@ -222,28 +222,27 @@ public class UserInfo {
 				new BasicDBObject("$set", new BasicDBObject("m_szInsuranceSubsriberID", m_szInsuranceSubsriberID)));
 		collection.update(new BasicDBObject("_id", new ObjectId(m_id)), 
 				new BasicDBObject("$set", new BasicDBObject("m_szInsuranceGroupID", m_szInsuranceGroupID)));		
-		
+
 		return true; 
 	}
 
-	public void LoadPatientProfile(String authString) 
+	public void LoadPatientProfile(String szUserName, String szPassword) 
 	{
-		String [] parts = authString.split(":");
-		m_szUserName = parts[0];
-		m_szHashUserPassword = parts[1];
-		
+		m_szUserName = szUserName;
+		m_szHashUserPassword = szPassword;
+
 		HashMap<String, UserInfo> mpPatients = GetAllPatients();
 
 		if(!mpPatients.containsKey(m_szUserName))
 			throw new RuntimeException("{\"error\":\"Username does not exist in the system\"}");
-		
+
 		if(mpPatients.containsKey(m_szUserName)) 
 		{
 			UserInfo user = mpPatients.get(m_szUserName);
 
 			if(!user.m_szHashUserPassword.equals(m_szHashUserPassword))
 				throw new RuntimeException("{\"error\":\"Invalid Password\"}");
-			
+
 			this.m_id = user.m_id;
 			this.m_szFirstName = user.m_szFirstName == null ? "" : user.m_szFirstName;
 			this.m_szLastName = user.m_szLastName == null ? "" : user.m_szLastName;

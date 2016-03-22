@@ -28,11 +28,10 @@ public class ProviderInfo {
 		return true;  //successfully created provider profile (else false)
 	}
 
-	public void LoadProviderProfile(String authString) 
+	public void LoadProviderProfile(String szUserName, String szPassword) 
 	{
-		String [] parts = authString.split(":");
-		m_szUserName = parts[0];
-		m_szHashUserPassword = parts[1];
+		m_szUserName = szUserName;
+		m_szHashUserPassword = szPassword;
 
 		// query the database for the user data and load the member variables
 	}
@@ -41,6 +40,16 @@ public class ProviderInfo {
 	{
 		//update a record in the provider table with all the data
 		return true; //successfully updated patient profile (else false)
+	}
+
+	public boolean IsValidUser(String szUserName, String szPassword) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean CreateProvider(String szUserName, String szPassword) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
