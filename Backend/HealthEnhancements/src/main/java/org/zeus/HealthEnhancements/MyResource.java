@@ -15,6 +15,8 @@ import javax.ws.rs.Produces;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
@@ -107,7 +109,7 @@ public class MyResource {
 
 		return "{\"error\":\"Patient profile not updated\"}";
 	}
-	
+
 	@POST
 	@Path ("CreateProvider")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -157,7 +159,7 @@ public class MyResource {
 		else
 			return "{\"success\":\"Provider profile updated\"}";	
 	}
-	
+
 	@POST
 	@Path ("AddPatientToProviderMapping")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -166,16 +168,23 @@ public class MyResource {
 	{
 		PatientToProvider p2p = new PatientToProvider();
 
-		if(!p2p.AddPatientToProviderMapping(szPatientID, szProviderID))
-			return "{\"error\":\"Patient-Provider mapping not added to the system\"}";
-		else
-			return "{\"success\":\"Patient-Provider mapping added to the system\"}";	
+		try
+		{
+			if(!p2p.AddPatientToProviderMapping(szPatientID, szProviderID))
+				return "{\"error\":\"Patient-Provider mapping not added to the system\"}";
+			else
+				return "{\"success\":\"Patient-Provider mapping added to the system\"}";	
+		}
+		catch(Exception e)
+		{
+			return e.getMessage();
+		}
 	}
 
 	@GET
-	@Path("GetPatientToProviderMapping")
+	@Path("IsValidPatientToProviderMapping")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Object CheckPrivilege(@HeaderParam("PatientID") String szPatientID, 
+	public Object IsValidPatientToProviderMapping(@HeaderParam("PatientID") String szPatientID, 
 			@HeaderParam("ProviderID") String szProviderID)
 	{
 		PatientToProvider p2p = new PatientToProvider();
@@ -187,30 +196,59 @@ public class MyResource {
 	}
 
 	@GET
-	@Path("GetAllPatientsForProvider")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Object GetAllPatientsForProvider(@HeaderParam("ProviderID") String szProviderID)
-	{
-		return "";
-
-	}
-
-	@GET
 	@Path("GetAllProvidersForPatient")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object GetAllProvidersForPatient(@HeaderParam("PatientID") String szPatientID)
 	{
-		return "";
+		PatientToProvider p2p = new PatientToProvider();
 
+		try
+		{
+			ArrayList<String> providers = p2p.FindAllProviders(szPatientID);
+			return ObjectToString(providers);
+		}
+		catch(Exception e)
+		{
+			return e.getMessage();
+		}
+	}
+
+	@GET
+	@Path("GetAllPatientsForProvider")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object GetAllPatientsForProvider(@HeaderParam("ProviderID") String szProviderID)
+	{
+		PatientToProvider p2p = new PatientToProvider();
+
+		try
+		{
+			ArrayList<String> patients = p2p.FindAllPatients(szProviderID);
+			return ObjectToString(patients);
+		}
+		catch(Exception e)
+		{
+			return e.getMessage();
+		}
 	}
 
 	@POST
 	@Path("AddFeedbackForProvider")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Object AddFeedbackForProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("feedback") String szfeedback)
+	public Object AddFeedbackForProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("Feedback") String szfeedback)
 	{
-		return "";
+		ProviderFeedback feedback = new ProviderFeedback();
 
+		try
+		{
+			if(!feedback.AddPatientToProviderFeedback(szPatientID, szProviderID, szfeedback))
+				return "{\"error\":\"Provider feedback not added to the system\"}";
+			else
+				return "{\"success\":\"Provider feedback added to the system\"}";	
+		}
+		catch(Exception e)
+		{
+			return e.getMessage();
+		}
 	}
 
 	@GET
@@ -218,8 +256,17 @@ public class MyResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object ViewAllFeedbackForProvider(@HeaderParam("ProviderID") String szProviderID)
 	{
-		return "";
+		ProviderFeedback feedback = new ProviderFeedback();
 
+		try
+		{
+			ArrayList<ProviderFeedback> patients = feedback.FindAllFeedbackForProvider(szProviderID);
+			return ObjectToString(patients);
+		}
+		catch(Exception e)
+		{
+			return e.getMessage();
+		}
 	}
 
 	@GET
@@ -227,8 +274,17 @@ public class MyResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object ViewAllFeedbackGivenByPatient(@HeaderParam("PatientID") String szPatientID)
 	{
-		return "";
+		ProviderFeedback feedback = new ProviderFeedback();
 
+		try
+		{
+			ArrayList<ProviderFeedback> providers = feedback.FindAllFeedbackForPatient(szPatientID);
+			return ObjectToString(providers);
+		}
+		catch(Exception e)
+		{
+			return e.getMessage();
+		}
 	}
 
 	@GET
@@ -236,8 +292,56 @@ public class MyResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object ViewAllFeedbackGivenByPatientForProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID)
 	{
-		return "";
+		ProviderFeedback feedback = new ProviderFeedback();
 
+		try
+		{
+			ArrayList<ProviderFeedback> fdbk = feedback.GetAllFeedbackGivenByPatientForProvider(szPatientID, szProviderID);
+			return ObjectToString(fdbk);
+		}
+		catch(Exception e)
+		{
+			return e.getMessage();
+		}
+	}
+
+
+	@POST
+	@Path("AddAppointment")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object AddAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("DateTime") String szDateTime, @HeaderParam("Notes") String szNotes)
+	{
+		Appointment appointment = new Appointment();
+
+		try
+		{
+			if(!appointment.AddPatientToProviderAppointment(szPatientID, szProviderID, szNotes, szDateTime))
+				return "{\"error\":\"Provider appointment not added to the system\"}";
+			else
+				return "{\"success\":\"Provider appointment added to the system\"}";	
+		}
+		catch(Exception e)
+		{
+			return e.getMessage();
+		}
+	}
+
+	@GET
+	@Path("GetAppointment")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object DeleteAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID)
+	{
+		Appointment appointment = new Appointment();
+
+		try
+		{
+			ArrayList<Appointment> apmt = appointment.GetAllAppointmentsGivenByPatientForProvider(szPatientID, szProviderID);
+			return ObjectToString(apmt);
+		}
+		catch(Exception e)
+		{
+			return e.getMessage();
+		}
 	}
 
 	@POST
@@ -263,42 +367,6 @@ public class MyResource {
 	@Path("ViewLatestMedicalHistory")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object ViewLatestMedicalHistory(@HeaderParam("PatientID") String szPatientID)
-	{
-		return "";
-
-	}
-
-	@POST
-	@Path("AddAppointment")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Object AddAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("DateTime") String szDateTime)
-	{
-		return "";
-
-	}
-
-	@GET
-	@Path("GetAppointment")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Object DeleteAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID)
-	{
-		return "";
-
-	}
-
-	@PUT
-	@Path("UpdateAppointment")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Object UpdateAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("DateTime") String szDateTime)
-	{
-		return "";
-
-	}
-
-	@DELETE
-	@Path("DeleteAppointment")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Object DeleteAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("DateTime") String szDateTime)
 	{
 		return "";
 

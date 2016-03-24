@@ -66,6 +66,16 @@ public class ProviderInfo {
 
 		return mpProviders;
 	}
+	
+	public boolean DoesProviderExist(String szUserName)
+	{
+		HashMap<String, ProviderInfo> mpProviders = GetAllProviders();
+		
+		if(mpProviders.containsKey(szUserName))
+			return true;
+		
+		return false;
+	}
 
 	public boolean IsValidUser(String szUserName, String szPassword) 
 	{

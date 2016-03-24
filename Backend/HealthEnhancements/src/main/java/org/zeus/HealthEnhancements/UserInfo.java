@@ -89,7 +89,17 @@ public class UserInfo {
 
 		return mpPatients;
 	}
-
+	
+	public boolean DoesPatientExist(String szUserName)
+	{
+		HashMap<String, UserInfo> mpPatients = GetAllPatients();
+		
+		if(mpPatients.containsKey(szUserName))
+			return true;
+		
+		return false;
+	}
+	
 	public boolean IsValidUser(String szUserName, String szPassword)
 	{
 		m_szUserName = szUserName;
