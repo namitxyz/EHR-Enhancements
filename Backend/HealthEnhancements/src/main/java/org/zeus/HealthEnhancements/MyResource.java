@@ -2,6 +2,7 @@
 package org.zeus.HealthEnhancements;
 
 import org.zeus.HealthEnhancements.UserInfo;
+import org.zeus.HealthEnhancements.Services.NotificationService;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,7 +23,7 @@ import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
-import sun.misc.BASE64Decoder;
+
 
 @SuppressWarnings({ "unused", "restriction" })
 @Path("/")
@@ -345,6 +346,18 @@ public class MyResource {
 	}
 
 	@POST
+	@Path("SendEmailToAnotherProvider")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object SendEmailToAnotherProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("OrigProviderID") String szOrigProviderID, @HeaderParam("NewProviderID") String szNewProviderID, @HeaderParam("EmailContent") String szEmailContent)
+	{
+		if(!NotificationService.Notify(szOrigProviderID, szNewProviderID, szPatientID, szEmailContent))
+			return "{\"error\":\"There was an error sending the notification\"}";
+		else
+			return "{\"success\":\"Notification has been sent successfully\"}";
+
+	}
+
+	@POST
 	@Path("AddMedicalRecord")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object AddMedicalRecord(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("MedicalRecordJSON") String szMedicalRecord)
@@ -367,15 +380,6 @@ public class MyResource {
 	@Path("ViewLatestMedicalHistory")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Object ViewLatestMedicalHistory(@HeaderParam("PatientID") String szPatientID)
-	{
-		return "";
-
-	}
-
-	@POST
-	@Path("SendEmailToAnotherProvider")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Object SendEmailToAnotherProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("OrigProviderID") String szOrigProviderID, @HeaderParam("NewProviderID") String szNewProviderID, @HeaderParam("EmailContent") String szEmailContent)
 	{
 		return "";
 
