@@ -1,40 +1,24 @@
 package org.zeus.HealthEnhancements.FHIR;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import org.hl7.fhir.instance.model.api.IBaseResource;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.api.IResource;
-import ca.uhn.fhir.model.base.resource.BaseOperationOutcome;
 import ca.uhn.fhir.model.dstu2.composite.CodingDt;
+import ca.uhn.fhir.model.dstu2.resource.Appointment;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
-import ca.uhn.fhir.model.dstu2.resource.Claim.Diagnosis;
-import ca.uhn.fhir.model.dstu2.resource.Conformance;
 import ca.uhn.fhir.model.dstu2.resource.DiagnosticReport;
 import ca.uhn.fhir.model.dstu2.resource.Medication;
 import ca.uhn.fhir.model.dstu2.resource.MedicationStatement;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
-import ca.uhn.fhir.model.dstu2.resource.OperationOutcome;
-import ca.uhn.fhir.model.dstu2.resource.OperationOutcome.Issue;
-import ca.uhn.fhir.model.dstu2.resource.Organization;
-import ca.uhn.fhir.model.dstu2.resource.Parameters;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
-import ca.uhn.fhir.model.dstu2.resource.Provenance;
-import ca.uhn.fhir.model.dstu2.valueset.AdministrativeGenderEnum;
-import ca.uhn.fhir.model.dstu2.valueset.IssueSeverityEnum;
-import ca.uhn.fhir.model.primitive.DateDt;
 import ca.uhn.fhir.model.primitive.IdDt;
-import ca.uhn.fhir.model.primitive.InstantDt;
 import ca.uhn.fhir.rest.api.MethodOutcome;
-import ca.uhn.fhir.rest.api.SummaryEnum;
 import ca.uhn.fhir.rest.client.IGenericClient;
-import ca.uhn.fhir.rest.client.interceptor.LoggingInterceptor;
-import ca.uhn.fhir.rest.method.SearchStyleEnum;
 import ca.uhn.fhir.rest.param.DateRangeParam;
-import ca.uhn.fhir.rest.server.exceptions.PreconditionFailedException;
 
 public class FHIRClient {
 
@@ -146,14 +130,46 @@ public class FHIRClient {
         for (Bundle.Entry entry : bundle.getEntry()) {
             if (entry.getResource() instanceof DiagnosticReport) {
             	DiagnosticReport dreport = (DiagnosticReport) entry.getResource();
-                CodingDt firstCoding = dreport.getCode().getCodingFirstRep();
-                System.out.println("Observation: code = " + firstCoding.getSystem() + "|" + firstCoding.getCode() + "|" + firstCoding.getDisplay());
+                String conclusion = dreport.getConclusion();
+                System.out.println("Conclusion is : = " + conclusion);
             } else if (entry.getResource() instanceof  Patient) {
                 Patient patient = (Patient) entry.getResource();
                 System.out.println("Patient: name = " + patient.getNameFirstRep().getFamilyFirstRep() + ", " + patient.getNameFirstRep().getGivenFirstRep());
             }
         }
         return bundle;
+    }
+    
+    public Bundle getAppointments (String baseurl, String patientid, String practionerid, String startdate, String enddate){
+    	IGenericClient client = this.getClient(baseurl);
+    	Bundle bundle = client.search().
+                forResource(Appointment.class).
+                where(Appointment.PATIENT.hasId(patientid))
+                .encodedJson().lastUpdated(new DateRangeParam(startdate, enddate)) // Date is of format "2014-11-01"
+				.include(Observation.INCLUDE_PATIENT).returnBundle(Bundle.class).execute();
+    	
+    	if(practionerid != null)
+    		bundle = client.search().
+                forResource(Appointment.class).
+                where(Appointment.PATIENT.hasId(patientid))
+                .where(Appointment.PRACTITIONER.hasId(practionerid))
+                .encodedJson().lastUpdated(new DateRangeParam(startdate, enddate)) // Date is of format "2014-11-01"
+				.include(Observation.INCLUDE_PATIENT).returnBundle(Bundle.class).execute();
+    	// Then
+        for (Bundle.Entry entry : bundle.getEntry()) {
+            if (entry.getResource() instanceof Appointment) {
+            	Appointment appt = (Appointment) entry.getResource();
+            	Date startd = appt.getStart();
+                System.out.println("Appointment start time is : = " + startd);
+                Date endd = appt.getEnd();
+                System.out.println("Appointment end time is : = " + endd);
+            } else if (entry.getResource() instanceof  Patient) {
+                Patient patient = (Patient) entry.getResource();
+                System.out.println("Patient: name = " + patient.getNameFirstRep().getFamilyFirstRep() + ", " + patient.getNameFirstRep().getGivenFirstRep());
+            }
+        }
+        return bundle;
+
     }
     
     public Bundle searchByPlainURL(IGenericClient client, String url){
