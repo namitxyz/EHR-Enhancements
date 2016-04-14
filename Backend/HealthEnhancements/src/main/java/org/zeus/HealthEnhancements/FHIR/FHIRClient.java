@@ -7,12 +7,12 @@ import java.util.List;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.model.api.IResource;
 import ca.uhn.fhir.model.dstu2.composite.CodingDt;
-import ca.uhn.fhir.model.dstu2.resource.Appointment;
 import ca.uhn.fhir.model.dstu2.resource.Bundle;
 import ca.uhn.fhir.model.dstu2.resource.Bundle.Entry;
 import ca.uhn.fhir.model.dstu2.resource.DiagnosticReport;
+import ca.uhn.fhir.model.dstu2.resource.Encounter;
 import ca.uhn.fhir.model.dstu2.resource.Medication;
-import ca.uhn.fhir.model.dstu2.resource.MedicationStatement;
+import ca.uhn.fhir.model.dstu2.resource.MedicationOrder;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.resource.Patient;
 import ca.uhn.fhir.model.primitive.IdDt;
@@ -21,8 +21,9 @@ import ca.uhn.fhir.rest.client.IGenericClient;
 import ca.uhn.fhir.rest.param.DateRangeParam;
 
 public class FHIRClient {
+	public static String baseurl = "http://polaris.i3l.gatech.edu:8080/gt-fhir-webapp/base";
 
-    public IGenericClient getClient(String serverBase){
+    private static IGenericClient getClient(String serverBase){
       
       FhirContext ctx = FhirContext.forDstu2();
       
@@ -31,23 +32,45 @@ public class FHIRClient {
       return client;
     }
 
-    public Bundle searchPatientByFamilyName(String baseurl, String familyName) {
+    public static Bundle searchPatientByFamilyName(String base, String familyName) {
+    	
+    	if (base != null)
+    		baseurl = base;
       
-      IGenericClient client = this.getClient(baseurl);
+      IGenericClient client = FHIRClient.getClient(baseurl);
 
       // Perform a search
       Bundle results = client
             .search()
             .forResource(Patient.class)
-            .where(Patient.FAMILY.matches().value("familyName"))
+            .where(Patient.FAMILY.matches().value(familyName))
             .returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
             .execute();
+      for (Bundle.Entry entry : results.getEntry()) {
+          if (entry.getResource() instanceof Patient) {
+          	System.out.println("----------------------");
+          	String patName = ((Patient) entry.getResource()).getName().get(0).getNameAsSingleString();
+          	String patId = ((Patient) entry.getResource()).getId().toUnqualifiedVersionless().getIdPart();
+          	System.out.println("Patient name is : = " + patName + " and id value is : = " + patId);
+            System.out.println("----------------------");
+          } 
+      }
       return results;
     }
+    
+    public static Bundle getPatientById(String base, String id) {
+    	if (base != null)
+    		baseurl = base;
+    	return (Bundle)searchByPlainURL(baseurl, "Patient?_id=" + id);
+    }
+    
+    
 
-    public void createPatient(String baseurl, String first, String last, String pid){
+    public static void createPatient(String base, String first, String last, String pid){
 
-        IGenericClient client = this.getClient(baseurl);
+    	if (base != null)
+    		baseurl = base;
+    	IGenericClient client = getClient(baseurl);
       // START SNIPPET: create
          Patient patient = new Patient();
          // ..populate the patient object..
@@ -60,7 +83,6 @@ public class FHIRClient {
          MethodOutcome outcome = client.create()
             .resource(patient)
             .prettyPrint()
-            .encodedJson()
             .execute();
          
          // The MethodOutcome object will contain information about the
@@ -73,12 +95,13 @@ public class FHIRClient {
          // END SNIPPET: create
     }
     
-    public List getMedicationsByPatientId(String baseurl, String patientid, String startdate, String enddate){
-    	IGenericClient client = this.getClient(baseurl);
+    public static List getMedicationsByPatientId(String base, String patientid){
+    	if (base != null)
+    		baseurl = base;
+    	IGenericClient client = getClient(baseurl);
     	Bundle ms = client.search()
-				.forResource(MedicationStatement.class).where(MedicationStatement.PATIENT.hasId(patientid))
+				.forResource(MedicationOrder.class).where(MedicationOrder.PATIENT.hasId(patientid))
 				.returnBundle(ca.uhn.fhir.model.dstu2.resource.Bundle.class)
-				.encodedJson().lastUpdated(new DateRangeParam(startdate, enddate)) // Date is of format "2014-11-01"
 				.execute();
     	List<String> medications = new ArrayList<String>();
 		for (Entry entry : ms.getEntry()){
@@ -96,14 +119,16 @@ public class FHIRClient {
 
     }
     
-    public Bundle getObservationsByPatientId(String baseurl, String patientid, String startdate, String enddate){
-    	IGenericClient client = this.getClient(baseurl);
+    public static Bundle getObservationsByPatientId(String base, String patientid, String startdate, String enddate){
+    	if (base != null)
+    		baseurl = base;
+    	IGenericClient client = getClient(baseurl);
     	Bundle bundle = client.search().
                 forResource(Observation.class).
                 where(Observation.PATIENT.hasId(patientid))
-                .encodedJson().lastUpdated(new DateRangeParam(startdate, enddate)) // Date is of format "2014-11-01"
-				.include(Observation.INCLUDE_PATIENT).returnBundle(Bundle.class).execute();
-
+                //.encodedJson().lastUpdated(new DateRangeParam(startdate, enddate)) // Date is of format "2014-11-01"
+				//.include(Observation.INCLUDE_PATIENT).returnBundle(Bundle.class).execute();
+.returnBundle(Bundle.class).execute();
         // Then
         for (Bundle.Entry entry : bundle.getEntry()) {
             if (entry.getResource() instanceof Observation) {
@@ -118,8 +143,10 @@ public class FHIRClient {
         return bundle;
     }
     
-    public Bundle getDiagnosticReportByPatientId(String baseurl, String patientid, String startdate, String enddate){
-    	IGenericClient client = this.getClient(baseurl);
+    public static Bundle getDiagnosticReportByPatientId(String base, String patientid, String startdate, String enddate){
+    	if (base != null)
+    		baseurl = base;
+    	IGenericClient client = getClient(baseurl);
     	Bundle bundle = client.search().
                 forResource(DiagnosticReport.class).
                 where(DiagnosticReport.PATIENT.hasId(patientid))
@@ -140,40 +167,41 @@ public class FHIRClient {
         return bundle;
     }
     
-    public Bundle getAppointments (String baseurl, String patientid, String practionerid, String startdate, String enddate){
-    	IGenericClient client = this.getClient(baseurl);
-    	Bundle bundle = client.search().
-                forResource(Appointment.class).
-                where(Appointment.PATIENT.hasId(patientid))
-                .encodedJson().lastUpdated(new DateRangeParam(startdate, enddate)) // Date is of format "2014-11-01"
-				.include(Observation.INCLUDE_PATIENT).returnBundle(Bundle.class).execute();
+    public static Bundle getAppointments (String base, String patientid){
+    	if (base != null)
+    		baseurl = base;
     	
-    	if(practionerid != null)
-    		bundle = client.search().
-                forResource(Appointment.class).
-                where(Appointment.PATIENT.hasId(patientid))
-                .where(Appointment.PRACTITIONER.hasId(practionerid))
-                .encodedJson().lastUpdated(new DateRangeParam(startdate, enddate)) // Date is of format "2014-11-01"
-				.include(Observation.INCLUDE_PATIENT).returnBundle(Bundle.class).execute();
-    	// Then
-        for (Bundle.Entry entry : bundle.getEntry()) {
-            if (entry.getResource() instanceof Appointment) {
-            	Appointment appt = (Appointment) entry.getResource();
-            	Date startd = appt.getStart();
+    	IGenericClient client = getClient(baseurl);
+    	Bundle bundle = client.search().
+                forResource(Encounter.class).
+                where(Encounter.PATIENT.hasId(patientid))
+                .returnBundle(Bundle.class).execute();
+    	
+    	for (Bundle.Entry entry : bundle.getEntry()) {
+            if (entry.getResource() instanceof Encounter) {
+            	System.out.println("----------------------");
+            	Encounter enct = (Encounter) entry.getResource();
+            	Date startd = enct.getPeriod().getStart();
                 System.out.println("Appointment start time is : = " + startd);
-                Date endd = appt.getEnd();
+                Date endd = enct.getPeriod().getEnd();
                 System.out.println("Appointment end time is : = " + endd);
-            } else if (entry.getResource() instanceof  Patient) {
-                Patient patient = (Patient) entry.getResource();
-                System.out.println("Patient: name = " + patient.getNameFirstRep().getFamilyFirstRep() + ", " + patient.getNameFirstRep().getGivenFirstRep());
-            }
+                String provider = enct.getServiceProvider().getReference().getValueAsString();
+                System.out.println("Provider name is " + provider);
+                System.out.println("----------------------");
+            } 
         }
         return bundle;
 
     }
     
-    public Bundle searchByPlainURL(IGenericClient client, String url){
-    	// Search URL can also be a relative URL in which case the client's base
+    public static Bundle searchByPlainURL(String base, String url){
+    	
+    	if (base != null)
+    		baseurl = base;
+    	
+    	IGenericClient client = getClient(baseurl);
+
+      // Search URL can also be a relative URL in which case the client's base
     	// URL will be added to it for example searchUrl = "Patient?identifier=foo"
     	return client.search()
     	      .byUrl(url)
