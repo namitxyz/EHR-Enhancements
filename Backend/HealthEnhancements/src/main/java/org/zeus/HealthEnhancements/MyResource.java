@@ -48,7 +48,7 @@ public class MyResource {
 	@POST
 	@Path ("CreateUser")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void CreateUser(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
+	public Response CreateUser(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
 	{
 		String returnObj = "";
 		UserInfo user = new UserInfo();
@@ -60,12 +60,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@GET
 	@Path("UserLogin")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void CheckUserIdAndPassword(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
+	public Response CheckUserIdAndPassword(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
 	{	
 		String returnObj = "";
 		UserInfo user = new UserInfo();
@@ -78,12 +79,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@GET
 	@Path("GetPatientProfile")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void GetPatientProfile(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
+	public Response GetPatientProfile(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
 	{
 		String returnObj = "";
 		
@@ -103,12 +105,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@PUT
 	@Path("UpdatePatientProfile")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void UpdatePatientProfile(@HeaderParam("userInfo") String szUser)
+	public Response UpdatePatientProfile(@HeaderParam("userInfo") String szUser)
 	{
 		String returnObj = "";
 		
@@ -127,13 +130,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
-		
+		return response;
 	}
 
 	@POST
 	@Path ("CreateProvider")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void CreateProvider(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
+	public Response CreateProvider(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
 	{
 		String returnObj = "";
 		ProviderInfo provider = new ProviderInfo();
@@ -146,12 +149,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@GET
 	@Path("ProviderLogin")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void CheckProviderIdAndPassword(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
+	public Response CheckProviderIdAndPassword(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
 	{	
 		String returnObj = "";
 		ProviderInfo provider = new ProviderInfo();
@@ -164,12 +168,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@GET
 	@Path("GetProviderProfile")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void GetProviderProfile(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
+	public Response GetProviderProfile(@HeaderParam("UserName") String szUserName, @HeaderParam("Password") String szPassword)
 	{
 		String returnObj = "";
 		ProviderInfo provider = new ProviderInfo();
@@ -179,12 +184,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@PUT
 	@Path("UpdateProviderProfile")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void UpdateProviderProfile(@HeaderParam("providerInfo") String szProvider)
+	public Response UpdateProviderProfile(@HeaderParam("providerInfo") String szProvider)
 	{
 		String returnObj = "";
 		ProviderInfo provider = StringToObject_ProviderInfo(szProvider);
@@ -197,12 +203,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@POST
 	@Path ("AddPatientToProviderMapping")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void AddPatientToProviderMapping(@HeaderParam("PatientID") String szPatientID, 
+	public Response AddPatientToProviderMapping(@HeaderParam("PatientID") String szPatientID, 
 			@HeaderParam("ProviderID") String szProviderID)
 	{
 		String returnObj = "";
@@ -222,13 +229,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
-		
+		return response;
 	}
 
 	@GET
 	@Path("IsValidPatientToProviderMapping")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void IsValidPatientToProviderMapping(@HeaderParam("PatientID") String szPatientID, 
+	public Response IsValidPatientToProviderMapping(@HeaderParam("PatientID") String szPatientID, 
 			@HeaderParam("ProviderID") String szProviderID)
 	{
 		String returnObj = "";
@@ -242,12 +249,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@GET
 	@Path("GetAllProvidersForPatient")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void GetAllProvidersForPatient(@HeaderParam("PatientID") String szPatientID)
+	public Response GetAllProvidersForPatient(@HeaderParam("PatientID") String szPatientID)
 	{
 		String returnObj = "";
 		PatientToProvider p2p = new PatientToProvider();
@@ -264,12 +272,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@GET
 	@Path("GetAllPatientsForProvider")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void GetAllPatientsForProvider(@HeaderParam("ProviderID") String szProviderID)
+	public Response GetAllPatientsForProvider(@HeaderParam("ProviderID") String szProviderID)
 	{
 		String returnObj = "";
 		PatientToProvider p2p = new PatientToProvider();
@@ -286,12 +295,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@POST
 	@Path("AddFeedbackForProvider")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void AddFeedbackForProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("Feedback") String szfeedback)
+	public Response AddFeedbackForProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("Feedback") String szfeedback)
 	{
 		String returnObj = "";
 		ProviderFeedback feedback = new ProviderFeedback();
@@ -310,12 +320,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@GET
 	@Path("ViewAllFeedbackForProvider")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void ViewAllFeedbackForProvider(@HeaderParam("ProviderID") String szProviderID)
+	public Response ViewAllFeedbackForProvider(@HeaderParam("ProviderID") String szProviderID)
 	{
 		String returnObj = "";
 		
@@ -333,12 +344,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@GET
 	@Path("ViewAllFeedbackGivenByPatient")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void ViewAllFeedbackGivenByPatient(@HeaderParam("PatientID") String szPatientID)
+	public Response ViewAllFeedbackGivenByPatient(@HeaderParam("PatientID") String szPatientID)
 	{
 		String returnObj = "";
 		
@@ -356,12 +368,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@GET
 	@Path("ViewAllFeedbackGivenByPatientForProvider")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void ViewAllFeedbackGivenByPatientForProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID)
+	public Response ViewAllFeedbackGivenByPatientForProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID)
 	{
 		String returnObj = "";
 		ProviderFeedback feedback = new ProviderFeedback();
@@ -378,13 +391,14 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 
 	@POST
 	@Path("AddAppointment")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void AddAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("DateTime") String szDateTime, @HeaderParam("Notes") String szNotes)
+	public Response AddAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("DateTime") String szDateTime, @HeaderParam("Notes") String szNotes)
 	{
 		String returnObj = "";
 		Appointment appointment = new Appointment();
@@ -403,12 +417,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@GET
 	@Path("GetAppointment")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void DeleteAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID)
+	public Response DeleteAppointment(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID)
 	{
 		String returnObj = "";
 		Appointment appointment = new Appointment();
@@ -425,12 +440,13 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 
 	@POST
 	@Path("SendEmailToAnotherProvider")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void SendEmailToAnotherProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("OrigProviderID") String szOrigProviderID, @HeaderParam("NewProviderID") String szNewProviderID, @HeaderParam("EmailContent") String szEmailContent)
+	public Response SendEmailToAnotherProvider(@HeaderParam("PatientID") String szPatientID, @HeaderParam("OrigProviderID") String szOrigProviderID, @HeaderParam("NewProviderID") String szNewProviderID, @HeaderParam("EmailContent") String szEmailContent)
 	{
 		String returnObj = "";
 		if(!NotificationService.Notify(szOrigProviderID, szNewProviderID, szPatientID, szEmailContent))
@@ -440,43 +456,45 @@ public class MyResource {
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
-
+		return response;
 	}
 
 	@POST
 	@Path("AddMedicalRecord")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void AddMedicalRecord(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("MedicalRecordJSON") String szMedicalRecord)
+	public Response AddMedicalRecord(@HeaderParam("PatientID") String szPatientID, @HeaderParam("ProviderID") String szProviderID, @HeaderParam("MedicalRecordJSON") String szMedicalRecord)
 	{
 		String returnObj = "";
 		//also store the timestamp
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
-
+		return response;
 	}
 
 	@GET
 	@Path("ViewEntireMedicalHistory")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void ViewEntireMedicalHistory(@HeaderParam("PatientID") String szPatientID)
+	public Response ViewEntireMedicalHistory(@HeaderParam("PatientID") String szPatientID)
 	{
 		String returnObj = "";
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
 
+		return response;
 	}
 
 	@GET
 	@Path("ViewLatestMedicalHistory")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void ViewLatestMedicalHistory(@HeaderParam("PatientID") String szPatientID)
+	public Response ViewLatestMedicalHistory(@HeaderParam("PatientID") String szPatientID)
 	{
 		String returnObj = "";
 		Response response = Response.status(200).
                 entity(returnObj).
                 header("Access-Control-Allow-Origin", "*").build();
+		return response;
 
 	}
 }
