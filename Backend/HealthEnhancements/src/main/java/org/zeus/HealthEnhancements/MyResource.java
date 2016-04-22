@@ -2,6 +2,8 @@
 package org.zeus.HealthEnhancements;
 
 import org.zeus.HealthEnhancements.UserInfo;
+import org.zeus.HealthEnhancements.FHIR.Patient;
+import org.zeus.HealthEnhancements.FHIR.PatientDataManager;
 import org.zeus.HealthEnhancements.Services.NotificationService;
 
 import com.google.gson.Gson;
@@ -15,6 +17,7 @@ import javax.ws.rs.Produces;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -496,5 +499,31 @@ public class MyResource {
                 header("Access-Control-Allow-Origin", "*").build();
 		return response;
 
+	}
+	
+	@GET
+	@Path("GetPatientData")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response GetPatientData(@HeaderParam("PatientID") String szPatientID)
+	{
+		Patient patient = PatientDataManager.GetData(szPatientID);
+		String returnObj = ObjectToString(patient);
+		Response response = Response.status(200).
+                entity(returnObj).
+                header("Access-Control-Allow-Origin", "*").build();
+		return response;
+	}
+	
+	@GET
+	@Path("GetAllPatients")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response GetAllPatients()
+	{
+		List<Patient> patients = PatientDataManager.GetAllPatients();
+		String returnObj = ObjectToString(patients);
+		Response response = Response.status(200).
+                entity(returnObj).
+                header("Access-Control-Allow-Origin", "*").build();
+		return response;
 	}
 }
