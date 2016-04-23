@@ -1,0 +1,28 @@
+<html>
+<head>
+	<title> Ajax 2</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+	<script type="text/javascript"></script>
+// Using jQuery
+<script>
+$(document).ready(function(){
+	$("#Shareitem").click(function(e){
+          e.preventDefault();
+		$.ajax({
+		    type: "GET",
+		    headers: {"UserName": "a1", "Password": "a1"},
+		    url: "http://ehr-namitgupta.rhcloud.com/webresources/UserLogin",
+		}).done(function (data) {
+		    console.log(data);
+		    
+		});
+	});
+});
+
+
+</script>
+</body>
+</html>

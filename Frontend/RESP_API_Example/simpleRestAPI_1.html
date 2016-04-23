@@ -1,0 +1,132 @@
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+
+	<script type="text/javascript"></script>
+	<script>
+		/*var xhr = new XMLHttpRequest();
+		xhr.open("GET", "http://ehr-namitgupta.rhcloud.com/webresources/UserLogin", true);
+		//xmlHttp.setRequestHeader('Content-Type', 'application/json')
+		//xhr.setRequestHeader('Content-Type', 'text/x-json');
+		xhr.setRequestHeader({UserName: a2
+		Password: a2});
+		xhr.send();
+
+		//xmlDocument = xhr.responseJSON;
+		//console.log(xmlDocument.childNodes['0'].textContent);*/
+		// var getUserName = function (username, password){
+		// 	var respond = [];
+		 	//var xhr = new XMLHttpRequest();
+		// 	console.log("function called"+username );
+		// 	xhr.open("GET", "http://ehr-namitgupta.rhcloud.com/webresources/GetPatientProfile",true);
+		// }
+		// getUserName('a1','a1');
+
+		///////////////////////////
+		// 	var result = null;
+		// function createRequest() {
+		// 	  var result = null;
+		// 	  if (window.XMLHttpRequest) {
+		// 	    // FireFox, Safari, etc.
+		// 	      result = new XMLHttpRequest();
+		// 	    if (typeof XMLHttp.overrideMimeType != 'undefined') {
+		// 	      result.overrideMimeType('text/xml'); // Or anything else
+		// 	    }
+		// 	  }
+		// 	  else if (window.ActiveXObject) {
+		// 	    // MSIE
+		// 	    result = new ActiveXObject("Microsoft.XMLHTTP");
+		// 	  } 
+		// 	  else {
+		// 	    // No known mechanism -- consider aborting the application
+		// 	  }
+		// 	  return result;
+		// }
+
+		// var req = createRequest(); // defined above
+		// // Create the callback:
+		// req.onreadystatechange = function() {
+		//   if (req.readyState != 4) return; // Not there yet
+		//   if (req.status != 200) {
+		//     // Handle request failure here...
+		//     return;
+		//   }
+		//   // Request successful, read the response
+		//   var resp = req.responseText;
+		//   // ... and use it as needed by your app.
+		// }
+
+		// jQuery.ajax({
+  //           url: "http://ehr-namitgupta.rhcloud.com/webresources/UserLogin",
+  //           type: "GET",
+  //           headers: {
+		//         "UserName": "a1",
+		// 		"Password": "a1"
+		//     },
+  //           //contentType: 'application/json; charset=utf-8',
+  //           //setRequestHeader:("username:a1,password:a1");
+  //           success: function(resultData) {
+  //           	console.log(resultData);
+  //               //here is your json.
+  //                 // process it
+
+  //           },
+  //           error : function(jqXHR, textStatus, errorThrown) {
+  //           },
+
+  //           timeout: 120000,
+  //       });
+
+		//var url ="http://ehr-namitgupta.rhcloud.com/webresources/GetPatientProfile"
+		//req.open("POST", url, true);
+		//req.setRequestHeader("Content-Type",
+		//	                     "application/x-www-form-urlencoded");
+		//req.setRequestHeader("username:a1,password:a1");
+		//console.log(req.response);
+		//req.send(form-encoded request body);
+
+		// req.open("GET", url, true);
+		// req.send();
+
+		// $(document).ready(function() {
+		//     $.ajax({
+		//     	headers: {
+		//     	    "UserName": "a1",
+		// 	 		"Password": "a1"},
+		//         url: "http://ehr-namitgupta.rhcloud.com/webresources/UserLogin"
+		//     }).then(function(data) {
+		//        //$('.greeting-id').append(data.id);
+		//        //$('.greeting-content').append(data.content);
+		//     });
+		// });
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "http://ehr-namitgupta.rhcloud.com/webresources/UserLogin", true);
+		xhr.setRequestHeader("UserName", "a1");
+		xhr.setRequestHeader("password", "a1");
+		xhr.setRequestHeader("Content-Type", "application/json");
+
+		xhr.onreadystatechange = function() {
+		  if (xhr.readyState == 4) {
+		    var result = JSON.parse(xhr.responseText);
+		    if (result.objectId) {
+		      alert("saved an object with id: " + result.objectId);
+		    }
+		  }
+		}
+		  
+		var data = JSON.stringify({ UserName: "a1", Password: "a1" });
+		xhr.send(data);
+
+
+	</script>
+
+
+</body>
+</html>
+
