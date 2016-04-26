@@ -1,0 +1,17 @@
+<script>
+function getContacts () {
+
+     jQuery.ajax({
+         type: "GET",
+         url: "http://localhost:49193/Contacts.svc/GetAll",
+         contentType: "application/json; charset=utf-8",
+         dataType: "json",
+         success: function (data, status, jqXHR) {
+             // do something
+         },
+
+         error: function (jqXHR, status) {
+             // error handler
+         }
+});
+</script>

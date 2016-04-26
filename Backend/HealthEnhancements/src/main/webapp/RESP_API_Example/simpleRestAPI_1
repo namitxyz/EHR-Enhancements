@@ -1,0 +1,8 @@
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://www.codecademy.com/", false);
+xhr.send();
+
+console.log(xhr.status);
+console.log(xhr.statusText);
+xhr.open("GET", "http://api.wunderground.com/api/Your_Key/conditions/q/CA/San_Francisco.json", true);
+xhr.send();i

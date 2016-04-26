@@ -20,7 +20,7 @@ public class EHRClnt {
 
 		Client restClient = Client.create();
 
-		CSVReader reader = null;
+		/*CSVReader reader = null;
 
 		reader = new CSVReader(new FileReader("/Users/namit/Desktop/Patient.csv"),',');
 		String [] nextLine;
@@ -30,7 +30,7 @@ public class EHRClnt {
 			String m_szUserName = nextLine[0];
 			String m_szHashUserPassword = nextLine[0];
 
-			String url = "http://ehr-namitgupta.rhcloud.com/webresources/CreateUser";
+			String url = "http://ehr-namitgupta.rhcloud.com/webresources/CreateProvider";
 			WebResource webResource = restClient.resource(url);
 			ClientResponse resp = webResource.accept("application/json")
 					.header("UserName", m_szUserName)
@@ -52,25 +52,23 @@ public class EHRClnt {
 
 				System.out.println(m_id);
 
-				UserInfo user = new UserInfo();
+				ProviderInfo user = new ProviderInfo();
 
 				user.m_id = m_id;
 				user.m_szUserName = nextLine[0];
 				user.m_szHashUserPassword = nextLine[0];
 				user.m_szLastName = nextLine[1];
 				user.m_szFirstName = nextLine[2];
-				user.m_szMiddleInitial = nextLine[3];
-				user.m_szGender = nextLine[4];
-				user.m_szDateOfBirth = nextLine[5];
+				user.m_szMiddleName = nextLine[3];
 				user.m_szAddress = nextLine[10] + ", " + nextLine[7] + ", " + nextLine[8] + ", " + nextLine[6];
 
 				Gson gson = new GsonBuilder().create();
 				String authString = gson.toJson(user);
 
-				url = "http://ehr-namitgupta.rhcloud.com/webresources/UpdatePatientProfile";
+				url = "http://ehr-namitgupta.rhcloud.com/webresources/UpdateProviderProfile";
 				webResource = restClient.resource(url);
 				resp = webResource.accept("application/json")
-						.header("UserInfo", authString)
+						.header("providerInfo", authString)
 						.put(ClientResponse.class);
 
 				if(resp.getStatus() != 200)
@@ -86,7 +84,7 @@ public class EHRClnt {
 			{
 				System.out.println(e.getMessage());
 			}
-		}
+		}*/
 
 		/*String url = "http://localhost:8080/HealthEnhancements/webresources/GetAllPatientsForProvider";
 		WebResource webResource = restClient.resource(url);
@@ -117,7 +115,7 @@ public class EHRClnt {
 				.header("Notes", "note 2")
 				.post(ClientResponse.class);*/
 
-		/*String url = "http://ehr-namitgupta.rhcloud.com/webresources/GetPatientProfile";
+		String url = "http://ehr-namitgupta.rhcloud.com/webresources/GetProviderProfile";
 		WebResource webResource = restClient.resource(url);
 		ClientResponse resp = webResource.accept("application/json")
 				.header("UserName", "3")
@@ -129,6 +127,6 @@ public class EHRClnt {
 		}
 
 		String output = resp.getEntity(String.class);
-		System.out.println("response: "+output);*/
+		System.out.println("response: "+output);
 	}
 }
