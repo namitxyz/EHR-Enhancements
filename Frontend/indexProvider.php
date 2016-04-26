@@ -10,6 +10,8 @@
 
 <script>
 
+<script>
+
 $(document).ready(function(){
     $("#apiCall").click(function(e){
           e.preventDefault();
@@ -17,31 +19,50 @@ $(document).ready(function(){
           var pass = document.getElementById("password").value;
           var result = "";
           //alert (user + pass)
-        $.ajax({
-            type: "GET",
-            headers: {"UserName": user, "Password": pass},
-            url: "http://ehr-namitgupta.rhcloud.com/webresources/UserLogin",
-            username: user,
-            password: pass,
-            success :(function (response){ 
-                console.log ("API successfully got the username and password");
-                //if responseSuccess:"User authenticated"
-                result = response.Success;
-                if (result === "User authenticated"){
-                    window.open("startbootstrap-sb-admin-2-1.0.8/pages/index.html");
-                }
-        }),
-            error :(function(){ console.log ("error")})
-        
-        
-        }).done(function (response) {
-            //console.log(response.data);
-            //alert (response);
-            
+          
+        $.when(
+            $.ajax({
+                type: "GET",
+                headers: {"UserName": user, "Password": pass},
+                url: "http://ehr-namitgupta.rhcloud.com/webresources/ProviderLogin",
+                username: user,
+                password: pass,
+                success :(function (response){ 
+                    console.log ("API successfully got the username and password");
+                    //if responseSuccess:"User authenticated"
+                    result = response.Success;
+                    if (result === "User authenticated"){
+                        window.location.href ="startbootstrap-sb-admin-2-1.0.8/index.php";
+                    }else {
+                         alert("Your username and password did not match our record. Please try again! ");
+                    }
+                }),
+                error :(function(){ alert ("Something went wrong.Please try again! ")})      
+            }),
+
+            $.ajax({
+                type: "GET",
+                headers: {"UserName": user, "Password": pass},
+                url: "http://ehr-namitgupta.rhcloud.com/webresources/GetProviderProfile",
+                username: user,
+                password: pass,
+                success :(function (response){ 
+                    console.log ("API successfully got providers's profile");
+                    //if responseSuccess:"User authenticated"
+                    result = response;
+                    console.log (result)
+                }),
+                error :(function(){ alert ("Something went wrong.  </br> Please try again! ")}) 
+            })
+
+        ).then( function(){
+            console.log("All Api finished!!!")
         });
         //console.log(result);
     });
 });
+   
+</script>
    
 </script>
 
@@ -76,9 +97,9 @@ $(document).ready(function(){
                             </div>
                         </div>
                         <div class="col-md-6 forgot-pass-content">
-                            <a href="javascription:void(0)" class="forgot-pass">Forgot Password</a></br>
-                            <a href="index.php" class="forgot-pass"> 
-                                Are you not a Provider? Click Here and log-in as patiant.</a>
+                            <a href="javascription:void(0)" class="forgot-pass">Forgot Password</a></br></br>
+                            <a href="indexProvider.php" >Are you not a Provider? Click Here and log-in as patiant.</a></br></br>
+                            <a href="startbootstrap-sb-admin-2-1.0.8/pages/register.php" >Don't have a user-name and password yet? Register Now.</a>
                         </div>
                     </div>
                 </div>
