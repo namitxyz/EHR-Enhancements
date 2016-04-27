@@ -30,8 +30,8 @@ $(document).ready(function(){
                     console.log ("API successfully got the username and password");
                     //if responseSuccess:"User authenticated"
                     result = response.Success;
-                    if (result === "User authenticated"){
-                        window.location.href ="perovidrFirstPage.php";
+                    if (result.id !== ""){
+                        window.location.href ="providerFirstPage.php";
                     }else {
                          alert("Your username and password did not match our record. you can not log as providr! ");
                     }

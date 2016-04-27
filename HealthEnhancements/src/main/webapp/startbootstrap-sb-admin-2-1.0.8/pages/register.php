@@ -28,7 +28,7 @@
 
 $(document).ready(function(){
     $("#apiRegister").click(function(e){
-          e.preventDefault();
+          //e.preventDefault();
             var iUserName = document.getElementById("inputUserName").value;
             var iPassword = document.getElementById("inputPassword").value;
             var iFirstName = document.getElementById("inputFirstName").value;
@@ -41,13 +41,7 @@ $(document).ready(function(){
             var iSSN = document.getElementById("inputSSN").value;
             var iCity = document.getElementById("City").value;
             var iState = document.getElementById("State").value;
-            var iZipcode = document.getElementById("inputZipCode").value;  
-          
-          
-          
-          
-          
-          
+            var iZipcode = document.getElementById("inputZipCode").value;           
           //alert (user + pass)
           
         $.when(
@@ -108,13 +102,13 @@ $(document).ready(function(){
 <div class="container">
 
 <div class="page-header">
-    <h1>Registration form <small></small></h1>
+    <h1>Patient's Registration form <small></small></h1>
 </div>
 
 <!-- Registration form - START -->
 <div class="container">
     <div class="row">
-        <form role="form">
+        <form role="form" data-toggle="validator">
             <div class="col-lg-12 col-md-12 col-sm-12">
 
                 <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>    Required Field</strong></div>
@@ -141,6 +135,25 @@ $(document).ready(function(){
                        <label >Last Name</label>
                        <div class="input-group">
                            <input type="text" class="form-control" id="inputLastName" name="inputMidelName" placeholder="Last Name" required>
+                           <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-lg-6 col-md-6 col-sm-6">
+                   <div class="form-group">
+                       <label >User Name</label>
+                       <div class="input-group">
+                           <input type="UserName" class="form-control" id="inputUserName" name="inputEmail" placeholder="User Name" required>
+                           <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+               </div>
+               </div>
+               <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="form-group">
+                       <label >password</label>
+                       <div class="input-group">
+                           <input type="password" class="form-control" id="inputPassword" name="inputEmail" placeholder="Password" required>
                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                        </div>
                    </div>
@@ -208,24 +221,7 @@ $(document).ready(function(){
                        </div>
                    </div>
                </div>
-               <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="form-group">
-                       <label >User Name</label>
-                       <div class="input-group">
-                           <input type="UserName" class="form-control" id="inputUserName" name="inputEmail" placeholder="User Name" required>
-                           <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                       </div>
-                   </div>
-               </div>
-               <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="form-group">
-                       <label >password</label>
-                       <div class="input-group">
-                           <input type="password" class="form-control" id="inputPassword" name="inputEmail" placeholder="Password" required>
-                           <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                       </div>
-                   </div>
-               </div>
+               
                <div class="col-lg-3 col-md-3 col-sm-3">
                    <div class="form-group">
                        <label >Phone</label>
@@ -376,15 +372,15 @@ $(document).ready(function(){
          </div>
       </form>
    </div>
-</dive> 
-            <!-- <div class="col-md-12">
+</div> 
+            <div class="col-md-12">
                 <div class="alert alert-success">
                     <strong><span class="glyphicon glyphicon-ok"></span> Success! Message sent.</strong>
                 </div>
                 <div class="alert alert-danger">
                     <span class="glyphicon glyphicon-remove"></span><strong> Error! Please check all page inputs.</strong>
                 </div>
-            </div> -->
+            </div>
         
 <!-- Registration form - END -->
 
@@ -392,8 +388,7 @@ $(document).ready(function(){
 
 <!-- //////////////////////////// -->
 
-</br>
-</br>
+
 
 </body>
 </html>
