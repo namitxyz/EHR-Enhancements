@@ -2,13 +2,12 @@
 <head>
     <title> Team Zeus </title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="loginPage.css">
+    <link rel="stylesheet" type="text/css" href="../../bootstrap-3.3.6-dist/css/login.css">
     <script src="loginPage.js"></script>
 </head>
 <body>
 
 
-<script>
 
 <script>
 
@@ -32,7 +31,7 @@ $(document).ready(function(){
                     //if responseSuccess:"User authenticated"
                     result = response.Success;
                     if (result === "User authenticated"){
-                        window.location.href ="startbootstrap-sb-admin-2-1.0.8/index.php";
+                        window.location.href ="perovidrFirstPage.php";
                     }else {
                          alert("Your username and password did not match our record. Please try again! ");
                     }
@@ -48,7 +47,7 @@ $(document).ready(function(){
                 password: pass,
                 success :(function (response){ 
                     console.log ("API successfully got providers's profile");
-                    //if responseSuccess:"User authenticated"
+                    //window.location.href ="perovidrFirstPage.php";
                     result = response;
                     console.log (result)
                 }),
@@ -98,8 +97,8 @@ $(document).ready(function(){
                         </div>
                         <div class="col-md-6 forgot-pass-content">
                             <a href="javascription:void(0)" class="forgot-pass">Forgot Password</a></br></br>
-                            <a href="indexProvider.php" >Are you not a Provider? Click Here and log-in as patiant.</a></br></br>
-                            <a href="startbootstrap-sb-admin-2-1.0.8/pages/register.php" >Don't have a user-name and password yet? Register Now.</a>
+                            <a href="../../index.php" >Are you not a Provider? Click Here and log-in as patiant.</a></br></br>
+                            <a href="startbootstrap-sb-admin-2-1.0.8/pages/registerProvider.php" >Don't have a user-name and password yet? Register Now.</a>
                         </div>
                     </div>
                 </div>

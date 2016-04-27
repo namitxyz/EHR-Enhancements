@@ -1,29 +1,74 @@
 {
 "m_id": "56f8703fe4b0732c103d6cc0"
-"m_szUserName": "a1"
-"m_szHashUserPassword": "a1"
+"UserName": "a1"
+"HashUserPassword": "a1"
+"FirstName": ""
+"LastName": ""
+"MiddleInitial": ""
+"Address": ""
+"PhoneNumber": ""
+"Email": ""
+"DateOfBirth": ""
+"Gender": ""
+"Race": ""
+"Ethnicity": ""
+"PrimaryLanguage": ""
+"MartialStatus": ""
+"SocialSecurity": ""
+"Employer": ""
+"EmploymentStatus": ""
+"EmergencyFirstName": ""
+"EmergencyLastName": ""
+"EmergencyPhoneNumber": ""
+"EmergencyRelationship": ""
+"EmergencyAddress": ""
+"InsuraceCompanyName": ""
+"InsurancePhoneNumber": ""
+"InsuranceSubsriberID": ""
+"InsuranceGroupID": ""
+}
+
+"UserName": "iUserName",
+                           "HashUserPassword": "iPassword",
+                           "FirstName": "iFirstName",
+                           "LastName": "ILastName",
+                           "MiddleInitial": "iMidelName",
+                           "Address": "iAddress1",
+                           "PhoneNumber": "iPhone",
+                           "Email": "iEmail",
+                           "DateOfBirth": "iDOB",
+                           "Gender": "",
+                           "Race": "",
+                           "Ethnicity": "",
+                           "PrimaryLanguage": "",
+                           "MartialStatus": "",
+                           "SocialSecurity": "iSSN",
+                           "Employer": "",
+                           "EmploymentStatus": "",
+                           "EmergencyFirstName": "",
+                           "EmergencyLastName": "",
+                           "EmergencyRelationship": "",
+                           "EmergencyPhoneNumber": "",
+                           "EmergencyAddress": "",
+                           "InsuraceCompanyName": "",
+                           "InsurancePhoneNumber": "",
+                           "InsuranceSubsriberID": "",
+                           "InsuranceGroupID": "" },
+
+Provider Json
+{"m_id": "571fea35e4b04061e2e931a0"
+"m_szUserName": "a2"
+"m_szHashUserPassword": "a2"
+"m_szProviderType": ""
 "m_szFirstName": ""
 "m_szLastName": ""
-"m_szMiddleInitial": ""
+"m_szMiddleName": ""
+"m_szSocialSecurity": ""
+"m_szLicenseNumber": ""
+"m_szPersonnelType": ""
+"m_szSpecialization": ""
+"m_szAffiliation": ""
 "m_szAddress": ""
 "m_szPhoneNumber": ""
 "m_szEmail": ""
-"m_szDateOfBirth": ""
-"m_szGender": ""
-"m_szRace": ""
-"m_szEthnicity": ""
-"m_szPrimaryLanguage": ""
-"m_szMartialStatus": ""
-"m_szSocialSecurity": ""
-"m_szEmployer": ""
-"m_szEmploymentStatus": ""
-"m_szEmergencyFirstName": ""
-"m_szEmergencyLastName": ""
-"m_szEmergencyPhoneNumber": ""
-"m_szEmergencyRelationship": ""
-"m_szEmergencyAddress": ""
-"m_szInsuraceCompanyName": ""
-"m_szInsurancePhoneNumber": ""
-"m_szInsuranceSubsriberID": ""
-"m_szInsuranceGroupID": ""
 }
