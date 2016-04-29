@@ -191,7 +191,7 @@
 
   <!-- scripts -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script sr="js/>bootstrap.min.js"></script>
+  <script src="../../bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 
   <!-- jQuery -->
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>
