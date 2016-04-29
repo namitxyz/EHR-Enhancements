@@ -7,12 +7,7 @@
 
   <title>Team Zeus EMR</title>
   <link rel="icon" href="logo.ico">
-  <link rel="stylesheet" type="text/css" href="../../bootstrap-3.3.6-dist/css/bootstrap.css">
-  <!-- IE8 support -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+
   <!-- Bootstrap Core CSS -->
   <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -30,6 +25,13 @@
 
   <!-- Custom Fonts -->
   <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
 
 <body>
@@ -44,6 +46,7 @@
     <li role="presentation" ><a href="page7.html">Page7</a></li>
   </ul>
   <!-- end navigation -->
+
   <!-- main section -->
   <div class="container"><br><br>
     <form class="form-inline">
@@ -113,18 +116,33 @@
       </div>
     </div>
     <!-- end all patients -->
-
+  <!-- Charts! -->
   <!-- two columns -->
   <div class="row" id="patientCharts">
     <div class="col-md-6">
-      <div id="chart1" style="height: 250px;"></div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Patient Heart Data
+        </div>
+        <div class="panel-body">
+          <div id="morris-area-chart" style="height: 250px;"></div>
+        </div>
+      </div>
     </div>
     <div class="col-md-6">
-      <!--<div id="chart2" style="height: 250px;"></div>-->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Patient Body Data
+        </div>
+        <div class="panel-body">
+          <div id="morris-area-chart2" style="height: 250px;"></div>
+        </div>
+      </div>
     </div>
   </div><br/><br/>
   </div>
   <!-- end two columns -->
+  <!-- end Charts! -->
   <!-- end main section -->
 
   <!-- scripts -->
@@ -140,14 +158,20 @@
   <!-- Metis Menu Plugin JavaScript -->
   <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-  <!-- Morris Charts JavaScript
+  <!-- Morris Charts JavaScript-->
   <script src="../bower_components/raphael/raphael-min.js"></script>
   <script src="../bower_components/morrisjs/morris.min.js"></script>
-  <script src="../js/morris-data.js"></script>-->
 
   <!-- Custom Theme JavaScript -->
   <script src="../dist/js/sb-admin-2.js"></script>
+  <!--<script>
+    $(document).ready(function(){
+      // $('#pcpComments').text('55');
 
+    });
+
+    var i =44;
+  </script>  -->
 
   <script>
     $(document).ready(function(){
@@ -306,15 +330,84 @@
               obsTime[i] = obsYear[1] + '/' + obsYear[2] + '/' + obsYear[0] + ' ' + obsHours[0] + ':' + obsHours[1];
             }
             // populate the observation table
+            heartChart = [];
             for (var i = 0; i < data['m_szObservations'].length; i++) {
               $('#observationTbl TBODY').append('<tr><td>' + data.m_szObservations[i].m_szObservationDisplay
                       + '</td><td>' + data.m_szObservations[i].m_szObservationValue
                       + '</td><td>' + data.m_szObservations[i].m_szObservationUnit
                       + '</td><td>' + obsTime[i]
                       + '</td><td>' + data.m_szObservations[i].m_szObservationStatues + '</td></tr>');
+              if (data.m_szObservations[i].m_szObservationDisplay == "Systolic blood pressure" ||
+                      data.m_szObservations[i].m_szObservationDisplay == "Diastolic blood pressure"){
+
+              }
+              heartChart[i] = {period: obsTime[i] };
             }
+            $('#patientCharts').show();
+            // create a new chart
+            new Morris.Area({
+              element: 'morris-area-chart',
+              data: [{
+                period: '2005 Q1',
+                Systolic: 142.0,
+                Diastolic: 91.0,
+                HeartRate: 92.0,
+                RespiratoryRate: 15.0
+              }, {
+                period: '2005 Q2',
+                Systolic: 147.0,
+                Diastolic: 94.0,
+                HeartRate: 93.0,
+                RespiratoryRate: 14.0
+              }, {
+                period: '2005 Q3',
+                Systolic: 145.0,
+                Diastolic: 92.0,
+                HeartRate: 92.0,
+                RespiratoryRate: 16
+              }],
+              xkey: 'period',
+              ykeys: ['Systolic', 'Diastolic', 'HeartRate', 'RespiratoryRate'],
+              labels: ['Systolic', 'Diastolic', 'HeartRate', 'RespiratoryRate'],
+              pointSize: 2,
+              hideHover: 'auto',
+              resize: true
+            });
+
+            // create a new chart
+            new Morris.Area({
+              element: 'morris-area-chart2',
+              data: [{
+                period: '2005 Q1',
+                Height: 173.0,
+                Weight: 93.2,
+                BMI: 31.14,
+                Temp: 37.1
+              }, {
+                period: '2005 Q2',
+                Height: 173.0,
+                Weight: 91.1,
+                BMI: 30.439,
+                Temp: 37.0
+              }, {
+                period: '2005 Q3',
+                Height: 173.0,
+                Weight: 92.2,
+                BMI: 30.806,
+                Temp: 37.1
+              }],
+              xkey: 'period',
+              ykeys: ['Height', 'Weight', 'BMI', 'Temp'],
+              labels: ['Height', 'Weight', 'BMI', 'Temp'],
+              pointSize: 2,
+              hideHover: 'auto',
+              resize: true
+            });
+
+
             // display the newly populated tables
             $('#patientInfo').show();
+
           }  //end success
         });  // end ajax
       }  //end popObserveTable
@@ -364,31 +457,7 @@
         }); //end ajax
         // display the table and charts (charts not working right now???)
         $('#allPatients').show();
-        $('#patientCharts').show();
       } //end popPatientTbl
-
-      // create a new chart
-//      new Morris.Line({
-//        // ID of the element in which to draw the chart.
-//        element: 'chart1',
-//        // Chart data records -- each entry in this array corresponds to a point on
-//        // the chart.
-//        data: [
-//          { year: '2008', value: 20 },
-//          { year: '2009', value: 10 },
-//          { year: '2010', value: 5 },
-//          { year: '2011', value: 5 },
-//          { year: '2012', value: 20 }
-//       ],
-//        // The name of the data record attribute that contains x-values.
-//        xkey: 'year',
-//        // A list of names of data record attributes that contain y-values.
-//        ykeys: ['value'],
-//        // Labels for the ykeys -- will be displayed when you hover over the
-//        // chart.
-//        labels: ['Value']
-//      }); //end morris.line
-
     });  //end ready function
 
   </script>
@@ -396,3 +465,4 @@
 
 </body>
 </html>
+

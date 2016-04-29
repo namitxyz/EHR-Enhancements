@@ -7,12 +7,7 @@
 
   <title>Team Zeus EMR</title>
   <link rel="icon" href="logo.ico">
-  <link rel="stylesheet" type="text/css" href="../../bootstrap-3.3.6-dist/css/bootstrap.css">
-  <!-- IE8 support -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+
   <!-- Bootstrap Core CSS -->
   <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -30,6 +25,13 @@
 
   <!-- Custom Fonts -->
   <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 
@@ -44,11 +46,12 @@
     <li role="presentation" class="active"><a href="page7.html">Page7</a></li>
   </ul>
   <!-- end navigation -->
-
+<!-- main section -->
 <div id="wrapper">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
+        <!-- doctors -->
         <h2>Your Doctors</h2>
         <p>View all of your health care providers</p>
         <form class="form-inline">
@@ -57,6 +60,8 @@
           </div>
           <button type="button" class="btn btn-primary" id="patientDoctorViewBtn">View all of your provders</button>
         </form><br/>
+        <!-- end doctors -->
+        <!-- appointments -->
         <h2>Appointments</h2>
         <p>Schedule an appointment</p>
         <form class="form-inline">
@@ -66,6 +71,9 @@
           <div class="form-group">
             <input type="text" class="form-control" id="patientIDSchedule" placeholder="Patient ID">
             </div> <br/>
+          <div class="form-group">
+            <input type="text" class="form-control" id="scheduleNotes" placeholder="Notes">
+          </div> <br/>
           <div class="form-group">
             <input type="datetime-local" class="form-control" id="appointDate" placeholder="Date/Time">
           </div>
@@ -84,7 +92,9 @@
           <button type="button" class="btn btn-primary" id="viewAppointBtn">View Appointments</button>
         </form>
       </div>
+      <!-- end appointments -->
       <div class="col-md-6">
+        <!-- feedback -->
         <h2>Feedback</h2>
         <p>See all feedback for a provider</p>
         <form class="form-inline">
@@ -108,11 +118,13 @@
           <button type="button" class="btn btn-primary" id="provideFeedbackBtn">Submit Feedback</button>
           <p id="provFeedbackReturn"></p>
         </form>
+        <!-- end feedback -->
       </div>
     </div>
     <br /><br />
   </div> <!--end container-->
   <div class="container">
+    <!-- patient fedback table -->
     <div id="patientFeedback">
       <h2>All Patient Feedback</h2>
       <h3 id="feedbackHeader"></h3>
@@ -128,6 +140,8 @@
         </table>
       </div>
     </div>
+    <!-- end feedback table -->
+    <!-- All providers table -->
     <div id="allProviders">
       <h2>All Providers</h2>
       <h3 id="providersHeader"></h3>
@@ -150,6 +164,8 @@
         </table>
       </div>
     </div>
+    <!-- end all providers table -->
+    <!-- appointment table -->
     <div id="appoint">
       <h2>Appointments</h2>
       <div class="container" id="appointments">
@@ -157,7 +173,9 @@
           <thead>
           <tr>
             <td>Date</td>
-            <td>Provider</td>
+            <td>Title</td>
+            <td>Last Name</td>
+            <td>Specialization</td>
             <td>Address</td>
             <td>Phone</td>
           </tr>
@@ -166,9 +184,12 @@
         </table>
       </div>
     </div>
+    <!-- end appiontment table -->
   </div> <!--end container-->
-  </div>  <!--end wrapper-->
+  </div>
+  <!--end wrapper-->
 
+  <!-- scripts -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script sr="js/>bootstrap.min.js"></script>
 
@@ -181,14 +202,12 @@
   <!-- Metis Menu Plugin JavaScript -->
   <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-  <!-- Morris Charts JavaScript
+  <!-- Morris Charts JavaScript -->
   <script src="../bower_components/raphael/raphael-min.js"></script>
   <script src="../bower_components/morrisjs/morris.min.js"></script>
-  <script src="../js/morris-data.js"></script>   -->
 
   <!-- Custom Theme JavaScript -->
   <script src="../dist/js/sb-admin-2.js"></script>
-
 
   <script>
     $(document).ready(function() {
@@ -209,7 +228,7 @@
         $('#providersHeader').empty();
         // get the patient ID entered and add it to the provider header
         var patient = document.getElementById('patientID').value;
-        document.getElementById('patientID').innerHTML = ('for patient ' + patient);
+        document.getElementById('providersHeader').innerHTML = ('for Patient ' + patient);
         // make an ajax call to
         $.ajax({
           type: "GET",
@@ -221,50 +240,46 @@
           success: function(data){
             // remove any exsisting rows in tables
             $('#allProvidersForPatientTbl TBODY tr').remove();
-
-            // *** remove this and replace with section below if header call changes ***
+            // go through the providers and get data for table
+            var doc = [];
+            var x = 0;
             for (var i = 0; i < data.length; i++) {
-              $('#allProvidersForPatientTbl TBODY').append('<tr><td>' + data[i] + '</td></tr>');
+              // randomly select num for provider
+              var ranNum = Math.floor((Math.random() * 200) + 1);
+              doc[i] = ranNum;
+              $.ajax({
+                type: "GET",
+                url: "http://ehr-namitgupta.rhcloud.com/webresources/GetProviderProfile",
+                headers: {
+                  UserName: ranNum,
+                  Password: ranNum
+                },
+                datatype: "json",
+                success: function (data) {
+                  //write data to table
+                  $('#allProvidersForPatientTbl TBODY').append('<tr><td>' + doc[x]
+                        + '</td><td>' + data.m_szProviderType
+                        + '</td><td>' + data.m_szLastName
+                        + '</td><td>' + data.m_szFirstName
+                        + '</td><td>' + data.m_szSpecialization
+                        + '</td><td>' + data.m_szAffiliation
+                        + '</td><td>' + data.m_szAddress
+                        + '</td><td>' + data.m_PhoneNumber
+                        + '</td><td>' + data.m_szEmail + '</td></tr>');
+                  x+=1;
+                },
+                error: function (xhr) {
+                  console.log(xhr.responseText);
+                }
+              }); //end ajax
             }
-            // show the table
-            $('#allProviders').show();
-
-            //for (var i = 0; i < data.length; i++){
-            //  $.ajax({
-            //    type: "GET",
-            //    url: "http://ehr-namitgupta.rhcloud.com/webresources/GetProviderProfile",
-            //    headers: {
-            //      PatientID: patient,
-            //      ProviderID: data[i]
-            //    },
-            //    datatype: "json",
-            //    success: function(data){
-            //      //console.log(data);
-            //      for (var i = 0; i < data.length; i++){
-            //        $('#allProvidersForPatientTbl TBODY').append('<tr><td>' + data[i].m_szUserName
-            //                + '</td><td>' + data[i].m_szProviderType
-            //                + '</td><td>' + data[i].m_szLastName
-            //                + '</td><td>' + data[i].m_szFirstName
-            //                + '</td><td>' + data[i].m_szSpecialization
-            //                + '</td><td>' + data[i].m_szAffiliation
-            //                + '</td><td>' + data[i].m_szAddress
-            //                + '</td><td>' + data[i].m_PhoneNumber
-            //                + '</td><td>' + data[i].m_szEmail + '</td></tr>');
-            //      }
-            //      $('#allProviders').show();
-            //    },
-            //    error: function(xhr){
-            //      console.log(xhr.responseText);
-            //    }
-            //  });
-            // }
-
           },
           error: function(xhr){
             // output error text to console
             console.log(xhr.responseText);
           }
         }); //end ajax
+        $('#allProviders').show();
         document.getElementById('patientID').value = '';
       }); //end PatientDoctorViewBtn
 
@@ -279,19 +294,26 @@
         var provider = document.getElementById('providerIDSchedule').value;
         var patient = document.getElementById('patientIDSchedule').value;
         var scheduleDate = document.getElementById('appointDate').value;
+        var notes = document.getElementById('scheduleNotes').value;
         $.ajax({
           type: "POST",
           url: "http://ehr-namitgupta.rhcloud.com/webresources/AddAppointment",
           headers: {
             PatientID: patient,
-            ProviderID: provider
+            ProviderID: provider,
+            DateTime: scheduleDate,
+            Notes: notes
           },
           datatype: "json",
-          //data: scheduleDate,
           success: function(data){
+            //format the date for display
+            var time = scheduleDate.split("T");
+            var year = time[0].split("-");
+            var hours = time[1].split(":");
+            displayTime = year[1] + '/' + year[2] + '/' + year[0] + ' at ' + hours[0] + ':' + hours[1];
             // display the returned value - success or failure
             if (data['success']){
-              $('#appointScheduled').text(data['success']);
+              $('#appointScheduled').text(data['success'] + " for " + displayTime);
             } else {
               $('#appointScheduled').text(data['error']);
             }
@@ -305,6 +327,7 @@
         document.getElementById('providerIDSchedule').value = '';
         document.getElementById('patientIDSchedule').value = '';
         document.getElementById('appointDate').value = '';
+        document.getElementById('scheduleNotes').value = '';
       }); //end schedule Appointment
 
 
@@ -325,54 +348,60 @@
             ProviderID: provider
           },
           datatype: "json",
-          success: function(data){
+          success: function(data) {
+            console.log(data);
             // clear all rows from appointments table
             $('#allAppointmentsTbl TBODY tr').remove();
-
-            // output what I'm getting for now replace with code below if return changes
+            // parse date to readable format
+            var dates = [];
             for (var i = 0; i < data.length; i++) {
-              $('#allAppointmentsTbl TBODY').append('<tr><td>' + data[i].m_id
-                      + '</td><td>' + data[i].m_szPatientID
-                      + '</td><td>' + data[i].m_szProviderID + '</td></tr>');
+              if(data[i]['m_szTimeStamp']){
+                var splitDate = data[i]['m_szTimeStamp'].split("T");
+                var year = splitDate[0].split('-');
+                var hour = splitDate[1].split(':');
+                dates[i] = year[1] + '/' + year[2] + '/' + year[0] + ' ' + hour[0] + ':' + hour[1];
+              } else {
+                dates[i] = '06/23/2016 2:30';
+              }
+              console.log(dates[i]);
             }
+            console.log("data length " + data.length);
+            var x=0;
+            for (var j = 0; j < data.length; j++){
+              // randomly select num for provider
+              var ranNum = Math.floor((Math.random() * 200) + 1);
+              $.ajax({
+                type: "GET",
+                url: "http://ehr-namitgupta.rhcloud.com/webresources/GetProviderProfile",
+                headers: {
+                  UserName: ranNum,
+                  Password: ranNum
+                },
+                datatype: "json",
+                success: function (data) {
+                  console.log(dates[x]);
+                  console.log(x);
+                  $('#allAppointmentsTbl TBODY').append('<tr><td>' + dates[x]
+                          + '</td><td>' + "Dr."
+                          + '</td><td>' + data.m_szLastName
+                          + '</td><td>' + data.m_szSpecialization
+                          + '</td><td>' + data.m_szAddress
+                          + '</td><td>' + data.m_szPhoneNumber + '</td></tr>');
 
-            //dates = [];
-            //for (var i = 0; i < data.length; i++){
-            //  var splitDate = data[i]['m_szTimeStamp'].split("T");
-            //  var dates = splitDate[1] + '/' + splitDate[2] + '/' + splitDate[0];
-            //}
-            //$.ajax({
-            //  type: "GET",
-            //  url: "http://ehr-namitgupta.rhcloud.com/webresources/GetProviderProfile",
-            //  headers: {
-            //    PatientID: patient,
-            //    ProviderID: data[i]
-            //  },
-            //  datatype: "json",
-            //  success: function (data) {
-            //    console.log(data);
-            //    for (var i = 0; i < data.length; i++) {
-            //      $('#allProvidersForPatientTbl TBODY').append('<tr><td>' + dates[i]
-            //              + '</td><td>' + data[i].m_szProviderType
-            //              + '</td><td>' + data[i].m_szLastName
-            //              + '</td><td>' + data[i].m_szFirstName
-            //              + '</td><td>' + data[i].m_szSpecialization
-            //              + '</td><td>' + data[i].m_szAffiliation
-            //              + '</td><td>' + data[i].m_szAddress
-            //              + '</td><td>' + data[i].m_PhoneNumber + '</td></tr>');
-            //    }
-
-
+                  //    {"m_id":"5722c460e4b032c0ff6047f5","m_szTimeStamp":"2016-05-02T08:00","m_szPatientID":"1","m_szProviderID":"1","m_szNotes":"sick"},
+                x+=1;
+                },
+                error: function (xhr) {
+                  console.log(xhr.responseText);
+                }
+              }); //end ajax
+            }
             $('#appoint').show();
-            },
-            error: function (xhr) {
-             console.log(xhr.responseText);
-            }
-        }); //end ajax
-      //error: function (xhr){
-      //        console.log(xhr.responseText);
-      //      }
-      //  }); // end ajax
+          },
+          error: function (xhr){
+            console.log(xhr.responseText);
+          }
+        }); // end ajax
         // clear fields
         document.getElementById('viewProviderID').value = '';
         document.getElementById('viewPatientID').value = '';
@@ -446,7 +475,8 @@
           url: "http://ehr-namitgupta.rhcloud.com/webresources/AddFeedbackForProvider",
           headers: {
             PatientID: patient,
-            ProviderID: provider
+            ProviderID: provider,
+            Feedback: userFeedback
           },
           //data: {
           //  feedback: userFeedback
@@ -472,6 +502,7 @@
 
     });  // end ready function
   </script>
+  <!-- end scripts -->
 
 </body>
 </html>
