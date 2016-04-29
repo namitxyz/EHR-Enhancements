@@ -451,7 +451,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Languages</label>
+                            <label>Find a Patient...</label>
                             <input class="form-control autocomplete" placeholder="Enter A" />
                         </div>
                           
