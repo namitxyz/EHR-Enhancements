@@ -52,7 +52,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Team ZEUS</a>
+                <a class="navbar-brand" href="providerFirstpage.php">Team ZEUS</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -70,7 +70,7 @@
                                         <em>Yesterday</em>
                                     </span>
                                 </div>
-                                <div>Just some text here...</div>
+                                <div>Can you send me...</div>
                             </a>
                         </li>
                         <li class="divider"></li>
@@ -82,7 +82,7 @@
                                         <em>Yesterday</em>
                                     </span>
                                 </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                <div>Referal to you...</div>
                             </a>
                         </li>
                         <li class="divider"></li>
@@ -94,7 +94,7 @@
                                         <em>Yesterday</em>
                                     </span>
                                 </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                <div>New patient's info...</div>
                             </a>
                         </li>
                         <li class="divider"></li>
@@ -257,7 +257,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="../../index.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="providerLogin.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -407,7 +407,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-support fa-5x"></i>
+                                    <i class="fa-tencent-weibo fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">13</div>

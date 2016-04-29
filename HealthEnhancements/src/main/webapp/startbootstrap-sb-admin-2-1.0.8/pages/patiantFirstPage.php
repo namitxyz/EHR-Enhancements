@@ -52,7 +52,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Team ZEUS</a>
+                <a class="navbar-brand" href="../../index.php">Team ZEUS</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -70,7 +70,7 @@
                                         <em>Yesterday</em>
                                     </span>
                                 </div>
-                                <div>Just some text here...</div>
+                                <div>I need a prescription refil...</div>
                             </a>
                         </li>
                         <li class="divider"></li>
@@ -82,19 +82,19 @@
                                         <em>Yesterday</em>
                                     </span>
                                 </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                <div>I had blood pressure yesterday, do I need to book an appointment?...</div>
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
                             <a href="#">
                                 <div>
-                                    <strong>John Smith</strong>
+                                    <strong>Elena Robert</strong>
                                     <span class="pull-right text-muted">
                                         <em>Yesterday</em>
                                     </span>
                                 </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                <div>Did you receied my test result?...</div>
                             </a>
                         </li>
                         <li class="divider"></li>
@@ -117,12 +117,12 @@
                             <a href="#">
                                 <div>
                                     <p>
-                                        <strong>Task 1</strong>
-                                        <span class="pull-right text-muted">40% Complete</span>
+                                        <strong>Next Prescription refil</strong>
+                                        <span class="pull-right text-muted">21 more Days</span>
                                     </p>
                                     <div class="progress progress-striped active">
                                         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
+                                            <span class="sr-only">27% Complete (success)</span>
                                         </div>
                                     </div>
                                 </div>
@@ -133,8 +133,8 @@
                             <a href="#">
                                 <div>
                                     <p>
-                                        <strong>Task 2</strong>
-                                        <span class="pull-right text-muted">20% Complete</span>
+                                        <strong>Next Appointment </strong>
+                                        <span class="pull-right text-muted">24 more days</span>
                                     </p>
                                     <div class="progress progress-striped active">
                                         <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
@@ -149,7 +149,7 @@
                             <a href="#">
                                 <div>
                                     <p>
-                                        <strong>Task 3</strong>
+                                        <strong>Daily exercise  </strong>
                                         <span class="pull-right text-muted">60% Complete</span>
                                     </p>
                                     <div class="progress progress-striped active">
@@ -165,8 +165,8 @@
                             <a href="#">
                                 <div>
                                     <p>
-                                        <strong>Task 4</strong>
-                                        <span class="pull-right text-muted">80% Complete</span>
+                                        <strong>Hours of sleep</strong>
+                                        <span class="pull-right text-muted">6 hours</span>
                                     </p>
                                     <div class="progress progress-striped active">
                                         <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
@@ -195,7 +195,7 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <i class="fa fa-comment fa-fw"></i> New Message
                                     <span class="pull-right text-muted small">4 minutes ago</span>
                                 </div>
                             </a>
@@ -204,7 +204,7 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Test Result
                                     <span class="pull-right text-muted small">12 minutes ago</span>
                                 </div>
                             </a>
@@ -213,7 +213,7 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <i class="fa fa-envelope fa-fw"></i> Blood pressure alert from Fitbit
                                     <span class="pull-right text-muted small">4 minutes ago</span>
                                 </div>
                             </a>
@@ -222,7 +222,7 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <i class="fa fa-tasks fa-fw"></i> Outbreak in your area
                                     <span class="pull-right text-muted small">4 minutes ago</span>
                                 </div>
                             </a>
@@ -231,7 +231,7 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <i class="fa fa-upload fa-fw"></i> Recall items
                                     <span class="pull-right text-muted small">4 minutes ago</span>
                                 </div>
                             </a>
@@ -252,12 +252,12 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="register.php"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
+                        <!-- <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li> -->
                         <li class="divider"></li>
-                        <li><a href="../../index.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="../../index.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -290,26 +290,29 @@
                                     <a href="flot.html">Flot Charts</a>
                                 </li> -->
                                 <li>
-                                    <a href="morris.html">Personal Charts</a>
+                                    <a href="morris.html"> Visit/Medication/Condition chart</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
-                        </li>
-                        <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Observation Detail<span class="fa arrow"></span></a>
+                            <ul class="nav ">
+                            <li>
+                                <a href="tables.html"><i class="fa fa-table fa-fw"></i>Observation Detail</a>
+                            </li>
+                        </ul>
+                            <!-- /.nav-second-level -->
                         </li>
                         
                         <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Detail Pages<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="blank.html">Page 1</a>
+                                    <a href="observation.php">Enter Observation</a>
                                 </li>
                                 <li>
-                                    <a href="blank2.html">page 2</a>
+                                    <a href="updateProfile.php">Update Profile</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -324,7 +327,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
+                    <h1 class="page-header">Patient's Dashboard</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -349,7 +352,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="patientDetail.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -371,7 +374,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="patientDetail.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -385,7 +388,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                    <i class="fa fa-tencent-weibo fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">124</div>
@@ -393,7 +396,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="patientDetail.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -415,7 +418,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="patientDetail.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -430,7 +433,7 @@
                 <div class="col-lg-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart Example
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart
                             <div class="pull-right">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -438,29 +441,29 @@
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu pull-right" role="menu">
-                                        <li><a href="#">Action</a>
+                                        <li><a href="register.php">Encouner/Medication/condition</a>
                                         </li>
-                                        <li><a href="#">Another action</a>
+                                        <!-- <li><a href="contact.php">Send Email to Provider</a>
                                         </li>
-                                        <li><a href="#">Something else here</a>
+                                        <li><a href="observation.php">Enter your observations</a>
                                         </li>
                                         <li class="divider"></li>
-                                        <li><a href="#">Separated link</a>
-                                        </li>
+                                        <li><a href="observation.php">enter you daily diet</a>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div id="morris-area-chart"></div>
+                            <div id="morris-line-chart"></div>
                         </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Bar Chart Example
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Bar Chart 
                             <div class="pull-right">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -468,15 +471,15 @@
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu pull-right" role="menu">
-                                        <li><a href="#">Action</a>
+                                        <li><a href="#">Blood Presure & Weight</a>
                                         </li>
-                                        <li><a href="#">Another action</a>
+                                        <!-- li><a href="#">Another action</a>
                                         </li>
                                         <li><a href="#">Something else here</a>
                                         </li>
                                         <li class="divider"></li>
                                         <li><a href="#">Separated link</a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -580,42 +583,42 @@
                                     </span>
                                 </a>
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New test result
                                     <span class="pull-right text-muted small"><em>12 minutes ago</em>
                                     </span>
                                 </a>
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <i class="fa fa-envelope fa-fw"></i> Message to provider
                                     <span class="pull-right text-muted small"><em>27 minutes ago</em>
                                     </span>
                                 </a>
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <i class="fa fa-tasks fa-fw"></i> Prescritpion Ready to pickup
                                     <span class="pull-right text-muted small"><em>43 minutes ago</em>
                                     </span>
                                 </a>
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <i class="fa fa-upload fa-fw"></i> Reminder, Enter you blood pressure
                                     <span class="pull-right text-muted small"><em>11:32 AM</em>
                                     </span>
                                 </a>
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-bolt fa-fw"></i> Server Crashed!
+                                    <i class="fa fa-bolt fa-fw"></i> Start exerciz...
                                     <span class="pull-right text-muted small"><em>11:13 AM</em>
                                     </span>
                                 </a>
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-warning fa-fw"></i> Server Not Responding
+                                    <i class="fa fa-warning fa-fw"></i> Insurence Term & policy
                                     <span class="pull-right text-muted small"><em>10:57 AM</em>
                                     </span>
                                 </a>
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
+                                    <i class="fa fa-shopping-cart fa-fw"></i> Dr. Jonson viewed your record
                                     <span class="pull-right text-muted small"><em>9:49 AM</em>
                                     </span>
                                 </a>
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-money fa-fw"></i> Payment Received
+                                    <i class="fa fa-money fa-fw"></i> Call you pcp
                                     <span class="pull-right text-muted small"><em>Yesterday</em>
                                     </span>
                                 </a>

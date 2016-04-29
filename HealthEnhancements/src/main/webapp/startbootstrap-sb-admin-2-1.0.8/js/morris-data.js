@@ -61,7 +61,7 @@ $(function() {
         resize: true
     });
     
-    Morris.Area({
+    /*Morris.Area({
         element: 'morris-area-chart',
         data: [{
             period: '2014 Q1',
@@ -116,12 +116,12 @@ $(function() {
         }],
         xkey: 'period',
         ykeys: ['Condition', 'Medication', 'Encounter'],
-        labels: ['Condition', 'Medication', 'iPod Touch'],
+        labels: ['Condition', 'Medication', 'Encounter'],
         pointSize: 2,
         hideHover: 'auto',
         resize: true
     });
-
+*/
     Morris.Donut({
         element: 'morris-donut-chart',
         data: [{
