@@ -80,9 +80,13 @@ $(document).ready(function(){
                     console.log ("API successfully finished");
                     //if responseSuccess:"User authenticated"
                     //result = response.Success;
-                    if (response.id != ""){
+                    if (response.UserName != "" && response.UserName != "undefined" && response.FirstNme !="kjh"){
                         console.log ("API successfully finished");
+                        console.log(response.UserName);
                         window.location.href ="../../index.php";
+                    }else{
+                        console.log
+                        ("do nothing");
                     }
                        
                 }),
@@ -148,7 +152,7 @@ $(document).ready(function(){
                         </div>
                     </div>
                </div>
-               </div>
+               
                <div class="col-lg-6 col-md-6 col-sm-6">
                   <div class="form-group">
                        <label >password</label>

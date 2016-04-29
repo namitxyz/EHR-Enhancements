@@ -30,7 +30,7 @@
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet"/>
+    <!-- <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet"/> -->
 
     <!-- /*<script src="loginPage.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
@@ -457,9 +457,9 @@
                           
                           
                         <!-- /.panel-heading -->
-                        <!-- <div class="panel-body">
-                            <div id="morris-area-chart"></div>
-                        </div> -->
+                        <div class="panel-body">
+                            <div id="morris-line-chart"></div>
+                        </div>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->

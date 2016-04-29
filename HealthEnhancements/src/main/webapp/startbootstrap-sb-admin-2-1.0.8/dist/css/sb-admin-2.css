@@ -153,7 +153,7 @@ body {
 }
 
 .btn-success.btn-outline {
-    color: #5cb85c;
+    color: #002699;
 }
 
 .btn-info.btn-outline {
@@ -161,7 +161,7 @@ body {
 }
 
 .btn-warning.btn-outline {
-    color: #f0ad4e;
+    color: #990000;
 }
 
 .btn-danger.btn-outline {
@@ -300,17 +300,17 @@ table.dataTable thead .sorting:after {
 }
 
 .panel-green {
-    border-color: #5cb85c;
+    border-color: #002699;
 }
 
 .panel-green .panel-heading {
-    border-color: #5cb85c;
+    border-color: #002699;
     color: #fff;
-    background-color: #5cb85c;
+    background-color: #002699;
 }
 
 .panel-green a {
-    color: #5cb85c;
+    color: #002699;
 }
 
 .panel-green a:hover {
@@ -336,17 +336,17 @@ table.dataTable thead .sorting:after {
 }
 
 .panel-yellow {
-    border-color: #f0ad4e;
+    border-color: #990000;
 }
 
 .panel-yellow .panel-heading {
-    border-color: #f0ad4e;
+    border-color: #990000;
     color: #fff;
-    background-color: #f0ad4e;
+    background-color: #990000;
 }
 
 .panel-yellow a {
-    color: #f0ad4e;
+    color: #990000;
 }
 
 .panel-yellow a:hover {
