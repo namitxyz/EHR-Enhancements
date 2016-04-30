@@ -28,7 +28,7 @@
 
 $(document).ready(function(){
     $("#apiRegister").click(function(e){
-          e.preventDefault();
+          //e.preventDefault();
             var iUserName = document.getElementById("inputUserName").value;
             var iPassword = document.getElementById("inputPassword").value;
             var iFirstName = document.getElementById("inputFirstName").value;
@@ -41,13 +41,7 @@ $(document).ready(function(){
             var iSSN = document.getElementById("inputSSN").value;
             var iCity = document.getElementById("City").value;
             var iState = document.getElementById("State").value;
-            var iZipcode = document.getElementById("inputZipCode").value;  
-          
-          
-          
-          
-          
-          
+            var iZipcode = document.getElementById("inputZipCode").value;           
           //alert (user + pass)
           
         $.when(
@@ -79,16 +73,20 @@ $(document).ready(function(){
                            "InsurancePhoneNumber": "",
                            "InsuranceSubsriberID": "",
                            "InsuranceGroupID": "" */
-                url: "http://ehr-namitgupta.rhcloud.com/webresources/CreateProvider",
+                url: "http://ehr-namitgupta.rhcloud.com/webresources/CreateUser",
                 //username: user,
                 //password: pass,
                 success :(function (response){ 
                     console.log ("API successfully finished");
                     //if responseSuccess:"User authenticated"
                     //result = response.Success;
-                    if (response.id != ""){
+                    if (response.UserName != "" && response.UserName != "undefined" && response.FirstNme !="kjh"){
                         console.log ("API successfully finished");
-                        window.location.href ="providerLogin.php";
+                        console.log(response.UserName);
+                        window.location.href ="../../index.html";
+                    }else{
+                        console.log
+                        ("do nothing");
                     }
                        
                 }),
@@ -108,13 +106,13 @@ $(document).ready(function(){
 <div class="container">
 
 <div class="page-header">
-    <h1>Provider Registration form <small></small></h1>
+    <h1>Patient's Registration form <small></small></h1>
 </div>
 
 <!-- Registration form - START -->
 <div class="container">
     <div class="row">
-        <form role="form">
+        <form role="form" data-toggle="validator">
             <div class="col-lg-12 col-md-12 col-sm-12">
 
                 <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>    Required Field</strong></div>
@@ -122,7 +120,7 @@ $(document).ready(function(){
                    <div class="form-group">
                        <label for="InputName">First Name</label>
                        <div class="input-group">
-                           <input type="text" class="form-control" name="inputFirstName" id="inputFirstName" placeholder="First Name" >
+                           <input type="text" class="form-control" name="inputFirstName" id="inputFirstName" placeholder="First Name" required>
                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                        </div>
                    </div>
@@ -140,7 +138,26 @@ $(document).ready(function(){
                    <div class="form-group">
                        <label >Last Name</label>
                        <div class="input-group">
-                           <input type="text" class="form-control" id="inputLastName" name="inputMidelName" placeholder="Last Name" >
+                           <input type="text" class="form-control" id="inputLastName" name="inputMidelName" placeholder="Last Name" required>
+                           <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-lg-6 col-md-6 col-sm-6">
+                   <div class="form-group">
+                       <label >User Name</label>
+                       <div class="input-group">
+                           <input type="UserName" class="form-control" id="inputUserName" name="inputEmail" placeholder="User Name" required>
+                           <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        </div>
+                    </div>
+               </div>
+               
+               <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="form-group">
+                       <label >password</label>
+                       <div class="input-group">
+                           <input type="password" class="form-control" id="inputPassword" name="inputEmail" placeholder="Password" required>
                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                        </div>
                    </div>
@@ -149,7 +166,7 @@ $(document).ready(function(){
                 <div class="form-group">
                        <label >Email Address</label>
                        <div class="input-group">
-                           <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email" >
+                           <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email" required>
                            <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                        </div>
                    </div>
@@ -208,24 +225,7 @@ $(document).ready(function(){
                        </div>
                    </div>
                </div>
-               <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="form-group">
-                       <label >User Name</label>
-                       <div class="input-group">
-                           <input type="UserName" class="form-control" id="inputUserName" name="inputEmail" placeholder="User Name" required>
-                           <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                       </div>
-                   </div>
-               </div>
-               <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="form-group">
-                       <label >password</label>
-                       <div class="input-group">
-                           <input type="password" class="form-control" id="inputPassword" name="inputEmail" placeholder="Password" required>
-                           <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                       </div>
-                   </div>
-               </div>
+               
                <div class="col-lg-3 col-md-3 col-sm-3">
                    <div class="form-group">
                        <label >Phone</label>
@@ -376,7 +376,7 @@ $(document).ready(function(){
          </div>
       </form>
    </div>
-</dive> 
+</div> 
             <!-- <div class="col-md-12">
                 <div class="alert alert-success">
                     <strong><span class="glyphicon glyphicon-ok"></span> Success! Message sent.</strong>
@@ -392,8 +392,7 @@ $(document).ready(function(){
 
 <!-- //////////////////////////// -->
 
-</br>
-</br>
+
 
 </body>
 </html>
