@@ -300,29 +300,17 @@ table.dataTable thead .sorting:after {
 }
 
 .panel-green {
-    border-color: #002699;
+    border-color: #0000b3;
 }
 
 .panel-green .panel-heading {
     border-color: #002699;
     color: #fff;
-    background-color: #002699;
+    background-color: #0000b3;
 }
 
-.panel-p {
-    border-color: #002699;
-}
-
-.panel-p .panel-heading {
-    border-color: #002699;
-    color: #fff;
-    background-color: #002699;
-}
-.panel-p a {
-    color: #002699;
-}
 .panel-green a {
-    color: #002699;
+    color: #0000b3;
 }
 
 .panel-green a:hover {
@@ -330,13 +318,13 @@ table.dataTable thead .sorting:after {
 }
 
 .panel-red {
-    border-color: #d9534f;
+    border-color: #0000b3;
 }
 
 .panel-red .panel-heading {
-    border-color: #d9534f;
+    border-color: #0000b3;
     color: #fff;
-    background-color: #d9534f;
+    background-color: #0000b3;
 }
 
 .panel-red a {
@@ -344,21 +332,21 @@ table.dataTable thead .sorting:after {
 }
 
 .panel-red a:hover {
-    color: #b52b27;
+    color: #0000b3;
 }
 
 .panel-yellow {
-    border-color: #990000;
+    border-color: #0000b3;
 }
 
 .panel-yellow .panel-heading {
-    border-color: #990000;
+    border-color: #0000b3;
     color: #fff;
-    background-color: #990000;
+    background-color: #0000b3;
 }
 
 .panel-yellow a {
-    color: #990000;
+    color: #0000b3;
 }
 
 .panel-yellow a:hover {

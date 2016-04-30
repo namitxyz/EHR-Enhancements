@@ -60,3 +60,13 @@ angular.module('ui.bootstrap.demo').controller('ModalInstanceCtrl', function ($s
     $uibModalInstance.dismiss('cancel');
   };
 });
+
+var rd= Math.floor(Math.random() * 20);
+
+function randomWholeNum() {
+
+  // Only change code below this line.
+
+  return Math.random();
+}
+

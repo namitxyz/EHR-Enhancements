@@ -1,43 +1,80 @@
 <!DOCTYPE html>
-<html lnag="en">
+
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
 <head>
+
   <meta charset="utf-8">
+
   <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+
   <meta name="viewport" content="width+device=width, inital-scale=1">
 
+
+
   <title>Team Zeus EMR</title>
+
   <link rel="icon" href="logo.ico">
 
+
+
   <!-- Bootstrap Core CSS -->
+
   <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
+
+
   <!-- MetisMenu CSS -->
+
   <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
+
+
   <!-- Timeline CSS -->
+
   <link href="../dist/css/timeline.css" rel="stylesheet">
 
+
+
   <!-- Custom CSS -->
+
   <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
+
+
   <!-- Morris Charts CSS -->
+
   <link href="../bower_components/morrisjs/morris.css" rel="stylesheet">
 
+
+
   <!-- Custom Fonts -->
+
   <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
   <!--[if lt IE 9]>
+
   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+
   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
   <![endif]-->
+
 </head>
+
+
+
 <body>
 
-  <body ng-controller="ModalDemoCtrl">
+  <!-- navigation -->
 
-    <div id="wrapper">
+  <div id="wrapper">
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -48,7 +85,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../../index.html">Team ZEUS</a>
+                <a class="navbar-brand" href="../../providerLogin.html">Team ZEUS</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -85,7 +122,7 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <strong>Elena Robert</strong>
+                                    <strong></strong>
                                     <span class="pull-right text-muted">
                                         <em>Yesterday</em>
                                     </span>
@@ -277,7 +314,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="patientFirstPage.html"><i class="fa fa-dashboard fa-fw"></i> Patient's Dashboard</a>
+                            <a href="providerFirstPage.html"><i class="fa fa-dashboard fa-fw"></i> Patient's Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -308,7 +345,7 @@
                                     <a href="patientpage1.html">Schedule & More</a>
                                 </li>
                                 <li>
-                                    <a href="patientpage2.html">Personal Health Record</a>
+                                    <a href="providerPage3.html"> Add Patient</a>
                                 </li>
                                 
                             </ul>
@@ -320,497 +357,859 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+
+
+
+
+
+
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Patient's Dashboard</h1>
+                    <h1 class="page-header">Provider's Dashboard</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-<!-- main section -->
-<div id="wrapper">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <!-- doctors -->
-        <h2>Your Doctors</h2>
-        <p>View all of your health care providers</p>
-        <form class="form-inline">
-          <div class="form-group">
-            <input type="text" class="form-control" id="patientID" placeholder="Patient ID">
-          </div>
-          <button type="button" class="btn btn-primary" id="patientDoctorViewBtn">View all of your provders</button>
-        </form><br/>
-        <!-- end doctors -->
-        <!-- appointments -->
-        <h2>Appointments</h2>
-        <p>Schedule an appointment</p>
-        <form class="form-inline">
-          <div class="form-group">
-            <input type="text" class="form-control" id="providerIDSchedule" placeholder="Provider ID">
-            </div> <br/>
-          <div class="form-group">
-            <input type="text" class="form-control" id="patientIDSchedule" placeholder="Patient ID">
-            </div> <br/>
-          <div class="form-group">
-            <input type="text" class="form-control" id="scheduleNotes" placeholder="Notes">
-          </div> <br/>
-          <div class="form-group">
-            <input type="datetime-local" class="form-control" id="appointDate" placeholder="Date/Time">
-          </div>
-          <button type="button" class="btn btn-primary" id="scheduleBtn">Schedule Appointment</button>
-        </form>
-        <p id="appointScheduled"></p>
-        <br/>
-        <p>View all scheduled appointments</p>
-        <form class="form-inline">
-          <div class="form-group">
-            <input type="text" class="form-control" id="viewProviderID" placeholder="Provider ID">
-          </div><br/>
-          <div class="form-group">
-            <input type="text" class="form-control" id="viewPatientID" placeholder="Patient ID">
-          </div>
-          <button type="button" class="btn btn-primary" id="viewAppointBtn">View Appointments</button>
-        </form>
+
+  <!-- end navigation -->
+
+
+
+  <!-- main section -->
+
+  <div class="container"><br><br>
+
+    <form class="form-inline">
+
+      <div class="form-group">
+
+        <input type="text" class="form-control" id="providerID" placeholder="Provider ID">
+
       </div>
-      <!-- end appointments -->
-      <div class="col-md-6">
-        <!-- feedback -->
-        <h2>Feedback</h2>
-        <p>See all feedback for a provider</p>
-        <form class="form-inline">
-          <div class="form-group">
-            <input type="text" class="form-control" id="providerIDFeedback" placeholder="Provider ID">
-          </div>
-          <button type="button" class="btn btn-primary" id="seeFeedbackBtn">View Feedback</button>
-          <p id="feedbackReturn"></p>
-        </form><br/>
-        <p>Provide feedback to your doctor</p>
-        <form class="form-inline">
-          <div class="form-group">
-            <input type="text" class="form-control" id="doctorIDFeedback" placeholder="Provider ID">
-          </div><br/>
-          <div class="form-group">
-            <input type="text" class="form-control" id="patientIDFeedback" placeholder="Patient ID">
-          </div><br/>
-          <div class="form-group">
-            <textarea rows="4" class="form-control" id="feedback" placeholder="Feedback"></textarea>
-          </div>
-          <button type="button" class="btn btn-primary" id="provideFeedbackBtn">Submit Feedback</button>
-          <p id="provFeedbackReturn"></p>
-        </form>
-        <!-- end feedback -->
+
+      <div class="form-group">
+
+        <input type="text" class="form-control" id="patientID" placeholder="Patient ID">
+
       </div>
-    </div>
-    <br /><br />
-  </div> <!--end container-->
-  <div class="container">
-    <!-- patient fedback table -->
-    <div id="patientFeedback">
-      <h2>All Patient Feedback</h2>
-      <h3 id="feedbackHeader"></h3>
-      <div class="container" id="Pfeedback">
-        <table class="table table-striped" id="patientFeedbackTbl">
+
+      <button type="button" class="btn btn-danger" id="sub">Add Patient</button>
+
+      <button type="button" class="btn btn-success" id="verify">Verify Patient</button>
+
+      <button type="button" class="btn btn-primary" id="viewAll">View All Patients</button>
+
+    </form>
+
+    <div id="result"></div>
+
+    <br>
+
+    <!-- patient records table -->
+
+    <div id="patientInfo">
+
+      <h2>Patient Records</h2>
+
+      <div class="container" id="medRecords">
+
+        <table class="table table-striped" id="medRecordsTbl">
+
           <thead>
+
           <tr>
-            <th>Date</th>
-            <th>Feedback</th>
+
+            <th>Condition</th>
+
+            <th>Onset</th>
+
+            <th>Severity</th>
+
+            <th>Encounter</th>
+
+            <th>Notes</th>
+
           </tr>
+
           </thead>
+
           <tbody> </tbody>
+
         </table>
-      </div>
-    </div>
-    <!-- end feedback table -->
-    <!-- All providers table -->
-    <div id="allProviders">
-      <h2>All Providers</h2>
-      <h3 id="providersHeader"></h3>
-      <div class="container" id="Aproviders">
-        <table class="table table-striped" id="allProvidersForPatientTbl">
+
+        <br/>
+
+        <table class="table table-striped" id="observationTbl">
+
           <thead>
+
           <tr>
-            <th>Provider ID</th>
-            <th>Provider Type</th>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Specialization</th>
-            <th>Affiliation</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Email</th>
+
+            <th>Observation</th>
+
+            <th>Value</th>
+
+            <th>Unit</th>
+
+            <th>Date</th>
+
+            <th>Status</th>
+
           </tr>
+
           </thead>
+
           <tbody></tbody>
+
         </table>
+
       </div>
+
     </div>
-    <!-- end all providers table -->
-    <!-- appointment table -->
-    <div id="appoint">
-      <h2>Appointments</h2>
-      <div class="container" id="appointments">
-        <table class="table table-striped" id="allAppointmentsTbl">
-          <thead>
-          <tr>
-            <td>Date</td>
-            <td>Title</td>
-            <td>Last Name</td>
-            <td>Specialization</td>
-            <td>Address</td>
-            <td>Phone</td>
-          </tr>
-          </thead>
-          <tbody></tbody>
+
+    <!-- end patient records -->
+
+    <!-- all patients table -->
+
+    <div id="allPatients">
+
+      <h2>Patients</h2>
+
+      <div class="container" id="patients">
+
+        <table class="table table-striped display" id="allPatientsTbl">
+
+          <thread>
+
+            <tr>
+
+              <th>Patient ID</th>
+
+              <th>Last Name</th>
+
+              <th>First Name</th>
+
+              <th>Middle Inital</th>
+
+              <th>Gender</th>
+
+              <th>Birth Date</th>
+
+              <th>Address</th>
+
+              <th>City</th>
+
+              <th>State</th>
+
+            </tr>
+
+          </thread>
+
         </table>
+
       </div>
+
     </div>
-    <!-- end appiontment table -->
-  </div> <!--end container-->
+
+    <!-- end all patients -->
+
+  <!-- Charts! -->
+
+  <!-- two columns -->
+
+  <div class="row" id="patientCharts">
+
+    <div class="col-md-6">
+
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+
+          Patient Heart Data
+
+        </div>
+
+        <div class="panel-body">
+
+          <div id="morris-area-chart" style="height: 250px;"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+
+          Patient Body Data
+
+        </div>
+
+        <div class="panel-body">
+
+          <div id="morris-area-chart2" style="height: 250px;"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div><br/><br/>
+
   </div>
-  <!--end wrapper-->
+
+  <!-- end two columns -->
+
+  <!-- end Charts! -->
+
+  <!-- end main section -->
+
+
 
   <!-- scripts -->
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
   <script src="../../bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 
+
+
   <!-- jQuery -->
+
   <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
+
+
   <!-- Bootstrap Core JavaScript -->
+
   <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+
+
   <!-- Metis Menu Plugin JavaScript -->
+
   <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-  <!-- Morris Charts JavaScript -->
+
+
+  <!-- Morris Charts JavaScript-->
+
   <script src="../bower_components/raphael/raphael-min.js"></script>
+
   <script src="../bower_components/morrisjs/morris.min.js"></script>
 
+
+
   <!-- Custom Theme JavaScript -->
+
   <script src="../dist/js/sb-admin-2.js"></script>
 
+  <!--<script>
+
+    $(document).ready(function(){
+
+      // $('#pcpComments').text('55');
+
+
+
+    });
+
+
+
+    var i =44;
+
+  </script>  -->
+
+
+
   <script>
-    $(document).ready(function() {
 
-      // hide the empty table headers when page loads
-      $('#patientFeedback').hide();
-      $('#allProviders').hide();
-      $('#appoint').hide();
+    $(document).ready(function(){
 
 
-      // show all providers a patient has
-      $('#patientDoctorViewBtn').click(function(){
-        // hide tables
-        $('#patientFeedback').hide();
-        $('#allProviders').hide();
-        $('#appoint').hide();
-        // clear patients name from header
-        $('#providersHeader').empty();
-        // get the patient ID entered and add it to the provider header
+
+      // hide the tables and focus on the providerID textbox
+
+      $('#providerID').focus();
+
+      $('#patientInfo').hide();
+
+      $('#allPatients').hide();
+
+      $('#patientCharts').hide();
+
+
+
+
+
+      // add patient to provider mapping
+
+      $('#sub').click(function() {
+
+        // hide the table if its showing
+
+        $('#patientInfo').hide();
+
+        $('#allPatients').hide();
+
+        $('#patientCharts').hide();
+
+        // get provider and patient IDs
+
+        var provider = document.getElementById('providerID').value;
+
         var patient = document.getElementById('patientID').value;
-        document.getElementById('providersHeader').innerHTML = ('for Patient ' + patient);
-        // make an ajax call to
-        $.ajax({
-          type: "GET",
-          url: "http://ehr-namitgupta.rhcloud.com/webresources/GetAllProvidersForPatient",
-          headers: {
-            PatientID: patient
-          },
-          datatype: "json",
-          success: function(data){
-            // remove any exsisting rows in tables
-            $('#allProvidersForPatientTbl TBODY tr').remove();
-            // go through the providers and get data for table
-            var doc = [];
-            var x = 0;
-            for (var i = 0; i < data.length; i++) {
-              // randomly select num for provider
-              var ranNum = Math.floor((Math.random() * 200) + 1);
-              doc[i] = ranNum;
-              $.ajax({
-                type: "GET",
-                url: "http://ehr-namitgupta.rhcloud.com/webresources/GetProviderProfile",
-                headers: {
-                  UserName: ranNum,
-                  Password: ranNum
-                },
-                datatype: "json",
-                success: function (data) {
-                  //write data to table
-                  $('#allProvidersForPatientTbl TBODY').append('<tr><td>' + doc[x]
-                        + '</td><td>' + data.m_szProviderType
-                        + '</td><td>' + data.m_szLastName
-                        + '</td><td>' + data.m_szFirstName
-                        + '</td><td>' + data.m_szSpecialization
-                        + '</td><td>' + data.m_szAffiliation
-                        + '</td><td>' + data.m_szAddress
-                        + '</td><td>' + data.m_PhoneNumber
-                        + '</td><td>' + data.m_szEmail + '</td></tr>');
-                  x+=1;
-                },
-                error: function (xhr) {
-                  console.log(xhr.responseText);
-                }
-              }); //end ajax
-            }
-          },
-          error: function(xhr){
-            // output error text to console
-            console.log(xhr.responseText);
-          }
-        }); //end ajax
-        $('#allProviders').show();
-        document.getElementById('patientID').value = '';
-      }); //end PatientDoctorViewBtn
 
+        // make an ajax call to AddPatientToProviderMapping
 
-      // schedule appointment
-      $('#scheduleBtn').click(function(){
-        // hide tables
-        $('#patientFeedback').hide();
-        $('#allProviders').hide();
-        $('#appoint').hide();
-        // get entered info
-        var provider = document.getElementById('providerIDSchedule').value;
-        var patient = document.getElementById('patientIDSchedule').value;
-        var scheduleDate = document.getElementById('appointDate').value;
-        var notes = document.getElementById('scheduleNotes').value;
         $.ajax({
+
           type: "POST",
-          url: "http://ehr-namitgupta.rhcloud.com/webresources/AddAppointment",
+
+          url: "http://ehr-namitgupta.rhcloud.com/webresources/AddPatientToProviderMapping",
+
           headers: {
+
             PatientID: patient,
-            ProviderID: provider,
-            DateTime: scheduleDate,
-            Notes: notes
+
+            ProviderID: provider
+
           },
+
           datatype: "json",
+
           success: function(data){
-            //format the date for display
-            var time = scheduleDate.split("T");
-            var year = time[0].split("-");
-            var hours = time[1].split(":");
-            displayTime = year[1] + '/' + year[2] + '/' + year[0] + ' at ' + hours[0] + ':' + hours[1];
-            // display the returned value - success or failure
+
+            // display the results of the mapping
+
             if (data['success']){
-              $('#appointScheduled').text(data['success'] + " for " + displayTime);
+
+              $('#result').text(data['success']);
+
             } else {
-              $('#appointScheduled').text(data['error']);
+
+              $('#result').text(data['error']);
+
             }
+
+            // populate the table with the new patients data
+
+            popRecordsTable(patient);
+
           },
+
           error: function(xhr){
+
             // output error text to console
+
             console.log(xhr.responseText);
+
           }
+
         });
-        // clear textboxes
-        document.getElementById('providerIDSchedule').value = '';
-        document.getElementById('patientIDSchedule').value = '';
-        document.getElementById('appointDate').value = '';
-        document.getElementById('scheduleNotes').value = '';
-      }); //end schedule Appointment
+
+        // clear the provider and patient ID fields and set focus on provider textbox
+
+        document.getElementById('providerID').value = '';
+
+        document.getElementById('patientID').value = '';
+
+        $('#providerID').focus();
+
+      });  //end add patient provider mapping
 
 
-      // View appointments
-      $('#viewAppointBtn').click(function(){
-        // hide tables
-        $('#patientFeedback').hide();
-        $('#allProviders').hide();
-        $('#appoint').hide();
-        // get IDs
-        var provider = document.getElementById('viewProviderID').value;
-        var patient = document.getElementById('viewPatientID').value;
+
+
+
+      // verify patient to provider mapping
+
+      $('#verify').click(function() {
+
+        // hide tables and chart
+
+        $('#patientInfo').hide();
+
+        $('#allPatients').hide();
+
+        $('#patientCharts').hide();
+
+        // get provider and patient IDs
+
+        var provider = document.getElementById('providerID').value;
+
+        var patient = document.getElementById('patientID').value;
+
+        // make ajax call to IsValidPatientToProviderMapping
+
         $.ajax({
+
           type: "GET",
-          url: "http://ehr-namitgupta.rhcloud.com/webresources/GetAppointment",
+
+          url: "http://ehr-namitgupta.rhcloud.com/webresources/IsValidPatientToProviderMapping",
+
           headers: {
+
             PatientID: patient,
+
             ProviderID: provider
+
           },
+
           datatype: "json",
-          success: function(data) {
-            console.log(data);
-            // clear all rows from appointments table
-            $('#allAppointmentsTbl TBODY tr').remove();
-            // parse date to readable format
-            var dates = [];
-            for (var i = 0; i < data.length; i++) {
-              if(data[i]['m_szTimeStamp']){
-                var splitDate = data[i]['m_szTimeStamp'].split("T");
-                var year = splitDate[0].split('-');
-                var hour = splitDate[1].split(':');
-                dates[i] = year[1] + '/' + year[2] + '/' + year[0] + ' ' + hour[0] + ':' + hour[1];
-              } else {
-                dates[i] = '06/23/2016 2:30';
-              }
-              console.log(dates[i]);
-            }
-            console.log("data length " + data.length);
-            var x=0;
-            for (var j = 0; j < data.length; j++){
-              // randomly select num for provider
-              var ranNum = Math.floor((Math.random() * 200) + 1);
-              $.ajax({
-                type: "GET",
-                url: "http://ehr-namitgupta.rhcloud.com/webresources/GetProviderProfile",
-                headers: {
-                  UserName: ranNum,
-                  Password: ranNum
-                },
-                datatype: "json",
-                success: function (data) {
-                  console.log(dates[x]);
-                  console.log(x);
-                  $('#allAppointmentsTbl TBODY').append('<tr><td>' + dates[x]
-                          + '</td><td>' + "Dr."
-                          + '</td><td>' + data.m_szLastName
-                          + '</td><td>' + data.m_szSpecialization
-                          + '</td><td>' + data.m_szAddress
-                          + '</td><td>' + data.m_szPhoneNumber + '</td></tr>');
 
-                  //    {"m_id":"5722c460e4b032c0ff6047f5","m_szTimeStamp":"2016-05-02T08:00","m_szPatientID":"1","m_szProviderID":"1","m_szNotes":"sick"},
-                x+=1;
-                },
-                error: function (xhr) {
-                  console.log(xhr.responseText);
-                }
-              }); //end ajax
-            }
-            $('#appoint').show();
-          },
-          error: function (xhr){
-            console.log(xhr.responseText);
-          }
-        }); // end ajax
-        // clear fields
-        document.getElementById('viewProviderID').value = '';
-        document.getElementById('viewPatientID').value = '';
-      }); //end view appointments
-
-
-      // see all feedback for a provider
-      $('#seeFeedbackBtn').click(function(){
-        // hide any tables that are showing and previous response
-        $('#patientFeedback').hide();
-        $('#allProviders').hide();
-        $('#appoint').hide();
-        $('#feedbackReturn').text('');
-        // clear the provider name from the header
-        $('#feedbackHeader').empty();
-        //get the providerID entered and add it to the header
-        var provider = document.getElementById('providerIDFeedback').value;
-        document.getElementById('feedbackHeader').innerHTML += ('&nbsp&nbspProvider ' + provider);
-        // make an ajax call to ViewAllFeedbackForProvider
-        $.ajax({
-          type: "GET",
-          url: "http://ehr-namitgupta.rhcloud.com/webresources/ViewAllFeedbackForProvider",
-          headers: {
-            ProviderID: provider
-          },
-          datatype: 'json',
-          success: function (data) {
-            // remove the rows from the feedback table
-            $('#patientFeedbackTbl TBODY tr').remove();
-            // if the response is error display the error else populate feedback table
-            if (data['error']){
-              $('#feedbackReturn').text(data['error']);
-              // if the table is showing hide it
-              $('#patientFeedback').hide();
-            } else {
-              $('#feedbackReturn').text('');
-              for (var i = 0; i < data.length; i++) {
-                var splitTime = data[i]['m_szTimeStamp'].split(".");
-                var time = splitTime[1] + '/' + splitTime[2] + '/' + splitTime[0] + ' ' + splitTime[3] + ':' + splitTime[4];
-                $('#patientFeedbackTbl TBODY').append('<tr><td>' + time
-                        + '</td><td>' + data[i].m_szFeedback + '</td></tr>');
-              }
-              // display the feedback table
-              $('#patientFeedback').show();
-            }
-          },
-          error: function (xhr) {
-            // output error text to console
-            console.log(xhr.responseType);
-          }
-        }); //end ajax
-        // clear the providerID textbox
-        document.getElementById('providerIDFeedback').value = '';
-      }); //end see all feedback
-
-
-      // provide feedback to your doctor
-      $('#provideFeedbackBtn').click(function () {
-        // hide the table and any previous response
-        $('#appoint').hide();
-        $('#allProviders').hide();
-        $('#patientFeedback').hide();
-        $('#provFeedbackReturn').text('');
-        // get the values entered by the patient
-        var provider = document.getElementById('doctorIDFeedback').value;
-        var patient = document.getElementById('patientIDFeedback').value;
-        var userFeedback = document.getElementById('feedback').value;
-        // make an ajax call to AddFeedbackForProvider
-        $.ajax({
-          type: "POST",
-          url: "http://ehr-namitgupta.rhcloud.com/webresources/AddFeedbackForProvider",
-          headers: {
-            PatientID: patient,
-            ProviderID: provider,
-            Feedback: userFeedback
-          },
-          //data: {
-          //  feedback: userFeedback
-          //},
-          datatype: "json",
           success: function(data){
-            // display success or failure message
-            if (data['success']){
-              $('#provFeedbackReturn').text(data['success']);
-            } else {
-              $('#provFeedbackReturn').text(data['error']);
-            }
-          },
-          error: function(xhr){
-            // output error text to console
-            console.log(xhr.responseText);
-          }
-        }); //end ajax
-        document.getElementById('doctorIDFeedback').value = '';
-        document.getElementById('patientIDFeedback').value = '';
-        document.getElementById('feedback').value = '';
-      }); //end provide feedback
 
-    });  // end ready function
+            // display the results of the validity check
+
+            if (data['success']){
+
+              $('#result').text(data['success']);
+
+            } else {
+
+              $('#result').text(data['error']);
+
+            }
+
+          },
+
+          error: function(xhr){
+
+            // output error text to console
+
+            console.log(xhr.responseText);
+
+          }
+
+        });
+
+        // clear the provider and patient ID fields and set focus on provider textbox
+
+        document.getElementById('providerID').value = '';
+
+        document.getElementById('patientID').value = '';
+
+        $('#providerID').focus();
+
+      }); //end verify patient
+
+
+
+
+
+      // view all patients for provider
+
+      $('#viewAll').click(function() {
+
+        // hide  tables and chart
+
+        $('#patientInfo').hide();
+
+        $('#allPatients').hide();
+
+        $('#patientCharts').hide();
+
+        // get provider id entered
+
+        var provider = document.getElementById('providerID').value;
+
+        // make an ajax call to GetAllPatientsForProvider
+
+        $.ajax({
+
+          type: "GET",
+
+          url: "http://ehr-namitgupta.rhcloud.com/webresources/GetAllPatientsForProvider",
+
+          headers: {
+
+            ProviderID: provider
+
+          },
+
+          datatype: "json",
+
+          success: function(data){
+
+            // populate a table with all the patients
+
+            popPatientTbl(provider);
+
+          },
+
+          error: function(xhr){
+
+            // output error text to console
+
+            console.log(xhr.responseText);
+
+          }
+
+        });
+
+        // clear the providerID textbox and set focus on it
+
+        document.getElementById('providerID').value = '';
+
+        $('#providerID').focus();
+
+      }); //end view all patients
+
+
+
+
+
+      // populate patient records table with data
+
+      function popRecordsTable(patient) {
+
+        // make an ajax call to GetPatientData
+
+        $.ajax({
+
+          type: "GET",
+
+          url: "http://ehr-namitgupta.rhcloud.com/webresources/GetPatientData",
+
+          headers: {
+
+            PatientID: patient
+
+          },
+
+          datatype: 'json',
+
+          success: function(data){
+
+            // remove any exsisting rows in tables
+
+            $('#medRecordsTbl TBODY tr').remove();
+
+            $('#observationTbl TBODY tr').remove();
+
+            // parse the time into a redable format
+
+            condTime=[];
+
+            for (var i = 0; i < data['conditons'].length; i++){
+
+              var splitTime = data['conditons'][i].m_szOnsetTime.split("T");
+
+              var condYear = splitTime[0].split("-");
+
+              condTime[i] = condYear[1] + '/' + condYear[2] + '/' + condYear[0];
+
+            }
+
+            // populate the patient records table
+
+            for (var i = 0; i < data['conditons'].length; i++){
+
+              $('#medRecordsTbl TBODY').append('<tr><td>' + data.conditons[i].m_szConditionDisplay
+
+                      + '</td><td>' + condTime[i]
+
+                      + '</td><td>' + data.conditons[i].m_szSeverityDisplay
+
+                      + '</td><td>' + data.conditons[i].m_szEncounterID
+
+                      + '</td><td>' + data.conditons[i].m_szNotes + '</td></tr>');
+
+            }
+
+            // parse the time into a readable format
+
+            obsTime=[];
+
+            for (var i = 0; i < data['m_szObservations'].length; i++) {
+
+              var splitTime2 = data['m_szObservations'][i].m_szObservationEffectiveTime.split("T");
+
+              var obsYear = splitTime2[0].split("-");
+
+              var obsHours = splitTime2[1].split(":");
+
+              obsTime[i] = obsYear[1] + '/' + obsYear[2] + '/' + obsYear[0] + ' ' + obsHours[0] + ':' + obsHours[1];
+
+            }
+
+            // populate the observation table
+
+            heartChart = [];
+
+            for (var i = 0; i < data['m_szObservations'].length; i++) {
+
+              $('#observationTbl TBODY').append('<tr><td>' + data.m_szObservations[i].m_szObservationDisplay
+
+                      + '</td><td>' + data.m_szObservations[i].m_szObservationValue
+
+                      + '</td><td>' + data.m_szObservations[i].m_szObservationUnit
+
+                      + '</td><td>' + obsTime[i]
+
+                      + '</td><td>' + data.m_szObservations[i].m_szObservationStatues + '</td></tr>');
+
+              if (data.m_szObservations[i].m_szObservationDisplay == "Systolic blood pressure" ||
+
+                      data.m_szObservations[i].m_szObservationDisplay == "Diastolic blood pressure"){
+
+
+
+              }
+
+              heartChart[i] = {period: obsTime[i] };
+
+            }
+
+            $('#patientCharts').show();
+
+            // create a new chart
+
+            new Morris.Area({
+
+              element: 'morris-area-chart',
+
+              data: [{
+
+                period: '2005 Q1',
+
+                Systolic: 142.0,
+
+                Diastolic: 91.0,
+
+                HeartRate: 92.0,
+
+                RespiratoryRate: 15.0
+
+              }, {
+
+                period: '2005 Q2',
+
+                Systolic: 147.0,
+
+                Diastolic: 94.0,
+
+                HeartRate: 93.0,
+
+                RespiratoryRate: 14.0
+
+              }, {
+
+                period: '2005 Q3',
+
+                Systolic: 145.0,
+
+                Diastolic: 92.0,
+
+                HeartRate: 92.0,
+
+                RespiratoryRate: 16
+
+              }],
+
+              xkey: 'period',
+
+              ykeys: ['Systolic', 'Diastolic', 'HeartRate', 'RespiratoryRate'],
+
+              labels: ['Systolic', 'Diastolic', 'HeartRate', 'RespiratoryRate'],
+
+              pointSize: 2,
+
+              hideHover: 'auto',
+
+              resize: true
+
+            });
+
+
+
+            // create a new chart
+
+            new Morris.Area({
+
+              element: 'morris-area-chart2',
+
+              data: [{
+
+                period: '2005 Q1',
+
+                Height: 173.0,
+
+                Weight: 93.2,
+
+                BMI: 31.14,
+
+                Temp: 37.1
+
+              }, {
+
+                period: '2005 Q2',
+
+                Height: 173.0,
+
+                Weight: 91.1,
+
+                BMI: 30.439,
+
+                Temp: 37.0
+
+              }, {
+
+                period: '2005 Q3',
+
+                Height: 173.0,
+
+                Weight: 92.2,
+
+                BMI: 30.806,
+
+                Temp: 37.1
+
+              }],
+
+              xkey: 'period',
+
+              ykeys: ['Height', 'Weight', 'BMI', 'Temp'],
+
+              labels: ['Height', 'Weight', 'BMI', 'Temp'],
+
+              pointSize: 2,
+
+              hideHover: 'auto',
+
+              resize: true
+
+            });
+
+
+
+
+
+            // display the newly populated tables
+
+            $('#patientInfo').show();
+
+
+
+          }  //end success
+
+        });  // end ajax
+
+      }  //end popObserveTable
+
+
+
+
+
+      // populate all patients table
+
+      function popPatientTbl(provider) {
+
+        // make ajax call to GetAllPatientsForProvider
+
+        $.ajax({
+
+          type: "GET",
+
+          url: "http://ehr-namitgupta.rhcloud.com/webresources/GetAllPatientsForProvider",
+
+          headers: {
+
+            ProviderID: provider
+
+          },
+
+          datatype: "json",
+
+          success: function (data) {
+
+            // remove any row in the table
+
+            $('#allPatientsTbl TBODY tr').remove();
+
+            for (var i = 0; i < data.length; i++) {
+
+              // make ajax call to GetPatientData
+
+              $.ajax({
+
+                type: "GET",
+
+                url: "http://ehr-namitgupta.rhcloud.com/webresources/GetPatientData",
+
+                headers: {
+
+                  PatientID: data[i]
+
+                },
+
+                datatype: 'json',
+
+                success: function (data) {
+
+                  // populate the patient table with information
+
+                  $('#allPatientsTbl TBODY').append('<tr><td>' + data['m_szPatientID']
+
+                          + '</td><td>' + data['m_szLastName'] + '</td><td>' +  data['m_szFirstName']
+
+                          + '</td><td>' +  data['m_szMiddleInitial'] + '</td><td>' +  data['m_szGender']
+
+                          + '</td><td>' +  data['m_szBirthDate'] + '</td><td>' +  data['m_szAddress']
+
+                          + '</td><td>' +  data['m_szCity'] + '</td><td>' + data['m_szState'] + '</td></tr>');
+
+                },
+
+                error: function (xhr) {
+
+                  // output error text to console
+
+                  console.log(xhr.responseText);
+
+                }
+
+              }); //end ajax
+
+            }
+
+          },
+
+          error: function (xhr) {
+
+            // output error text to console
+
+            console.log(xhr.responseText);
+
+          }
+
+        }); //end ajax
+
+        // display the table and charts (charts not working right now???)
+
+        $('#allPatients').show();
+
+      } //end popPatientTbl
+
+    });  //end ready function
+
+
+
   </script>
-   <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Send Email</h3>
-        </div>
-        <div class="modal-body form-group has-success">
-            <ul>
-                
-                <!-- <li ng-repeat="item in items"> -->
-                <li>    <p> first name : <br><input type="text" name="fname" required> </p></li>
-                <li>    <p> Last name  : <br><input type="text" name="lname"  required>  </p></li>
-                <li>    <p> Provider's Email : <br><input type="email" name="eMail" required></p></li>
-                <li>    <p> Text : <br><textarea rows="4" cols="50"> </textarea></li>
-                    <!-- <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a> -->
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>
-        </div>
-        <div class="modal-footer">
-            
-            <button class="btn btn-primary" type="button" ng-click="ok()">Send Email</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
-  
+
   <!-- end scripts -->
-</div>
+
+
+
 </body>
+
 </html>
 
 

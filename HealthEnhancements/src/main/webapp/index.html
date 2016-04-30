@@ -40,7 +40,7 @@ $(document).ready(function(){
                          alert("Your username and password did not match our record. Please try again! ");
                     }
                 }),
-                error :(function(){ alert ("Something went wrong.Please try again!  line 43 index.html")})      
+                error :(function(){ alert ("We could not call the API to the the information. you entered a username and password that don't have record in our database. try with username : a1 and password a1")})      
             }),
 
             $.ajax({
@@ -55,7 +55,7 @@ $(document).ready(function(){
                     result = response;
                     console.log (result)
                 }),
-                error :(function(){ alert ("Something went wrong.Please try again! line 58 index.html ")}) 
+                error :(function(){ alert ("We could not call the API to the the information. you entered a username and password that don't have record in our database. try with username : a1 and password a1 ")}) 
             })
 
         ).then( function(){

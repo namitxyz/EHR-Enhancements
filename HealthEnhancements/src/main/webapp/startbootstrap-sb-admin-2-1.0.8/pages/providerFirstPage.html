@@ -10,7 +10,18 @@
     <meta name="author" content="">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
 
+
     <title>Index | Team Zeus</title>
+    <script>
+        var rd= Math.floor(Math.random() * 20);
+
+            function randomWholeNum() {
+
+              // Only change code below this line.
+
+              return Math.random();
+            }
+        </script>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +29,7 @@
     <!-- MetisMenu CSS -->
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
-    <!-- Timeline CSS -->
+    <!-- Timeline sb -->
     <link href="../dist/css/timeline.css" rel="stylesheet">
 
     <!-- Custom CSS -->
@@ -53,7 +64,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../../index.html">Team ZEUS</a>
+                <a class="navbar-brand" href="../../providerLogin.html">Team ZEUS</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -66,7 +77,7 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <strong>John Smith</strong>
+                                    <strong></strong>
                                     <span class="pull-right text-muted">
                                         <em>Yesterday</em>
                                     </span>
@@ -78,7 +89,7 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <strong>John Smith</strong>
+                                    <strong></strong>
                                     <span class="pull-right text-muted">
                                         <em>Yesterday</em>
                                     </span>
@@ -90,7 +101,7 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <strong>Elena Robert</strong>
+                                    <strong></strong>
                                     <span class="pull-right text-muted">
                                         <em>Yesterday</em>
                                     </span>
@@ -282,7 +293,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="patiantFirstPage.html"><i class="fa fa-dashboard fa-fw"></i> Patient's Dashboard</a>
+                            <a href="providerFirstPage.html"><i class="fa fa-dashboard fa-fw"></i> Patient's Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -291,7 +302,7 @@
                                     <a href="flot.html">Flot Charts</a>
                                 </li> -->
                                 <li>
-                                    <a href="morris.html"> Visit/Medication/Condition chart</a>
+                                    <a href="providermorris.html"> Visit/Medication/Condition chart</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -300,7 +311,7 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Observation Detail<span class="fa arrow"></span></a>
                             <ul class="nav ">
                             <li>
-                                <a href="tables.html"><i class="fa fa-table fa-fw"></i>Observation Detail</a>
+                                <a href="providertables.html"><i class="fa fa-table fa-fw"></i>Observation Detail</a>
                             </li>
                         </ul>
                             <!-- /.nav-second-level -->
@@ -310,17 +321,12 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Detail Pages<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="patientpage1.html">Schedule & More</a>
+                                    <a href="providerpage1.html">Schedules & More</a>
                                 </li>
                                 <li>
-                                    <a href="patientpage2.html">Update Profile</a>
+                                    <a href="providerPage3.html"> Add Patient</a>
                                 </li>
-                                <li>
-                                    <a href="patientpage3.html">Update Profile</a>
-                                </li>
-                                <li>
-                                    <a href="patientpage4.html">Update Profile</a>
-                                </li>
+                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -330,6 +336,11 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+
+
+
+
+
 
         <div id="page-wrapper">
             <div class="row">
@@ -343,7 +354,7 @@
 
             <div class="row">
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
+                    <div class="panel panel-p">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
@@ -352,10 +363,10 @@
                                 <div class="col-xs-9 text-right">
                                     <div class="huge" id= "pcpComments" > "26" </div>
                                     <script>
-                                            var i = 21;
+                                            var i = 1 + Math.floor(Math.random() * 6);
                                             $('#pcpComments').text(i);
                                     </script>
-                                    <div> Patient's chart Update</div>
+                                    <div> Chart Update</div>
                                 </div>
                             </div>
                         </div>
@@ -369,15 +380,20 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
+                    <div class="panel panel-p">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                    <div>Test Result!</div>
+                                    <div id = "huge" class="huge">12</div>
+                                    <script>
+                                            var i = 1 + Math.floor(Math.random() * 20);
+                                            $('#huge').text(i);
+                                    </script>
+                                    <div> Test Result</div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -391,14 +407,18 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
+                    <div class="panel panel-p">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                    <i class="fa fa-tencent-weibo fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
+                                    <div id = "j" class="huge">124</div>
+                                    <script>
+                                            var i = 1 + Math.floor(Math.random() * 20);
+                                            $('#j').text(i);
+                                    </script>
                                     <div>Today's schedule</div>
                                 </div>
                             </div>
@@ -406,22 +426,26 @@
                         <a href="#">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right "></i></span>
                                 <div class="clearfix"></div>
                             </div>
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
+                    <div class="panel panel-p">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa-tencent-weibo fa-5x"></i>
+                                    <i class="fa fa-support fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
-                                    <div>Prescription refill</div>
+                                    <div id = "k" class="huge">13</div>
+                                    <script>
+                                            var i = 1 + Math.floor(Math.random() * 20);
+                                            $('#k').text(i);
+                                    </script>
+                                    <div>Refill Request</div>
                                 </div>
                             </div>
                         </div>
@@ -437,10 +461,10 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-8">
-                    <div class="panel panel-default">
+                <div class="col-lg-12">
+                    <div class="panel panel-p">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Patient's Search
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Patient Search
                             <div class="pull-right">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -462,203 +486,844 @@
                         </div>
                         <div class="form-group">
                             <label>Find a Patient...</label>
-                            <input class="form-control autocomplete" placeholder="Enter A" />
+                            <!-- <input class="form-control autocomplete" placeholder="Enter A" /> -->
                         </div>
                           
                           
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="morris-line-chart"></div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Patient's List
-                            <div class="pull-right">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                        Filter
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right" role="menu">
-                                        <li><a href="#">Sort By Name</a>
-                                        </li>
-                                        <li><a href="#">Sort By Date</a>
-                                        </li>
-                                        <li><a href="#">Sort by Date of Birth</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Detail</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Date</th>
-                                                    <th>Time</th>
-                                                    <td>Doctor's Name</td>
-                                                    
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>3326</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:29 PM</td>
-                                                    <td>Dr. Holems Khati </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3325</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:20 PM</td>
-                                                    <td>Dr. Danial Cacenelly</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3324</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:03 PM</td>
-                                                    <td>Dr. Danial Cacenelly</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3323</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:00 PM</td>
-                                                    <td>Dr. Danial Cacenelly</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3322</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:49 PM</td>
-                                                    <td>Dr. Danial Cacenelly</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3321</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:23 PM</td>
-                                                    <td>Dr. Danial Cacenelly</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3320</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:15 PM</td>
-                                                    <td>Dr. Danial Cacenelly</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3319</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:13 PM</td>
-                                                    <td>Dr. Danial Cacenelly</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- /.table-responsive -->
-                                </div>
-                                <!-- /.col-lg-4 (nested) -->
-                                <div class="col-lg-8">
-                                    <div id="morris-bar-chart"></div>
-                                </div>
-                                <!-- /.col-lg-8 (nested) -->
-                            </div>
-                            <!-- /.row -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                    <div class="panel panel-default">
-   
-                    </div>
+                        <div class="container"><br><br>
+
+    <form class="form-inline">
+
+      <div class="form-group">
+
+        <input type="text" class="form-control" id="providerID" placeholder="Provider ID">
+
+      </div>
+
+      <div class="form-group">
+
+        <input type="text" class="form-control" id="patientID" placeholder="Patient ID">
+
+      </div>
+
+      <button type="button" class="btn btn-danger" id="sub">Add Patient</button>
+
+      <button type="button" class="btn btn-success" id="verify">Verify Patient</button>
+
+      <button type="button" class="btn btn-primary" id="viewAll">View All Patients</button>
+
+    </form>
+
+    <div id="result"></div>
+
+    <br>
+
+    <!-- patient records table -->
+
+    <div id="patientInfo">
+
+      <h2>Patient Records</h2>
+
+      <div class="container" id="medRecords">
+
+        <table class="table table-striped" id="medRecordsTbl">
+
+          <thead>
+
+          <tr>
+
+            <th>Condition</th>
+
+            <th>Onset</th>
+
+            <th>Severity</th>
+
+            <th>Encounter</th>
+
+            <th>Notes</th>
+
+          </tr>
+
+          </thead>
+
+          <tbody> </tbody>
+
+        </table>
+
+        <br/>
+
+        <table class="table table-striped" id="observationTbl">
+
+          <thead>
+
+          <tr>
+
+            <th>Observation</th>
+
+            <th>Value</th>
+
+            <th>Unit</th>
+
+            <th>Date</th>
+
+            <th>Status</th>
+
+          </tr>
+
+          </thead>
+
+          <tbody></tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+    <!-- end patient records -->
+
+    <!-- all patients table -->
+
+    <div id="allPatients">
+
+      <h2>Patients</h2>
+
+      <div class="container" id="patients">
+
+        <table class="table table-striped display" id="allPatientsTbl">
+
+          <thread>
+
+            <tr>
+
+              <th>Patient ID</th>
+
+              <th>Last Name</th>
+
+              <th>First Name</th>
+
+              <th>Middle Inital</th>
+
+              <th>Gender</th>
+
+              <th>Birth Date</th>
+
+              <th>Address</th>
+
+              <th>City</th>
+
+              <th>State</th>
+
+            </tr>
+
+          </thread>
+
+        </table>
+
+      </div>
+
+    </div>
+
+    <!-- end all patients -->
+
+  <!-- Charts! -->
+
+  <!-- two columns -->
+
+  <div class="row" id="patientCharts">
+
+    <div class="col-md-6">
+
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+
+          Patient Heart Data
+
+        </div>
+
+        <div class="panel-body">
+
+          <div id="morris-area-chart" style="height: 250px;"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+
+          Patient Body Data
+
+        </div>
+
+        <div class="panel-body">
+
+          <div id="morris-area-chart2" style="height: 250px;"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div><br/><br/>
+
+  </div>
+
+  <!-- end two columns -->
+
+  <!-- end Charts! -->
+
+  <!-- end main section -->
+
+
+
+  <!-- scripts -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <script src="../../bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+
+
+
+  <!-- jQuery -->
+
+  <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+
+
+  <!-- Bootstrap Core JavaScript -->
+
+  <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+
+  <!-- Metis Menu Plugin JavaScript -->
+
+  <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+
+
+  <!-- Morris Charts JavaScript-->
+
+  <script src="../bower_components/raphael/raphael-min.js"></script>
+
+  <script src="../bower_components/morrisjs/morris.min.js"></script>
+
+
+
+  <!-- Custom Theme JavaScript -->
+
+  <script src="../dist/js/sb-admin-2.js"></script>
+
+  <!--<script>
+
+    $(document).ready(function(){
+
+      // $('#pcpComments').text('55');
+
+
+
+    });
+
+
+
+    var i =44;
+
+  </script>  -->
+
+
+
+  <script>
+
+    $(document).ready(function(){
+
+
+
+      // hide the tables and focus on the providerID textbox
+
+      $('#providerID').focus();
+
+      $('#patientInfo').hide();
+
+      $('#allPatients').hide();
+
+      $('#patientCharts').hide();
+
+
+
+
+
+      // add patient to provider mapping
+
+      $('#sub').click(function() {
+
+        // hide the table if its showing
+
+        $('#patientInfo').hide();
+
+        $('#allPatients').hide();
+
+        $('#patientCharts').hide();
+
+        // get provider and patient IDs
+
+        var provider = document.getElementById('providerID').value;
+
+        var patient = document.getElementById('patientID').value;
+
+        // make an ajax call to AddPatientToProviderMapping
+
+        $.ajax({
+
+          type: "POST",
+
+          url: "http://ehr-namitgupta.rhcloud.com/webresources/AddPatientToProviderMapping",
+
+          headers: {
+
+            PatientID: patient,
+
+            ProviderID: provider
+
+          },
+
+          datatype: "json",
+
+          success: function(data){
+
+            // display the results of the mapping
+
+            if (data['success']){
+
+              $('#result').text(data['success']);
+
+            } else {
+
+              $('#result').text(data['error']);
+
+            }
+
+            // populate the table with the new patients data
+
+            popRecordsTable(patient);
+
+          },
+
+          error: function(xhr){
+
+            // output error text to console
+
+            console.log(xhr.responseText);
+
+          }
+
+        });
+
+        // clear the provider and patient ID fields and set focus on provider textbox
+
+        document.getElementById('providerID').value = '';
+
+        document.getElementById('patientID').value = '';
+
+        $('#providerID').focus();
+
+      });  //end add patient provider mapping
+
+
+
+
+
+      // verify patient to provider mapping
+
+      $('#verify').click(function() {
+
+        // hide tables and chart
+
+        $('#patientInfo').hide();
+
+        $('#allPatients').hide();
+
+        $('#patientCharts').hide();
+
+        // get provider and patient IDs
+
+        var provider = document.getElementById('providerID').value;
+
+        var patient = document.getElementById('patientID').value;
+
+        // make ajax call to IsValidPatientToProviderMapping
+
+        $.ajax({
+
+          type: "GET",
+
+          url: "http://ehr-namitgupta.rhcloud.com/webresources/IsValidPatientToProviderMapping",
+
+          headers: {
+
+            PatientID: patient,
+
+            ProviderID: provider
+
+          },
+
+          datatype: "json",
+
+          success: function(data){
+
+            // display the results of the validity check
+
+            if (data['success']){
+
+              $('#result').text(data['success']);
+
+            } else {
+
+              $('#result').text(data['error']);
+
+            }
+
+          },
+
+          error: function(xhr){
+
+            // output error text to console
+
+            console.log(xhr.responseText);
+
+          }
+
+        });
+
+        // clear the provider and patient ID fields and set focus on provider textbox
+
+        document.getElementById('providerID').value = '';
+
+        document.getElementById('patientID').value = '';
+
+        $('#providerID').focus();
+
+      }); //end verify patient
+
+
+
+
+
+      // view all patients for provider
+
+      $('#viewAll').click(function() {
+
+        // hide  tables and chart
+
+        $('#patientInfo').hide();
+
+        $('#allPatients').hide();
+
+        $('#patientCharts').hide();
+
+        // get provider id entered
+
+        var provider = document.getElementById('providerID').value;
+
+        // make an ajax call to GetAllPatientsForProvider
+
+        $.ajax({
+
+          type: "GET",
+
+          url: "http://ehr-namitgupta.rhcloud.com/webresources/GetAllPatientsForProvider",
+
+          headers: {
+
+            ProviderID: provider
+
+          },
+
+          datatype: "json",
+
+          success: function(data){
+
+            // populate a table with all the patients
+
+            popPatientTbl(provider);
+
+          },
+
+          error: function(xhr){
+
+            // output error text to console
+
+            console.log(xhr.responseText);
+
+          }
+
+        });
+
+        // clear the providerID textbox and set focus on it
+
+        document.getElementById('providerID').value = '';
+
+        $('#providerID').focus();
+
+      }); //end view all patients
+
+
+
+
+
+      // populate patient records table with data
+
+      function popRecordsTable(patient) {
+
+        // make an ajax call to GetPatientData
+
+        $.ajax({
+
+          type: "GET",
+
+          url: "http://ehr-namitgupta.rhcloud.com/webresources/GetPatientData",
+
+          headers: {
+
+            PatientID: patient
+
+          },
+
+          datatype: 'json',
+
+          success: function(data){
+
+            // remove any exsisting rows in tables
+
+            $('#medRecordsTbl TBODY tr').remove();
+
+            $('#observationTbl TBODY tr').remove();
+
+            // parse the time into a redable format
+
+            condTime=[];
+
+            for (var i = 0; i < data['conditons'].length; i++){
+
+              var splitTime = data['conditons'][i].m_szOnsetTime.split("T");
+
+              var condYear = splitTime[0].split("-");
+
+              condTime[i] = condYear[1] + '/' + condYear[2] + '/' + condYear[0];
+
+            }
+
+            // populate the patient records table
+
+            for (var i = 0; i < data['conditons'].length; i++){
+
+              $('#medRecordsTbl TBODY').append('<tr><td>' + data.conditons[i].m_szConditionDisplay
+
+                      + '</td><td>' + condTime[i]
+
+                      + '</td><td>' + data.conditons[i].m_szSeverityDisplay
+
+                      + '</td><td>' + data.conditons[i].m_szEncounterID
+
+                      + '</td><td>' + data.conditons[i].m_szNotes + '</td></tr>');
+
+            }
+
+            // parse the time into a readable format
+
+            obsTime=[];
+
+            for (var i = 0; i < data['m_szObservations'].length; i++) {
+
+              var splitTime2 = data['m_szObservations'][i].m_szObservationEffectiveTime.split("T");
+
+              var obsYear = splitTime2[0].split("-");
+
+              var obsHours = splitTime2[1].split(":");
+
+              obsTime[i] = obsYear[1] + '/' + obsYear[2] + '/' + obsYear[0] + ' ' + obsHours[0] + ':' + obsHours[1];
+
+            }
+
+            // populate the observation table
+
+            heartChart = [];
+
+            for (var i = 0; i < data['m_szObservations'].length; i++) {
+
+              $('#observationTbl TBODY').append('<tr><td>' + data.m_szObservations[i].m_szObservationDisplay
+
+                      + '</td><td>' + data.m_szObservations[i].m_szObservationValue
+
+                      + '</td><td>' + data.m_szObservations[i].m_szObservationUnit
+
+                      + '</td><td>' + obsTime[i]
+
+                      + '</td><td>' + data.m_szObservations[i].m_szObservationStatues + '</td></tr>');
+
+              if (data.m_szObservations[i].m_szObservationDisplay == "Systolic blood pressure" ||
+
+                      data.m_szObservations[i].m_szObservationDisplay == "Diastolic blood pressure"){
+
+
+
+              }
+
+              heartChart[i] = {period: obsTime[i] };
+
+            }
+
+            $('#patientCharts').show();
+
+            // create a new chart
+
+            new Morris.Area({
+
+              element: 'morris-area-chart',
+
+              data: [{
+
+                period: '2005 Q1',
+
+                Systolic: 142.0,
+
+                Diastolic: 91.0,
+
+                HeartRate: 92.0,
+
+                RespiratoryRate: 15.0
+
+              }, {
+
+                period: '2005 Q2',
+
+                Systolic: 147.0,
+
+                Diastolic: 94.0,
+
+                HeartRate: 93.0,
+
+                RespiratoryRate: 14.0
+
+              }, {
+
+                period: '2005 Q3',
+
+                Systolic: 145.0,
+
+                Diastolic: 92.0,
+
+                HeartRate: 92.0,
+
+                RespiratoryRate: 16
+
+              }],
+
+              xkey: 'period',
+
+              ykeys: ['Systolic', 'Diastolic', 'HeartRate', 'RespiratoryRate'],
+
+              labels: ['Systolic', 'Diastolic', 'HeartRate', 'RespiratoryRate'],
+
+              pointSize: 2,
+
+              hideHover: 'auto',
+
+              resize: true
+
+            });
+
+
+
+            // create a new chart
+
+            new Morris.Area({
+
+              element: 'morris-area-chart2',
+
+              data: [{
+
+                period: '2005 Q1',
+
+                Height: 173.0,
+
+                Weight: 93.2,
+
+                BMI: 31.14,
+
+                Temp: 37.1
+
+              }, {
+
+                period: '2005 Q2',
+
+                Height: 173.0,
+
+                Weight: 91.1,
+
+                BMI: 30.439,
+
+                Temp: 37.0
+
+              }, {
+
+                period: '2005 Q3',
+
+                Height: 173.0,
+
+                Weight: 92.2,
+
+                BMI: 30.806,
+
+                Temp: 37.1
+
+              }],
+
+              xkey: 'period',
+
+              ykeys: ['Height', 'Weight', 'BMI', 'Temp'],
+
+              labels: ['Height', 'Weight', 'BMI', 'Temp'],
+
+              pointSize: 2,
+
+              hideHover: 'auto',
+
+              resize: true
+
+            });
+
+
+
+
+
+            // display the newly populated tables
+
+            $('#patientInfo').show();
+
+
+
+          }  //end success
+
+        });  // end ajax
+
+      }  //end popObserveTable
+
+
+
+
+
+      // populate all patients table
+
+      function popPatientTbl(provider) {
+
+        // make ajax call to GetAllPatientsForProvider
+
+        $.ajax({
+
+          type: "GET",
+
+          url: "http://ehr-namitgupta.rhcloud.com/webresources/GetAllPatientsForProvider",
+
+          headers: {
+
+            ProviderID: provider
+
+          },
+
+          datatype: "json",
+
+          success: function (data) {
+
+            // remove any row in the table
+
+            $('#allPatientsTbl TBODY tr').remove();
+
+            for (var i = 0; i < data.length; i++) {
+
+              // make ajax call to GetPatientData
+
+              $.ajax({
+
+                type: "GET",
+
+                url: "http://ehr-namitgupta.rhcloud.com/webresources/GetPatientData",
+
+                headers: {
+
+                  PatientID: data[i]
+
+                },
+
+                datatype: 'json',
+
+                success: function (data) {
+
+                  // populate the patient table with information
+
+                  $('#allPatientsTbl TBODY').append('<tr><td>' + data['m_szPatientID']
+
+                          + '</td><td>' + data['m_szLastName'] + '</td><td>' +  data['m_szFirstName']
+
+                          + '</td><td>' +  data['m_szMiddleInitial'] + '</td><td>' +  data['m_szGender']
+
+                          + '</td><td>' +  data['m_szBirthDate'] + '</td><td>' +  data['m_szAddress']
+
+                          + '</td><td>' +  data['m_szCity'] + '</td><td>' + data['m_szState'] + '</td></tr>');
+
+                },
+
+                error: function (xhr) {
+
+                  // output error text to console
+
+                  console.log(xhr.responseText);
+
+                }
+
+              }); //end ajax
+
+            }
+
+          },
+
+          error: function (xhr) {
+
+            // output error text to console
+
+            console.log(xhr.responseText);
+
+          }
+
+        }); //end ajax
+
+        // display the table and charts (charts not working right now???)
+
+        $('#allPatients').show();
+
+      } //end popPatientTbl
+
+    });  //end ready function
+
+
+
+  </script>
+
+  <!-- end scripts -->
+                        <!-- /.panel-body################################################ -->
+                    
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-8 -->
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> Notifications Panel
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small"><em>4 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small"><em>27 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small"><em>11:32 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-bolt fa-fw"></i> Server Crashed!
-                                    <span class="pull-right text-muted small"><em>11:13 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-warning fa-fw"></i> Server Not Responding
-                                    <span class="pull-right text-muted small"><em>10:57 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
-                                    <span class="pull-right text-muted small"><em>9:49 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-money fa-fw"></i> Payment Received
-                                    <span class="pull-right text-muted small"><em>Yesterday</em>
-                                    </span>
-                                </a>
-                            </div>
-                            <!-- /.list-group -->
-                            <a href="#" class="btn btn-default btn-block">View All Alerts</a>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart Example
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-donut-chart"></div>
-                            <a href="#" class="btn btn-default btn-block">View Details</a>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    
-                    </div>
-                    <!-- /.panel .chat-panel -->
-                </div>
-                <!-- /.col-lg-4 -->
-            </div>
-            <!-- /.row -->
+                
         </div>
         <!-- /#page-wrapper -->
 
