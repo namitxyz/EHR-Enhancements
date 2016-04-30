@@ -857,7 +857,7 @@
                         + '</div><div class="form-group">'
                         + '<select class="form-control" id="labStatus">'
                         + '<option>Status</option><option>Complete</option><option>Refused Test</option>'
-                        + '<option>Pending</option><option>Quantity Not Sufficient><option></select>'
+                        + '<option>Pending</option><option>Quantity Not Sufficient</option></select>'
                         + '</div><div class="form-group">'
                         + '<input type="text" class="form-control" id="test" placeholder="Test Name">'
                         + '</div><div class="form-group">'
@@ -897,24 +897,48 @@
                 $('#message').text('');
                 // create the form
                 var form = '<form class="form-horizontal"><div class="form-group">' +
-                        '' +
-                        '' +
-                        '</form>';
-
+                        + '<input type="text" class="form-control" id="medicineName" placeholder="Name">Ex: Ibuprofren, Albuterol'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="medStrength" placeholder="Strength">'
+                        + '</div><div class="form-group">'
+                        + '<select class="form-control" id="medUnit">'
+                        + '<option>Select...</option><option>cfu/ml</option><option>iu</option>'
+                        + '<option>mg</option><option>mg/ml></option><option>ml</option>'
+                        + '<option>%</option><option>unit</option></select>'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="medDosage" placeholder="Dosage">'
+                        + '</div><div class="form-group">'
+                        + '<select class="form-control" id="dosageType">'
+                        + '<option>Status</option><option>Complete</option><option>Refused Test</option>'
+                        + '<option>Pending</option><option>Quantity Not Sufficient><option></select>'
+                        + '</div><div class="form-group">'
+                        + '<select class="form-control" id="medTaken">'
+                        + '<option>Select...</option><option>Injection</option><option>By Mouth</option>'
+                        + '<option>In The Ear</option><option>In The Eye</option>'
+                        + '<option>In The Nose</option><option>Rectal</option><option>Injected</option>'
+                        + '<option>Feeding Tube</option><option>Intravenous (IV)</option></select>'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="medFrequency" placeholder="How Often Taken">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="procedureName" placeholder="Reason For Taking">'
+                        + '</div><div class="form-group">'
+                        + '<input type="date" class="form-control" id="medDate" placeholder="Date">'
+                        + '</div><br/><div class="form-group">'
+                        + '<button type="text" class="btn-primary" id="medicationSubmit">Record Medication</button></div></form>';
                 // put the form into the page
                 $('#dataEntryTemplate').html(form);
                 // show the form
-                $('#dataEntry').hide();
+                $('#dataEntry').show();
                 // focus on the form fields
-                $('#procedureName').focus();
+                $('#medicineName').focus();
                 // save the data to session storage when button is pushed
-                $('#procedureSubmit').click(function(e){
+                $('#medicationSubmit').click(function(e){
                     e.preventDefault();
 
                     // hide the empty form
                     $('#dataEntry').hide();
                     // display a success message
-                    $('#message').text("Medications Recorded");
+                    $('#message').text("Medication Recorded");
                 })
             }); //end medications
 
