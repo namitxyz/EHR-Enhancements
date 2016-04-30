@@ -14,8 +14,7 @@
     <!-- MetisMenu CSS -->
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
-    <!-- Timeline CSS -->
-    <link href="../dist/css/timeline.css" rel="stylesheet">
+    <!-- Timeline CSS   <link href="../dist/css/timeline.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
@@ -343,14 +342,14 @@
                         </div>
                         <div class="col-md-4"> <!-- column 2 - middle -->
                             <h4>Current Health</h4>
-                            <button type="button" class="btn btn-default">Appointments</button>
-                            <button type="button" class="btn btn-default">Allergies</button>
-                            <button type="button" class="btn btn-default">Lab Results</button><br/><br/>
-                            <button type="button" class="btn btn-default">Medications</button>
-                            <button type="button" class="btn btn-default">Procedure</button>
-                            <button type="button" class="btn btn-default">Conditions</button><br/><br/>
-                            <button type="button" class="btn btn-default">Immunizations</button>
-                            <button type="button" class="btn btn-default">Medical devices</button>
+                            <button type="button" class="btn btn-default" id="appoint">Appointments</button>
+                            <button type="button" class="btn btn-default" id="allergies">Allergies</button>
+                            <button type="button" class="btn btn-default" id="lab">Lab Results</button><br/><br/>
+                            <button type="button" class="btn btn-default" id="meds">Medications</button>
+                            <button type="button" class="btn btn-default" id="procedure">Procedure</button>
+                            <button type="button" class="btn btn-default" id="conditions">Conditions</button><br/><br/>
+                            <button type="button" class="btn btn-default" id="imune">Immunizations</button>
+                            <button type="button" class="btn btn-default" id="medDevice">Medical devices</button>
 
                         </div>
                         <div class="col-md-4"> <!-- column 3 - right -->
@@ -751,44 +750,318 @@
                     // display a success message
                     $('#message').text("Exercise Recorded");
                 })
-            });
+            }); //end exercise
 
+// work on contact dropdown info here
             // record appointments
-
+            $('#appoint').click(function(){
+                // clear the message
+                $('#message').text('');
+                // create the form
+                var form = '<form class="form-horizontal"><div class="form-group">'
+                        + '<input type="date" class="form-control" id="appointDate" placeholder="Date">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="providerEntry" placeholder="Treatment Provider">'
+                        + '<div class="dropdown">Contact Info<a href="#" class="dropdown-toggle" data-toggle="subform"><b class="caret"></b></a>'
+                        + '</div>'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="appointPurpose" placeholder="Purpose">'
+                        + '</div><div class="form-group">'
+                        + '<select class="form-control" id="appointType">'
+                        + '<option>Type</option><option>Day Surgery</option><option>Emergency</option>'
+                        + '<option>Inpatient</option><option>Outpatient</option><option>Recurring</option></select>'
+                        + '</div><div class="form-group">'
+                        + '<select class="form-control" id="appointStatus">'
+                        + '<option>Status</option><option>Cancelled</option><option>Completed</option>'
+                        + '<option>Missed</option><option>Scheduled</option><option>To Be Scheduled</option></select>'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="appointSpecialty" placeholder="Specialty">ex: Family medicine, Gynecology, Neurology'
+                        + '</div><br/><div class="form-group">'
+                        + '<button type="text" class="btn-primary" id="appointSubmit">Record Appointment</button></div></form>';
+                // put the form into the page
+                $('#dataEntryTemplate').html(form);
+                // show the form
+                $('#dataEntry').show();
+                // focus on the form fields
+                $('#appointDate').focus();
+                // save the data to session storage when button is pushed
+                $('#appointSubmit').click(function(e){
+                    e.preventDefault();
+                    sessionStorage.setItem("appointmentDate", document.getElementById('appointDate').value);
+                    sessionStorage.setItem("appointmentProvider", document.getElementById('providerEntry').value);
+                    sessionStorage.setItem("appointmentPurpose", document.getElementById('appointPurpose').value);
+                    sessionStorage.setItem("appointmentType", document.getElementById('appointType').value);
+                    sessionStorage.setItem("appointmentStatus", document.getElementById('appointStatus').value);
+                    sessionStorage.setItem("appointmentSpecialty", document.getElementById('appointSpecialty').value);
+                    // hide the empty form
+                    $('#dataEntry').hide();
+                    // display a success message
+                    $('#message').text("Appointment Recorded");
+                })
+            }); //end appointments
 
             // record allergies
+            $('#allergies').click(function(){
+                // clear the message
+                $('#message').text('');
+                // create the form
+                var form = '<form class="form-horizontal"><div class="form-group">'
+                        + '<input type="text" class="form-control" id="allergy" placeholder="Allergy">'
+                        + '</div><div class="form-group">'
+                        + '<select class="form-control" id="reaction">'
+                        + '<option>Reaction</option><option>Abnormal Swelling</option><option>Chest Tightness</option>'
+                        + '<option>Difficulty Swallowing</option><option>Dizzyness/option><option>Fast Heartbeat</option>'
+                        + '<option>Headache</option><option>Itchy Watery Eyes</option><option>Nausea/Vomiting</option>'
+                        + '<option>Rash</option><option>Sneezing</option><option>Wheezing</option></select>'
+                        + '</div><div class="form-group">'
+                        + '<select class="form-control" id="allergyType">'
+                        + '<option>Type</option><option>Animal</option><option>Environmental</option>'
+                        + '<option>Food</option><option>Medication</option><option>Plant</option></select>'
+                        + '</div><div class="form-group">'
+                        + '<input type="date" class="form-control" id="allergyDate" placeholder="Date">'
+                        + '</div><br/><div class="form-group">'
+                        + '<button type="text" class="btn-primary" id="allergySubmit">Record Allergy</button></div></form>';
+                // put the form into the page
+                $('#dataEntryTemplate').html(form);
+                // show the form
+                $('#dataEntry').show();
+                // focus on the form fields
+                $('#allergy').focus();
+                // save the data to session storage when button is pushed
+                $('#allergySubmit').click(function(e){
+                    e.preventDefault();
+                    sessionStorage.setItem("allergy", document.getElementById('allergy').value);
+                    sessionStorage.setItem("allergyReaction", document.getElementById('reaction').value);
+                    sessionStorage.setItem("allergyType", document.getElementById('allergyType').value);
+                    sessionStorage.setItem("allergyDate", document.getElementById('allergyDate').value);
+                    // hide the empty form
+                    $('#dataEntry').hide();
+                    // display a success message
+                    $('#message').text("Allergies Recorded");
+                })
+            }); //end allergies
 
-
+// Add dropdown info here
             // record lab results
-
-
+            $('#lab').click(function(){
+                // clear the message
+                $('#message').text('');
+                // create the form
+                var form = '<form class="form-horizontal"><div class="form-group">'
+                        + '<input type="text" class="form-control" id="labName" placeholder="Lab Panel Name">'
+                        + '</div><div class="form-group">'
+                        + '<input type="date" class="form-control" id="labDate" placeholder="Date">'
+                        + '</div><div class="form-group">'
+                        + '<select class="form-control" id="labStatus">'
+                        + '<option>Status</option><option>Complete</option><option>Refused Test</option>'
+                        + '<option>Pending</option><option>Quantity Not Sufficient><option></select>'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="test" placeholder="Test Name">'
+                        + '</div><div class="form-group">'
+                        + '<input type="date" class="form-control" id="testDate" placeholder="Date">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="testResult" placeholder="Results">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="testUnits" placeholder="Units">'
+                        + '</div><br/><div class="form-group">'
+                        + '<button type="text" class="btn-primary" id="labSubmit">Record Lab/Test Results</button></div></form>';
+                // put the form into the page
+                $('#dataEntryTemplate').html(form);
+                // show the form
+                $('#dataEntry').show();
+                // focus on the form fields
+                $('#labName').focus();
+                // save the data to session storage when button is pushed
+                $('#labSubmit').click(function(e){
+                    e.preventDefault();
+                    sessionStorage.setItem("lab", document.getElementById('labName').value);
+                    sessionStorage.setItem("labDate", document.getElementById('labDate').value);
+                    sessionStorage.setItem("labStatus", document.getElementById('labStatus').value);
+                    sessionStorage.setItem("test", document.getElementById('test').value);
+                    sessionStorage.setItem("testDate", document.getElementById('testDate').value);
+                    sessionStorage.setItem("allergyDate", document.getElementById('testResult').value);
+                    sessionStorage.setItem("allergyDate", document.getElementById('testUnits').value);
+                    // hide the empty form
+                    $('#dataEntry').hide();
+                    // display a success message
+                    $('#message').text("Lab/Test Results Recorded");
+                })
+            }); //end lab results
+// needs form added here
             // record medications
+            $('#meds').click(function(){
+                // clear the message
+                $('#message').text('');
+                // create the form
+                var form = '';
 
+                // put the form into the page
+                $('#dataEntryTemplate').html(form);
+                // show the form
+                $('#dataEntry').hide();
+                // focus on the form fields
+                $('#procedureName').focus();
+                // save the data to session storage when button is pushed
+                $('#procedureSubmit').click(function(e){
+                    e.preventDefault();
+
+                    // hide the empty form
+                    $('#dataEntry').hide();
+                    // display a success message
+                    $('#message').text("Medications Recorded");
+                })
+            }); //end procedures
 
             // record procedures
-
+            $('#procedure').click(function(){
+                // clear the message
+                $('#message').text('');
+                // create the form
+                var form = '<form class="form-horizontal"><div class="form-group">'
+                        + '<input type="text" class="form-control" id="procedureName" placeholder="Name">'
+                        + '</div><div class="form-group">'
+                        + '<input type="date" class="form-control" id="procedureDate" placeholder="Date">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="procedureLocation" placeholder="Location on Body">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="procedureProvider" placeholder="Provider">'
+                        + '</div><br/><div class="form-group">'
+                        + '<button type="text" class="btn-primary" id="procedureSubmit">Record Procedure</button></div></form>';
+                // put the form into the page
+                $('#dataEntryTemplate').html(form);
+                // show the form
+                $('#dataEntry').show();
+                // focus on the form fields
+                $('#procedureName').focus();
+                // save the data to session storage when button is pushed
+                $('#procedureSubmit').click(function(e){
+                    e.preventDefault();
+                    sessionStorage.setItem("procedure", document.getElementById('procedure').value);
+                    sessionStorage.setItem("procedureDate", document.getElementById('procedureDate').value);
+                    sessionStorage.setItem("procedureLocation", document.getElementById('procedureLocation').value);
+                    sessionStorage.setItem("procedureProvider", document.getElementById('procedureProvider').value);
+                    // hide the empty form
+                    $('#dataEntry').hide();
+                    // display a success message
+                    $('#message').text("Procedure Recorded");
+                })
+            }); //end procedures
 
             // record conditions
-
+            $('#conditions').click(function(){
+                // clear the message
+                $('#message').text('');
+                // create the form
+                var form = '<form class="form-horizontal"><div class="form-group">'
+                        + '<input type="text" class="form-control" id="condition" placeholder="Condition">'
+                        + '</div><div class="form-group">'
+                        + '<select class="form-control" id="condStatus">'
+                        + '<option>Status</option><option>Current</option><option>Intermittent</option>'
+                        + '<option>Past</option>></select>'
+                        + '</div><div class="form-group">'
+                        + '<input type="date" class="form-control" id="condDate" placeholder="Date">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="condEnds" placeholder="How It Ended">'
+                        + '</div><br/><div class="form-group">'
+                        + '<button type="text" class="btn-primary" id="condSubmit">Record Condition</button></div></form>';
+                // put the form into the page
+                $('#dataEntryTemplate').html(form);
+                // show the form
+                $('#dataEntry').show();
+                // focus on the form fields
+                $('#condition').focus();
+                // save the data to session storage when button is pushed
+                $('#condSubmit').click(function(e){
+                    e.preventDefault();
+                    sessionStorage.setItem("condition", document.getElementById('condition').value);
+                    sessionStorage.setItem("conditionStatus", document.getElementById('condStatus').value);
+                    sessionStorage.setItem("conditionDate", document.getElementById('condDate').value);
+                    sessionStorage.setItem("conditionEnds", document.getElementById('condEnds').value);
+                    // hide the empty form
+                    $('#dataEntry').hide();
+                    // display a success message
+                    $('#message').text("Condition Recorded");
+                })
+            }); //end conditions
 
             // record immunizations
-
+            $('#imune').click(function(){
+                // clear the message
+                $('#message').text('');
+                // create the form
+                var form = '<form class="form-horizontal"><div class="form-group">'
+                        + '<input type="text" class="form-control" id="vacName" placeholder="Vaccine Name">'
+                        + '</div><div class="form-group">'
+                        + '<input type="date" class="form-control" id="vacDate" placeholder="Date">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="vacNum" placeholder="Number in Sequance">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="vacEffects" placeholder="Adverse Effects">'
+                        + '</div><br/><div class="form-group">'
+                        + '<button type="text" class="btn-primary" id="vacSubmit">Record Immunization</button></div></form>';
+                // put the form into the page
+                $('#dataEntryTemplate').html(form);
+                // show the form
+                $('#dataEntry').show();
+                // focus on the form fields
+                $('#vacName').focus();
+                // save the data to session storage when button is pushed
+                $('#vacSubmit').click(function(e){
+                    e.preventDefault();
+                    sessionStorage.setItem("vaccination", document.getElementById('vacName').value);
+                    sessionStorage.setItem("vaccinationDate", document.getElementById('vacDate').value);
+                    sessionStorage.setItem("vaccinationNumber", document.getElementById('vacNum').value);
+                    sessionStorage.setItem("vaccinationEffects", document.getElementById('vacEffects').value);
+                    // hide the empty form
+                    $('#dataEntry').hide();
+                    // display a success message
+                    $('#message').text("Immunization Recorded");
+                })
+            }); //end immunizations
 
             // record medical devices
-
-
-
-//            function listAllItems(){
-//                for (var i = 0; i <=localStorage.length-1; i++)
-//                {
-//                   var key = sessionStorage.key(i);
-//                   var val = sessionStorage.getItem(key);
-//                    console.log(key + ', ' + val);
-//                }
-//
-//            }
-//
-//            listAllItems();
+            $('#medDevice').click(function(){
+                // clear the message
+                $('#message').text('');
+                // create the form
+                var form = '<form class="form-horizontal"><div class="form-group">'
+                        + '<input type="date" class="form-control" id="deviceDate" placeholder="Date">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="deviceType" placeholder="Device Type">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="deviceMan" placeholder="Manufacturer">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="deviceModel" placeholder="Device Model">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="deviceSerial" placeholder="Serial Number">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="deviceDesc" placeholder="Description">'
+                        + '</div><div class="form-group">'
+                        + '<input type="text" class="form-control" id="deviceLoc" placeholder="Location on Body">'
+                        + '</div><br/><div class="form-group">'
+                        + '<button type="text" class="btn-primary" id="deviceSubmit">Record Device</button></div></form>';
+                // put the form into the page
+                $('#dataEntryTemplate').html(form);
+                // show the form
+                $('#dataEntry').show();
+                // focus on the form fields
+                $('#deviceDate').focus();
+                // save the data to session storage when button is pushed
+                $('#deviceSubmit').click(function(e){
+                    e.preventDefault();
+                    sessionStorage.setItem("deviceDate", document.getElementById('deviceDate').value);
+                    sessionStorage.setItem("deviceType", document.getElementById('deviceType').value);
+                    sessionStorage.setItem("manufacturer", document.getElementById('deviceMan').value);
+                    sessionStorage.setItem("model", document.getElementById('deviceModel').value);
+                    sessionStorage.setItem("serialNumber", document.getElementById('deviceSerial').value);
+                    sessionStorage.setItem("deviceDescription", document.getElementById('deviceDesc').value);
+                    sessionStorage.setItem("deviceLocation", document.getElementById('deviceLoc').value);
+                    // hide the empty form
+                    $('#dataEntry').hide();
+                    // display a success message
+                    $('#message').text("Device Recorded");
+                })
+            }); //end immunizations
 
         });  //end ready function
 
