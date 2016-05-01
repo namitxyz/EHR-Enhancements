@@ -12,6 +12,7 @@
 
 
     <title>Index | Team Zeus</title>
+
     <script>
         var rd= Math.floor(Math.random() * 20);
 
@@ -419,24 +420,6 @@
                     <div class="panel panel-p">
                         <div class="panel-heading">
                             <i class="fa fa-bar-chart-o fa-fw"></i> Patient Search
-                            <div class="pull-right">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                        Actions
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right" role="menu">
-                                        <li><a href="#">Sort By Name</a>
-                                        </li>
-                                        <li><a href="#">Sort By Date</a>
-                                        </li>
-                                        <li><a href="#">Sort by Date of Birth</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Detail</a>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                         <div class="form-group">
                             <label>Find a Patient...</label>
@@ -481,55 +464,63 @@
 
       <div class="container" id="medRecords">
 
-        <table class="table table-striped" id="medRecordsTbl">
+          <div class="table-responsive">
 
-          <thead>
+                <table class="table table-striped" id="medRecordsTbl">
 
-          <tr>
+                  <thead>
 
-            <th>Condition</th>
+                  <tr>
 
-            <th>Onset</th>
+                    <th>Condition</th>
 
-            <th>Severity</th>
+                    <th>Onset</th>
 
-            <th>Encounter</th>
+                    <th>Severity</th>
 
-            <th>Notes</th>
+                    <th>Encounter</th>
 
-          </tr>
+                    <th>Notes</th>
 
-          </thead>
+                  </tr>
 
-          <tbody> </tbody>
+                  </thead>
 
-        </table>
+                  <tbody> </tbody>
+
+                </table>
+
+              </div>
 
         <br/>
 
-        <table class="table table-striped" id="observationTbl">
+         <div class="table-responsive">
 
-          <thead>
+            <table class="table table-striped" id="observationTbl">
 
-          <tr>
+              <thead>
 
-            <th>Observation</th>
+              <tr>
 
-            <th>Value</th>
+                <th>Observation</th>
 
-            <th>Unit</th>
+                <th>Value</th>
 
-            <th>Date</th>
+                <th>Unit</th>
 
-            <th>Status</th>
+                <th>Date</th>
 
-          </tr>
+                <th>Status</th>
 
-          </thead>
+              </tr>
 
-          <tbody></tbody>
+              </thead>
 
-        </table>
+              <tbody></tbody>
+
+            </table>
+
+         </div>
 
       </div>
 
@@ -545,32 +536,36 @@
 
       <div class="container" id="patients">
 
-        <table class="table table-striped display" id="allPatientsTbl">
+        <div class="table-responsive">
 
-          <thead>
+            <table class="table table-striped display" id="allPatientsTbl">
 
-            <tr>
+              <thead>
 
-              <th>Patient ID</th>
+                <tr>
 
-              <th>Last Name</th>
+                  <th>Patient ID</th>
 
-              <th>Gender</th>
+                  <th>Last Name</th>
 
-              <th>Birth Date</th>
+                  <th>Gender</th>
 
-              <th>Address</th>
+                  <th>Birth Date</th>
 
-              <th>City</th>
+                  <th>Address</th>
 
-              <th>State</th>
+                  <th>City</th>
 
-            </tr>
+                  <th>State</th>
 
-          </thead>
-            <tbody></tbody>
+                </tr>
 
-        </table>
+              </thead>
+                <tbody></tbody>
+
+            </table>
+
+        </div>
 
       </div>
 
@@ -1258,7 +1253,7 @@
 
         }); //end ajax
 
-        // display the table and charts (charts not working right now???)
+        // display the table and charts
 
         $('#allPatients').show();
 
@@ -1271,42 +1266,7 @@
   </script>
 
   <!-- end scripts -->
-                        <!-- /.panel-body################################################ -->
-                    
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-8 -->
-                
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="../bower_components/raphael/raphael-min.js"></script>
-    <script src="../bower_components/morrisjs/morris.min.js"></script>
-    <script src="../js/morris-data.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
-    <script>
-        $(document).ready(function(){
-           // $('#pcpComments').text('55');
-            
-        });
-        
-            var i =44;
-    </script>
+                        
 </body>
 
 </html>

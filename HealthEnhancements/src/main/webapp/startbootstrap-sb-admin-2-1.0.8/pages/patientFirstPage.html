@@ -548,15 +548,17 @@
             <div id="patientFeedback">
                 <h2>All Patient Feedback<span id="feedbackHeader"></span></h2>
                 <div class="container" id="Pfeedback">
-                    <table class="table table-striped" id="patientFeedbackTbl">
-                        <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Feedback</th>
-                        </tr>
-                        </thead>
-                        <tbody> </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="patientFeedbackTbl">
+                            <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Feedback</th>
+                            </tr>
+                            </thead>
+                            <tbody> </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <!-- end feedback table -->
@@ -564,22 +566,24 @@
             <div id="allProviders">
                 <h2>All Providers <span id="providersHeader"></span></h2>
                 <div class="container" id="Aproviders">
-                    <table class="table table-striped" id="allProvidersForPatientTbl">
-                        <thead>
-                        <tr>
-                            <th>Provider ID</th>
-                            <th>Provider Type</th>
-                            <th>Last Name</th>
-                            <th>First Name</th>
-                            <th>Specialization</th>
-                            <th>Affiliation</th>
-                            <th>Address</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                        </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table><a id="providersFocus"></a>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="allProvidersForPatientTbl">
+                            <thead>
+                            <tr>
+                                <th>Provider ID</th>
+                                <th>Provider Type</th>
+                                <th>Last Name</th>
+                                <th>First Name</th>
+                                <th>Specialization</th>
+                                <th>Affiliation</th>
+                                <th>Address</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <!-- end all providers table -->
@@ -587,19 +591,21 @@
             <div id="appoint">
                 <h2>Appointments</h2>
                 <div class="container" id="appointments">
-                    <table class="table table-striped" id="allAppointmentsTbl">
-                        <thead>
-                        <tr>
-                            <td>Date</td>
-                            <td>Title</td>
-                            <td>Last Name</td>
-                            <td>Specialization</td>
-                            <td>Address</td>
-                            <td>Phone</td>
-                        </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="allAppointmentsTbl">
+                            <thead>
+                            <tr>
+                                <td>Date</td>
+                                <td>Title</td>
+                                <td>Last Name</td>
+                                <td>Specialization</td>
+                                <td>Address</td>
+                                <td>Phone</td>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <!-- end appiontment table -->
@@ -861,10 +867,12 @@
                 // clear fields
                 document.getElementById('viewProviderID').value = '';
                 document.getElementById('viewPatientID').value = '';
-                // set focus to table
-                $('html,body').animate({
-                            scrollTop: $('#appoint').offset().top},
-                        'slow');
+                setTimeout(function(){
+                    // set focus to table
+                    $('html,body').animate({
+                                scrollTop: $('#appoint').offset().top},
+                            'slow');
+                }, 1000)
             }); //end view appointments
 
 
@@ -915,10 +923,12 @@
                 }); //end ajax
                 // clear the providerID textbox
                 document.getElementById('providerIDFeedback').value = '';
-                // set focus to table
-                $('html,body').animate({
-                            scrollTop: $('#patientFeedback').offset().top},
-                        'slow');
+                setTimeout(function(){
+                    // set focus to table
+                    $('html,body').animate({
+                                scrollTop: $('#patientFeedback').offset().top},
+                            'slow');
+                }, 1000)
             }); //end see all feedback
 
 
