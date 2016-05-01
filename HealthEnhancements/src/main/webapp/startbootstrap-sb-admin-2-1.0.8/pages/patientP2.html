@@ -731,8 +731,6 @@
                         + '<input type="date" class="form-control" id="appointDate" placeholder="Date">'
                         + '</div><div class="form-group">'
                         + '<input type="text" class="form-control" id="providerEntry" placeholder="Treatment Provider">'
-                        + '<div class="dropdown">Contact Info<a href="#" class="dropdown-toggle" data-toggle="subform"><b class="caret"></b></a>'
-                        + '</div>'
                         + '</div><div class="form-group">'
                         + '<input type="text" class="form-control" id="appointPurpose" placeholder="Purpose">'
                         + '</div><div class="form-group">'
@@ -779,7 +777,7 @@
                         + '</div><div class="form-group">'
                         + '<select class="form-control" id="reaction">'
                         + '<option>Reaction</option><option>Abnormal Swelling</option><option>Chest Tightness</option>'
-                        + '<option>Difficulty Swallowing</option><option>Dizzyness/option><option>Fast Heartbeat</option>'
+                        + '<option>Difficulty Swallowing</option><option>Dizzyness</option><option>Fast Heartbeat</option>'
                         + '<option>Headache</option><option>Itchy Watery Eyes</option><option>Nausea/Vomiting</option>'
                         + '<option>Rash</option><option>Sneezing</option><option>Wheezing</option></select>'
                         + '</div><div class="form-group">'
@@ -856,20 +854,20 @@
                     $('#message').text("Lab/Test Results Recorded");
                 })
             }); //end lab results
-// needs form added here
+
             // record medications
             $('#meds').click(function(){
                 // clear the message
                 $('#message').text('');
                 // create the form
-                var form = '<form class="form-horizontal"><div class="form-group">' +
-                        + '<input type="text" class="form-control" id="medicineName" placeholder="Name">Ex: Ibuprofren, Albuterol'
+                var form = '<form class="form-horizontal"><div class="form-group">'
+                        + '<input type="text" class="form-control" id="medicineName" placeholder="Name">ex: Ibuprofren, Albuterol'
                         + '</div><div class="form-group">'
                         + '<input type="text" class="form-control" id="medStrength" placeholder="Strength">'
                         + '</div><div class="form-group">'
                         + '<select class="form-control" id="medUnit">'
                         + '<option>Select...</option><option>cfu/ml</option><option>iu</option>'
-                        + '<option>mg</option><option>mg/ml></option><option>ml</option>'
+                        + '<option>mg</option><option>mg/ml</option><option>ml</option>'
                         + '<option>%</option><option>unit</option></select>'
                         + '</div><div class="form-group">'
                         + '<input type="text" class="form-control" id="medDosage" placeholder="Dosage">'
