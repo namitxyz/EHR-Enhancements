@@ -547,17 +547,13 @@
 
         <table class="table table-striped display" id="allPatientsTbl">
 
-          <thread>
+          <thead>
 
             <tr>
 
               <th>Patient ID</th>
 
               <th>Last Name</th>
-
-              <th>First Name</th>
-
-              <th>Middle Inital</th>
 
               <th>Gender</th>
 
@@ -571,7 +567,8 @@
 
             </tr>
 
-          </thread>
+          </thead>
+            <tbody></tbody>
 
         </table>
 
@@ -726,6 +723,7 @@
         $('#allPatients').hide();
 
         $('#patientCharts').hide();
+
 
         // get provider and patient IDs
 
@@ -1221,13 +1219,14 @@
 
                 success: function (data) {
 
-                  // populate the patient table with information
+                    // populate the patient table with information
+                    // randomly select num for provider
+                    var ranNum = Math.floor((Math.random() * 200) + 1);
 
-                  $('#allPatientsTbl TBODY').append('<tr><td>' + data['m_szPatientID']
 
-                          + '</td><td>' + data['m_szLastName'] + '</td><td>' +  data['m_szFirstName']
+                  $('#allPatientsTbl TBODY').append('<tr><td>' + ranNum
 
-                          + '</td><td>' +  data['m_szMiddleInitial'] + '</td><td>' +  data['m_szGender']
+                          + '</td><td>' + data['m_szLastName'] + '</td><td>' +  data['m_szGender']
 
                           + '</td><td>' +  data['m_szBirthDate'] + '</td><td>' +  data['m_szAddress']
 

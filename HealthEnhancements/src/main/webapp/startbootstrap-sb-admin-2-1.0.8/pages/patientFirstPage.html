@@ -731,10 +731,13 @@
                 }); //end ajax
                 $('#allProviders').show();
                 document.getElementById('patientID').value = '';
-                // set focus to table
-                $('html,body').animate({
-                    scrollTop: $('#allProviders').offset().top},
-                        'slow');
+                setTimeout(function(){
+                    // set focus to table
+                    $('html,body').animate({
+                                scrollTop: $('#allProviders').offset().top},
+                            'slow');
+                }, 1000)
+
             }); //end PatientDoctorViewBtn
 
 
